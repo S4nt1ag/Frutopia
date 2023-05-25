@@ -40,12 +40,10 @@ public class Categoria {
 
 	
 	
-	public Categoria(Integer idCategoria, @NotBlank String nome, @NotBlank String descricao,
-			List<Produto> listaProdutos) {
+	public Categoria(Integer idCategoria, @NotBlank String nome, @NotBlank String descricao) {
 		this.idCategoria = idCategoria;
 		this.nome = nome;
 		this.descricao = descricao;
-		this.listaProdutos = listaProdutos;
 	}
 
 
