@@ -34,7 +34,6 @@ public class EnderecoService {
 	private void updateAtributos(Endereco updateEndereco, Endereco instrutor) {
 		updateEndereco.setCep(instrutor.getCep());
 		updateEndereco.setRua(instrutor.getRua());
-		updateEndereco.setRua(instrutor.getRua());
 		updateEndereco.setBairro(instrutor.getBairro());
 		updateEndereco.setCidade(instrutor.getCidade());
 		updateEndereco.setNumero(instrutor.getNumero());
