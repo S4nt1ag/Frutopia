@@ -1,12 +1,15 @@
 package com.grupoone.frutopia.entities;
 
+import java.util.List;
 import java.util.Objects;
+
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
@@ -26,7 +29,11 @@ public class Categoria {
 	@NotBlank
 	@Column(name = "descricao")
 	private String descricao;
-
+	
+	@OneToMany(mappedBy = "categoria")  // (1,N)
+	private List<Produto> listaProduto;
+	
+	
 	public Categoria() {
 
 	}
@@ -76,6 +83,14 @@ public class Categoria {
 			return false;
 		Categoria other = (Categoria) obj;
 		return Objects.equals(idCategoria, other.idCategoria);
+	}
+
+	public List<Produto> getListaProduto() {
+		return listaProduto;
+	}
+
+	public void setListaProduto(List<Produto> listaProduto) {
+		this.listaProduto = listaProduto;
 	}
 
 }
