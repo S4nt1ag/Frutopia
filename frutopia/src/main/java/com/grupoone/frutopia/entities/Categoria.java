@@ -94,12 +94,12 @@ public class Categoria {
 		return Objects.equals(idCategoria, other.idCategoria);
 	}
 
-	public List<Produto> getListaProduto() {
-		return listaProduto;
+	public List<Produto> getListaProdutos() {
+		return listaProdutos;
 	}
 
-	public void setListaProduto(List<Produto> listaProduto) {
-		this.listaProduto = listaProduto;
+	public void setListaProdutos(List<Produto> listaProdutos) {
+		this.listaProdutos = listaProdutos;
 	}
 
 }

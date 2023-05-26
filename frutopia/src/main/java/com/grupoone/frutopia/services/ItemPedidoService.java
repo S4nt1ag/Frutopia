@@ -6,84 +6,108 @@ import java.util.NoSuchElementException;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.grupoone.frutopia.dto.ItemPedidoDTO;
 import com.grupoone.frutopia.entities.ItemPedido;
+import com.grupoone.frutopia.entities.Pedido;
+import com.grupoone.frutopia.entities.Produto;
+import com.grupoone.frutopia.exceptions.IdNotFoundException;
+import com.grupoone.frutopia.exceptions.NullPointExPedidoProduto;
 import com.grupoone.frutopia.repositories.ItemPedidoRepository;
-
-import jakarta.persistence.EntityNotFoundException;
+import com.grupoone.frutopia.repositories.PedidoRepository;
+import com.grupoone.frutopia.repositories.ProdutoRepository;
 
 @Service
 public class ItemPedidoService {
 
 	@Autowired
 	ItemPedidoRepository itemPedidoRepository;
-	
+
+	@Autowired
+	PedidoRepository pedidoRepository;
+
+	@Autowired
+	ProdutoRepository produtoRepository;
+
 	@Autowired
 	private ModelMapper modelMapper;
-	
+
 	public List<ItemPedidoDTO> getAllItensPedidosDto() {
 		List<ItemPedido> listaItens = itemPedidoRepository.findAll();
-		List<ItemPedidoDTO> listaItensDto = modelMapper.map(listaItens, new TypeToken<List<ItemPedidoDTO>>() {}.getType());		
-				
-			for (int i = 0; i < listaItens.size(); i++) {
+		List<ItemPedidoDTO> listaItensDto = modelMapper.map(listaItens, new TypeToken<List<ItemPedidoDTO>>() {
+		}.getType());
+
+		for (int i = 0; i < listaItens.size(); i++) {
 			Produto produto = listaItens.get(i).getProduto();
-			Integer idProduto = produto.getId(); // verificar classe	
-			listaItensDto.get(i).getProduto().setIdProduto(idProduto); // verificar classe
+			Integer idProduto = produto.getIdProduto();
+			listaItensDto.get(i).getProduto().setIdProduto(idProduto);
 
 			Pedido pedido = listaItens.get(i).getPedido();
-			Integer idPedido = pedido.getId(); // verificar classe	
-			listaItensDto.get(i).getPedido().setIdPedido(idPedido); // verificar classe
+			Integer idPedido = pedido.getIdPedido();
+			listaItensDto.get(i).getPedido().setIdPedido(idPedido);
 		}
-
 		return listaItensDto;
+
 	}
 
 	public ItemPedidoDTO getItemPedidoDtoById(Integer id) {
-		
-		ItemPedido itemPedido = itemPedidoRepository.findById(id).orElseThrow(() -> new NoSuchElementException(""));
+		ItemPedido itemPedido = itemPedidoRepository.findById(id)
+				.orElseThrow(() -> new IdNotFoundException("Entidade não foi encontrada"));
 		ItemPedidoDTO itemPedidoDto = new ItemPedidoDTO();
-		
-		if(itemPedido == null) {
-			return null;
-		}		
-		
+
 		// alterar Model
+		itemPedidoDto.setId(itemPedido.getIdItemPedido());
 		itemPedidoDto.setPrecoVenda(itemPedido.getPrecoVenda());
 		itemPedidoDto.setQuantidade(itemPedido.getQuantidade());
 		itemPedidoDto.setPercentualDesconto(itemPedido.getPercentualDesconto());
 		itemPedidoDto.setValorBruto(itemPedido.getValorBruto());
 		itemPedidoDto.setValorLiquido(itemPedido.getValorLiquido());
-		itemPedidoDto.setPedido(itemPedido.getPedido().getIdPedido()); // verificar
-		itemPedidoDto.setProduto(itemPedido.getProduto().getIdProduto()); // verificar
-
+		try {
+			itemPedidoDto.getPedido().setIdPedido(itemPedido.getPedido().getIdPedido());
+			itemPedidoDto.getProduto().setIdProduto(itemPedido.getProduto().getIdProduto());
+		} 
+		catch (NullPointerException e) {
+			throw new NullPointExPedidoProduto("");
+		}
 		return itemPedidoDto;
 	}
 
 	public ItemPedido saveItemPedido(ItemPedido ItemPedido) {
-		ItemPedido novoItemPedido = itemPedidoRepository.save(ItemPedido);
-		return novoItemPedido;
+		try {
+			return itemPedidoRepository.save(ItemPedido);
+
+		} 
+		catch (DataAccessException e) {
+			throw new IdNotFoundException("");
+		}
 	}
 
 	public ItemPedido updateItemPedido(ItemPedido itemPedido, Integer id) {
 		try {
-			ItemPedido updateItemPedido = itemPedidoRepository.findById(id).get();
-			updateData(updateItemPedido, itemPedido);
-			return itemPedidoRepository.save(updateItemPedido);
-		} catch (EntityNotFoundException e) {
-			throw new NoSuchElementException("");
+			System.out.println("TESTE");
+			if (produtoRepository.existsById(id) && pedidoRepository.existsById(id)) {
+				ItemPedido updateItemPedido = itemPedidoRepository.findById(id).get();
+				updateData(updateItemPedido, itemPedido);
+				return itemPedidoRepository.save(updateItemPedido);
+			} 
+			else {
+				throw new NoSuchElementException("");
+			}
+		} 
+		catch (DataAccessException e) {
+			throw new IdNotFoundException("");
 		}
 	}
 
 	private void updateData(ItemPedido updateItemPedido, ItemPedido itemPedido) {
-		updateItemPedido.setIdItemPedido(itemPedido.getIdItemPedido());
 		updateItemPedido.setPrecoVenda(itemPedido.getPrecoVenda());
 		updateItemPedido.setPercentualDesconto(itemPedido.getPercentualDesconto());
 		updateItemPedido.setValorBruto(itemPedido.getValorBruto());
 		updateItemPedido.setValorLiquido(itemPedido.getValorLiquido());
 		updateItemPedido.setPedido(itemPedido.getPedido());
-		updateItemPedido.setProduto(itemPedido.getProduto());		
+		updateItemPedido.setProduto(itemPedido.getProduto());
 	}
 
 	public Boolean deleteItemPedido(Integer id) {
@@ -93,11 +117,12 @@ public class ItemPedidoService {
 			ItemPedidoDeleted = itemPedidoRepository.findById(id).orElse(null);
 			if (ItemPedidoDeleted != null) {
 				return false;
-			} else {
+			} 
+			else {
 				return true;
 			}
-
-		} else {
+		} 
+		else {
 			return false;
 		}
 	}

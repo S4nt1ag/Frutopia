@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.grupoone.frutopia.dto.CategoriaDTO;
 import com.grupoone.frutopia.entities.Categoria;
 import com.grupoone.frutopia.services.CategoriaService;
 
@@ -29,6 +30,11 @@ public class CategoriaController {
 	@GetMapping
 	public ResponseEntity<List<Categoria>> getAllCategorias() {
 		return new ResponseEntity<>(categoriaService.getAllCategorias(), HttpStatus.OK);
+	}
+	
+	@GetMapping("/categorias")
+	public ResponseEntity<List<CategoriaDTO>> getAllCategoriasDTO() {
+		return new ResponseEntity<>(categoriaService.getAllCategoriasDTO(), HttpStatus.OK);
 	}
 
 	@GetMapping("/{id}")
