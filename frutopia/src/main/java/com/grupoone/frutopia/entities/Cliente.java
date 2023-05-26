@@ -18,6 +18,7 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idCliente")
@@ -46,11 +47,11 @@ public class Cliente {
 	private String cpf;
 
 	@NotBlank
-	@Pattern(regexp = "^[0-9]{9,15}")
+	@Pattern(regexp = "^[0-9]{8,15}")
 	@Column(name = "telefone", unique = true)
 	private String telefone;
 
-	@NotBlank
+	@NotNull
 	@Column(name = "data_nascimento")
 	private Date dataNascimento;
 
@@ -71,7 +72,7 @@ public class Cliente {
 
 	public Cliente(Integer idCliente, @NotBlank @Email String email, @NotBlank String nomeCompleto,
 			@NotBlank @Pattern(regexp = "^[0-9]{11}") String cpf,
-			@NotBlank @Pattern(regexp = "^[0-9]{9,15}") String telefone, @NotBlank Date dataNascimento,
+			@NotBlank @Pattern(regexp = "^[0-9]{8,15}") String telefone, @NotBlank Date dataNascimento,
 			@NotBlank String senha, List<Pedido> listaPedidos, Endereco endereco) {
 		super();
 		this.idCliente = idCliente;
