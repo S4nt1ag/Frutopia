@@ -15,8 +15,6 @@ import com.grupoone.frutopia.entities.ItemPedido;
 import com.grupoone.frutopia.entities.Pedido;
 import com.grupoone.frutopia.entities.Produto;
 import com.grupoone.frutopia.repositories.CategoriaRepository;
-import com.residencia.biblioteca.dto.LivroResumidoDTO;
-import com.residencia.biblioteca.entities.Editora;
 
 import jakarta.persistence.EntityNotFoundException;
 
