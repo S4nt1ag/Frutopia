@@ -27,7 +27,7 @@ public class EnderecoController {
 	EnderecoService enderecoService;
 
 	@GetMapping
-	public ResponseEntity<List<Endereco>> getAllEnderecoes() {
+	public ResponseEntity<List<Endereco>> getAllEnderecos() {
 		return new ResponseEntity<>(enderecoService.getAllEnderecos(), HttpStatus.OK);
 	}
 

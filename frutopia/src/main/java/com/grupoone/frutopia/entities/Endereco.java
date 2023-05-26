@@ -44,7 +44,6 @@ public class Endereco {
 	@Column(name = "numero")
 	private Integer numero;
 	
-	@NotBlank
 	@Column(name = "complemento")
 	private String complemento;
 	
