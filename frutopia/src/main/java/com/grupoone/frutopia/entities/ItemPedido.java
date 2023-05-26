@@ -14,6 +14,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
@@ -28,27 +29,32 @@ public class ItemPedido {
 	@Column(name = "id_item_pedido")
 	private Integer idItemPedido;
 	
-	@NotBlank
+	@NotNull(message = "Invalid quantity: Quantity is NULL")
 	@Column(name = "quantidade")
 	private Integer quantidade;
 	
-	@NotBlank
+	@NotNull(message = "Invalid price: Price is NULL")
 	@Column(name = "preco_venda")
 	private Double precoVenda;
 	
+	@NotNull(message = "Invalid discount: Discount is NULL")
 	@Column(name = "percentual_desconto")
 	private Double percentualDesconto;
 	
+	@NotNull(message = "Invalid value: Gross_Amout is NULL")
 	@Column(name = "valor_bruto")
 	private Double valorBruto;
 	
+	@NotNull(message = "Invalid value: Net_Amount is NULL")
 	@Column(name = "valor_liquido")
 	private Double valorLiquido;
 	
+	@NotNull(message = "Invalid FK: FK is NULL")
 	@ManyToOne
 	@JoinColumn(name = "id_pedido_FK", referencedColumnName = "id_pedido")
 	private Pedido pedido;
 	
+	@NotNull(message = "Invalid FK: FK is NULL")
 	@ManyToOne
 	@JoinColumn(name = "id_produto_FK", referencedColumnName = "id_produto")
 	private Produto produto;
