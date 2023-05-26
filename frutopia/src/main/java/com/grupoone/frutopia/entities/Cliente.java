@@ -55,7 +55,7 @@ public class Cliente {
 	private Date dataNascimento;
 
 	@OneToMany(mappedBy = "cliente")
-	private List<Pedido> pedido;
+	private List<Pedido> listaPedidos;
 
 	@OneToOne
 	@JoinColumn(name = "id_endereco_FK", referencedColumnName = "id_endereco")
