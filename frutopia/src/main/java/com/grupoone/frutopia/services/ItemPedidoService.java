@@ -11,7 +11,10 @@ import org.springframework.stereotype.Service;
 import com.grupoone.frutopia.dto.ItemPedidoDTO;
 import com.grupoone.frutopia.entities.ItemPedido;
 import com.grupoone.frutopia.entities.Pedido;
+<<<<
+====
 import com.grupoone.frutopia.entities.Produto;
+>>>>
 import com.grupoone.frutopia.repositories.ItemPedidoRepository;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -79,13 +82,12 @@ public class ItemPedidoService {
 	}
 
 	private void updateData(ItemPedido updateItemPedido, ItemPedido itemPedido) {
-		updateItemPedido.setIdItemPedido(itemPedido.getIdItemPedido());
 		updateItemPedido.setPrecoVenda(itemPedido.getPrecoVenda());
 		updateItemPedido.setPercentualDesconto(itemPedido.getPercentualDesconto());
 		updateItemPedido.setValorBruto(itemPedido.getValorBruto());
 		updateItemPedido.setValorLiquido(itemPedido.getValorLiquido());
-		updateItemPedido.setPedido(itemPedido.getPedido());
-		updateItemPedido.setProduto(itemPedido.getProduto());		
+//		updateItemPedido.setPedido(itemPedido.getPedido());
+//		updateItemPedido.setProduto(itemPedido.getProduto());		
 	}
 
 	public Boolean deleteItemPedido(Integer id) {
