@@ -2,8 +2,6 @@ package com.grupoone.frutopia.entities;
 
 import java.util.Objects;
 
-import com.grupoone.frutopia.entities.Endereco;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

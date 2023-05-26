@@ -1,7 +1,10 @@
 package com.grupoone.frutopia.dto;
 
 import com.grupoone.frutopia.entities.Pedido;
+
+
 import com.grupoone.frutopia.entities.Produto;
+
 
 public class ItemPedidoDTO {
 
