@@ -1,5 +1,6 @@
 package com.grupoone.frutopia.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -11,7 +12,6 @@ import org.springframework.stereotype.Service;
 import com.grupoone.frutopia.dto.CategoriaDTO;
 import com.grupoone.frutopia.dto.ProdutoDTO;
 import com.grupoone.frutopia.entities.Categoria;
-import com.grupoone.frutopia.entities.Produto;
 import com.grupoone.frutopia.repositories.CategoriaRepository;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -26,14 +26,17 @@ public class CategoriaService {
 	private ModelMapper modelMapper;
 	
 	public List<CategoriaDTO> getAllCategoriasDTO() {
+		CategoriaDTO categoriaDTO = new CategoriaDTO();
 		List<Categoria> listaCategoria = categoriaRepository.findAll();
 		List<CategoriaDTO> listaCategoriaDTO = modelMapper.map(listaCategoria, new TypeToken<List<CategoriaDTO>>() {}.getType());
+		List<ProdutoDTO> listaProdutosDTO = new ArrayList<>();
 		
 		for (int i = 0; i < listaCategoria.size(); i++) {
 			ProdutoDTO produtoDTO = new ProdutoDTO();
 			produtoDTO.setNome(produtoDTO.getNome());
-			listaCategoriaDTO.add(produtoDTO);
+			listaProdutosDTO.add(produtoDTO);
 		}
+		categoriaDTO.setListaProdutosDTO(listaProdutosDTO);
 		
 		return listaCategoriaDTO;
 	}

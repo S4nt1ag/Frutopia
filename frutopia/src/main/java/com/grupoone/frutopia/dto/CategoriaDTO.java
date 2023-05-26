@@ -34,11 +34,11 @@ public class CategoriaDTO {
 		this.descricao = descricao;
 	}
 
-	public List<ProdutoDTO> getListaProdutos() {
+	public List<ProdutoDTO> getListaProdutosDTO() {
 		return listaProdutosDTO;
 	}
 
-	public void setListaProdutos(List<ProdutoDTO> listaProdutosDTO) {
+	public void setListaProdutosDTO(List<ProdutoDTO> listaProdutosDTO) {
 		this.listaProdutosDTO = listaProdutosDTO;
 	}
 
