@@ -9,10 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.grupoone.frutopia.dto.CategoriaDTO;
-import com.grupoone.frutopia.dto.ItemPedidoDTO;
+import com.grupoone.frutopia.dto.ProdutoDTO;
 import com.grupoone.frutopia.entities.Categoria;
-import com.grupoone.frutopia.entities.ItemPedido;
-import com.grupoone.frutopia.entities.Pedido;
 import com.grupoone.frutopia.entities.Produto;
 import com.grupoone.frutopia.repositories.CategoriaRepository;
 
@@ -32,9 +30,9 @@ public class CategoriaService {
 		List<CategoriaDTO> listaCategoriaDTO = modelMapper.map(listaCategoria, new TypeToken<List<CategoriaDTO>>() {}.getType());
 		
 		for (int i = 0; i < listaCategoria.size(); i++) {
-			ProdutoDTO produtoDTO = new Produto();
-			produtoDTO.setNome(Produto.getNome());
-			listaCategoriaDTO.add(ProdutoDTO);
+			ProdutoDTO produtoDTO = new ProdutoDTO();
+			produtoDTO.setNome(produtoDTO.getNome());
+			listaCategoriaDTO.add(produtoDTO);
 		}
 		
 		return listaCategoriaDTO;

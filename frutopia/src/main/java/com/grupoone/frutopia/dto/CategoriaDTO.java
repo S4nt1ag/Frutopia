@@ -2,8 +2,6 @@ package com.grupoone.frutopia.dto;
 
 import java.util.List;
 
-import com.grupoone.frutopia.entities.Produto;
-
 public class CategoriaDTO {
 
 	private String nome;
@@ -17,7 +15,7 @@ public class CategoriaDTO {
 	public CategoriaDTO(String nome, String descricao, List<ProdutoDTO> listaProdutosDTO) {
 		this.nome = nome;
 		this.descricao = descricao;
-		this.listaProdutosDTO = listaProdutos;
+		this.listaProdutosDTO = listaProdutosDTO;
 	}
 
 	public String getNome() {
