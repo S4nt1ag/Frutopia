@@ -51,7 +51,11 @@ public class Cliente {
 	@Column(name = "telefone", unique = true)
 	private String telefone;
 
+<<<<<<< HEAD
 	@NotNull
+=======
+//	@NotBlank
+>>>>>>> Breno
 	@Column(name = "data_nascimento")
 	private Date dataNascimento;
 
@@ -62,6 +66,7 @@ public class Cliente {
 	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> listaPedidos;
 
+	@NotNull
 	@OneToOne
 	@JoinColumn(name = "id_endereco_FK", referencedColumnName = "id_endereco")
 	private Endereco endereco;

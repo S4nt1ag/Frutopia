@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.grupoone.frutopia.dto.ItemPedidoDTO;
+import com.grupoone.frutopia.dto.ProdutoDTO;
 import com.grupoone.frutopia.entities.Categoria;
 import com.grupoone.frutopia.entities.Produto;
 import com.grupoone.frutopia.services.CategoriaService;
@@ -26,6 +28,15 @@ import jakarta.validation.Valid;
 public class ProdutoController {
 	@Autowired
 	ProdutoService produtoService;
+
+	@GetMapping
+	public ResponseEntity<List<ProdutoDTO>> getAllProdutoDtoProdutos() {
+		return new ResponseEntity<>(ProdutoService.getAllIProdutoDto(), HttpStatus.OK);
+	}
+	@GetMapping("/{id}")
+	public ResponseEntity<ProdutoDTO> getProdutoDtoById(@Valid @PathVariable Integer id) {
+		return new ResponseEntity<>(ProdutoService.getProdutoDtoById(id), HttpStatus.OK);
+	}
 
 	@GetMapping
 	public ResponseEntity<List<Produto>> getAllProdutos() {

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.grupoone.frutopia.entities.Categoria;
+import com.grupoone.frutopia.dto.PedidoDTO;
 import com.grupoone.frutopia.entities.Pedido;
 import com.grupoone.frutopia.services.PedidoService;
 
@@ -28,13 +28,13 @@ public class PedidoController {
 	PedidoService pedidoService;
 	
 	@GetMapping
-	public ResponseEntity<List<Pedido>> getAllPedidos() {
-		return new ResponseEntity<>(pedidoService.getAllPedidos(), HttpStatus.OK);
+	public ResponseEntity<List<PedidoDTO>> getAllPedidosDto() {
+		return new ResponseEntity<>(pedidoService.getAllPedidosDto(), HttpStatus.OK);
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Pedido> getPedidobyId(@Valid @PathVariable Integer id) {
-		return new ResponseEntity<>(pedidoService.getPedidoById(id), HttpStatus.OK);
+	public ResponseEntity<PedidoDTO> getPedidoDtobyId(@Valid @PathVariable Integer id) {
+		return new ResponseEntity<>(pedidoService.getPedidoDtoById(id), HttpStatus.OK);
 	}
 	
 	@PostMapping

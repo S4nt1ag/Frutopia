@@ -7,12 +7,14 @@ import java.util.NoSuchElementException;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.grupoone.frutopia.dto.ClienteDTO;
 import com.grupoone.frutopia.entities.Cliente;
 import com.grupoone.frutopia.entities.Endereco;
 import com.grupoone.frutopia.entities.Pedido;
+import com.grupoone.frutopia.exceptions.IdNotFoundException;
 import com.grupoone.frutopia.repositories.ClienteRepository;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -81,8 +83,13 @@ public class ClienteService {
 	}
 
 	public Cliente saveCliente(Cliente cliente) {
+		try {
+			
 		Cliente novoCliente = clienteRepository.save(cliente);
 		return novoCliente;
+		}catch(DataAccessException e) {
+            throw new IdNotFoundException("");
+        }
 	}
 
 	public Cliente updateCliente(Cliente cliente, Integer id) {
