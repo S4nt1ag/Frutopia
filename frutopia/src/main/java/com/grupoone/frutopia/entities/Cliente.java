@@ -18,6 +18,7 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idCliente")
@@ -46,13 +47,17 @@ public class Cliente {
 	private String cpf;
 
 	@NotBlank
-	@Pattern(regexp = "^[0-9]{9,15}")
+	@Pattern(regexp = "^[0-9]{8,15}")
 	@Column(name = "telefone", unique = true)
 	private String telefone;
 
-	@NotBlank
+	@NotNull
 	@Column(name = "data_nascimento")
 	private Date dataNascimento;
+
+	@NotBlank
+	@Column(name = "senha")
+	private String senha;
 
 	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> listaPedidos;
@@ -67,8 +72,8 @@ public class Cliente {
 
 	public Cliente(Integer idCliente, @NotBlank @Email String email, @NotBlank String nomeCompleto,
 			@NotBlank @Pattern(regexp = "^[0-9]{11}") String cpf,
-			@NotBlank @Pattern(regexp = "^[0-9]{9,15}") String telefone, @NotBlank Date dataNascimento,
-			Endereco endereco) {
+			@NotBlank @Pattern(regexp = "^[0-9]{8,15}") String telefone, @NotBlank Date dataNascimento,
+			@NotBlank String senha, List<Pedido> listaPedidos, Endereco endereco) {
 		super();
 		this.idCliente = idCliente;
 		this.email = email;
@@ -76,6 +81,8 @@ public class Cliente {
 		this.cpf = cpf;
 		this.telefone = telefone;
 		this.dataNascimento = dataNascimento;
+		this.senha = senha;
+		this.listaPedidos = listaPedidos;
 		this.endereco = endereco;
 	}
 
@@ -141,6 +148,14 @@ public class Cliente {
 
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 	@Override
