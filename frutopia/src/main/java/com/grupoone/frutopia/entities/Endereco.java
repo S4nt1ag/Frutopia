@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
 @Entity
@@ -38,10 +39,11 @@ public class Endereco {
 	@Column(name = "cidade")
 	private String cidade;
 	
-	@NotBlank
+	@NotNull
 	@Column(name = "numero")
 	private Integer numero;
 	
+	@NotBlank
 	@Column(name = "complemento")
 	private String complemento;
 	
