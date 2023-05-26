@@ -16,6 +16,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
@@ -31,7 +32,7 @@ public class Pedido {
 	@Column(name = "id_pedido")
 	private Integer idPedido;
 	
-	@NotBlank
+	@NotNull
 	@Column(name = "data_pedido")
 	private Date dataPedido;
 	
@@ -48,6 +49,7 @@ public class Pedido {
 	@Column(name = "valor_total")
 	private Double valorTotal;
 	
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "id_cliente_FK", referencedColumnName = "id_cliente")
 	private Cliente cliente;

@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import com.grupoone.frutopia.dto.CategoriaDTO;
 import com.grupoone.frutopia.dto.ProdutoDTO;
 import com.grupoone.frutopia.entities.Categoria;
+import com.grupoone.frutopia.entities.Produto;
+import com.grupoone.frutopia.exceptions.IdNotFoundException;
 import com.grupoone.frutopia.repositories.CategoriaRepository;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -32,8 +34,9 @@ public class CategoriaService {
 		List<ProdutoDTO> listaProdutosDTO = new ArrayList<>();
 		
 		for (int i = 0; i < listaCategoria.size(); i++) {
+			Produto produto = new Produto();
 			ProdutoDTO produtoDTO = new ProdutoDTO();
-			produtoDTO.setNome(produtoDTO.getNome());
+			produtoDTO.setNome(produto.getNome());
 			listaProdutosDTO.add(produtoDTO);
 		}
 		categoriaDTO.setListaProdutosDTO(listaProdutosDTO);
@@ -46,7 +49,8 @@ public class CategoriaService {
 	}
 
 	public Categoria getCategoriaById(Integer id) {
-		return categoriaRepository.findById(id).orElseThrow(() -> new NoSuchElementException(""));
+	
+		return categoriaRepository.findById(id).orElseThrow(() -> new IdNotFoundException(""));
 	}
 
 	public Categoria saveCategoria(Categoria categoria) {

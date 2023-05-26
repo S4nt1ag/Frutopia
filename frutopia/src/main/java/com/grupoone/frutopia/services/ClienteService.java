@@ -1,12 +1,20 @@
 package com.grupoone.frutopia.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.grupoone.frutopia.dto.ClienteDTO;
 import com.grupoone.frutopia.entities.Cliente;
+import com.grupoone.frutopia.entities.Endereco;
+import com.grupoone.frutopia.entities.Pedido;
+import com.grupoone.frutopia.exceptions.IdNotFoundException;
 import com.grupoone.frutopia.repositories.ClienteRepository;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -17,6 +25,55 @@ public class ClienteService {
 	@Autowired
 	ClienteRepository clienteRepository;
 
+	@Autowired
+	private ModelMapper modelMapper;
+	
+	public List<ClienteDTO> getAllClientesDto() {
+		List<Cliente> listaClientes = clienteRepository.findAll();
+		List<ClienteDTO> listaClientesDto = modelMapper.map(listaClientes, new TypeToken<List<ClienteDTO>> (){}.getType());
+
+		for (int i = 0; i < listaClientes.size(); i++) {
+			Endereco endereco = listaClientes.get(i).getEndereco();
+			Integer idEndereco = endereco.getIdEndereco();
+			listaClientesDto.get(i).getEndereco().setIdEndereco(idEndereco);
+
+		}
+		return listaClientesDto;
+
+	}
+	
+	public ClienteDTO getClienteDtoById(Integer id) {
+		Cliente cliente = clienteRepository.findById(id).orElse(null);
+		ClienteDTO clienteDto = new ClienteDTO();
+		
+		if(null == cliente) return null;
+		
+		clienteDto.setCpf(cliente.getCpf()); 
+		clienteDto.setDataNascimento(cliente.getDataNascimento());
+		clienteDto.setEmail(cliente.getEmail());
+		clienteDto.setNomeCompleto(cliente.getNomeCompleto());
+		clienteDto.setTelefone(cliente.getTelefone());
+		clienteDto.setEndereco(cliente.getEndereco());
+		
+		
+		List<Pedido> listaPedidos = new ArrayList<>();
+		for (Pedido pedido : cliente.getListaPedidos()) {
+			Pedido pedidoDTO = new Pedido();
+			pedidoDTO.setIdPedido(pedido.getIdPedido());
+			pedidoDTO.setDataPedido(pedido.getDataPedido());
+			pedidoDTO.setDataEntrega(pedido.getDataEntrega());
+			pedidoDTO.setDataEnvio(pedido.getDataEnvio());
+			pedidoDTO.setStatus(pedido.getStatus());
+			pedidoDTO.setValorTotal(pedido.getValorTotal());
+			
+			listaPedidos.add(pedidoDTO);
+		}
+		
+		clienteDto.setListaPedidos(listaPedidos);
+		
+		return clienteDto;
+	}
+	
 	public List<Cliente> getAllClientes() {
 		return clienteRepository.findAll();
 	}
@@ -26,8 +83,13 @@ public class ClienteService {
 	}
 
 	public Cliente saveCliente(Cliente cliente) {
+		try {
+			
 		Cliente novoCliente = clienteRepository.save(cliente);
 		return novoCliente;
+		}catch(DataAccessException e) {
+            throw new IdNotFoundException("");
+        }
 	}
 
 	public Cliente updateCliente(Cliente cliente, Integer id) {

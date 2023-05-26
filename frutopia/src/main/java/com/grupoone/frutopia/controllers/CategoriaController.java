@@ -27,12 +27,8 @@ public class CategoriaController {
 	@Autowired
 	CategoriaService categoriaService;
 
-	@GetMapping
-	public ResponseEntity<List<Categoria>> getAllCategorias() {
-		return new ResponseEntity<>(categoriaService.getAllCategorias(), HttpStatus.OK);
-	}
 	
-	@GetMapping("/categorias")
+	@GetMapping
 	public ResponseEntity<List<CategoriaDTO>> getAllCategoriasDTO() {
 		return new ResponseEntity<>(categoriaService.getAllCategoriasDTO(), HttpStatus.OK);
 	}

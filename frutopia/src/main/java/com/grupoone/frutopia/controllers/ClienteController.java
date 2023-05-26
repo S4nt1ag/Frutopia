@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.grupoone.frutopia.dto.ClienteDTO;
 import com.grupoone.frutopia.entities.Cliente;
 import com.grupoone.frutopia.services.ClienteService;
 
@@ -27,15 +28,15 @@ public class ClienteController {
 	ClienteService clienteService;
 
 	@GetMapping
-	public ResponseEntity<List<Cliente>> getAllClientes() {
-		return new ResponseEntity<>(clienteService.getAllClientes(), HttpStatus.OK);
+	public ResponseEntity<List<ClienteDTO>> getAllClientesDtoPedidos() {
+		return new ResponseEntity<>(clienteService.getAllClientesDto(), HttpStatus.OK);
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Cliente> getClienteById(@Valid @PathVariable Integer id) {
-		return new ResponseEntity<>(clienteService.getClienteById(id), HttpStatus.OK);
+	public ResponseEntity<ClienteDTO> getClientesDtoById(@Valid @PathVariable Integer id) {
+		return new ResponseEntity<>(clienteService.getClienteDtoById(id), HttpStatus.OK);
 	}
-
+	
 	@PostMapping
 	public ResponseEntity<Cliente> saveCliente(@Valid @RequestBody Cliente cliente) {
 		return new ResponseEntity<>(clienteService.saveCliente(cliente), HttpStatus.CREATED);
