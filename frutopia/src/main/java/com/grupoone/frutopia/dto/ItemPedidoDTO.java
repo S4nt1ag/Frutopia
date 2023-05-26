@@ -1,5 +1,7 @@
 package com.grupoone.frutopia.dto;
 
+import com.grupoone.frutopia.entities.Pedido;
+
 public class ItemPedidoDTO {
 
 	private Integer id;
