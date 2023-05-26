@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.grupoone.frutopia.dto.ClienteDTO;
 import com.grupoone.frutopia.entities.Cliente;
+import com.grupoone.frutopia.entities.Endereco;
 import com.grupoone.frutopia.entities.Pedido;
 import com.grupoone.frutopia.repositories.ClienteRepository;
 
@@ -20,6 +23,23 @@ public class ClienteService {
 	@Autowired
 	ClienteRepository clienteRepository;
 
+	@Autowired
+	private ModelMapper modelMapper;
+	
+	public List<ClienteDTO> getAllClientesDto() {
+		List<Cliente> listaClientes = clienteRepository.findAll();
+		List<ClienteDTO> listaClientesDto = modelMapper.map(listaClientes, new TypeToken<List<ClienteDTO>> (){}.getType());
+
+		for (int i = 0; i < listaClientes.size(); i++) {
+			Endereco endereco = listaClientes.get(i).getEndereco();
+			Integer idEndereco = endereco.getIdEndereco();
+			listaClientesDto.get(i).getEndereco().setIdEndereco(idEndereco);
+
+		}
+		return listaClientesDto;
+
+	}
+	
 	public ClienteDTO getClienteDtoById(Integer id) {
 		Cliente cliente = clienteRepository.findById(id).orElse(null);
 		ClienteDTO clienteDto = new ClienteDTO();
