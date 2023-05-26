@@ -33,7 +33,7 @@ public class Cliente {
 
 	@NotBlank
 	@Email
-	@Column(name = "email")
+	@Column(name = "email", unique = true)
 	private String email;
 
 	@NotBlank
@@ -42,12 +42,12 @@ public class Cliente {
 
 	@NotBlank
 	@Pattern(regexp = "^[0-9]{11}")
-	@Column(name = "cpf")
+	@Column(name = "cpf", unique = true)
 	private String cpf;
 
 	@NotBlank
 	@Pattern(regexp = "^[0-9]{9,15}")
-	@Column(name = "telefone")
+	@Column(name = "telefone", unique = true)
 	private String telefone;
 
 	@NotBlank
