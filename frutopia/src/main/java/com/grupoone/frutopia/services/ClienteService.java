@@ -6,8 +6,8 @@ import java.util.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.grupoone.frutopia.entities.Categoria;
-import com.grupoone.frutopia.repositories.CategoriaRepository;
+import com.grupoone.frutopia.entities.Cliente;
+import com.grupoone.frutopia.repositories.ClienteRepository;
 
 import jakarta.persistence.EntityNotFoundException;
 
@@ -15,42 +15,45 @@ import jakarta.persistence.EntityNotFoundException;
 public class ClienteService {
 
 	@Autowired
-	CategoriaRepository categoriaRepository;
+	ClienteRepository clienteRepository;
 
-	public List<Categoria> getAllCategoriaes() {
-		return categoriaRepository.findAll();
+	public List<Cliente> getAllClientees() {
+		return clienteRepository.findAll();
 	}
 
-	public Categoria getCategoriaById(Integer id) {
-		return categoriaRepository.findById(id).orElseThrow(() -> new NoSuchElementException(""));
+	public Cliente getClienteById(Integer id) {
+		return clienteRepository.findById(id).orElseThrow(() -> new NoSuchElementException(""));
 	}
 
-	public Categoria saveCategoria(Categoria categoria) {
-		Categoria novoCategoria = categoriaRepository.save(categoria);
-		return novoCategoria;
+	public Cliente saveCliente(Cliente cliente) {
+		Cliente novoCliente = clienteRepository.save(cliente);
+		return novoCliente;
 	}
 
-	public Categoria updateCategoria(Categoria categoria, Integer id) {
+	public Cliente updateCliente(Cliente cliente, Integer id) {
 		try {
-			Categoria updateCategoria = categoriaRepository.getReferenceById(id);
-			updateData(updateCategoria, categoria);
-			return categoriaRepository.save(updateCategoria);
+			Cliente updateCliente = clienteRepository.getReferenceById(id);
+			updateData(updateCliente, cliente);
+			return clienteRepository.save(updateCliente);
 		} catch (EntityNotFoundException e) {
 			throw new NoSuchElementException("");
 		}
 	}
 
-	private void updateData(Categoria updateCategoria, Categoria categoria) {
-		updateCategoria.setNome(categoria.getNome());
-		updateCategoria.setDescricao(categoria.getDescricao());
+	private void updateData(Cliente updateCliente, Cliente cliente) {
+		updateCliente.setEmail(cliente.getEmail());
+		updateCliente.setNomeCompleto(cliente.getNomeCompleto());
+		updateCliente.setCpf(cliente.getCpf());
+		updateCliente.setTelefone(cliente.getTelefone());
+		updateCliente.setDataNascimento(cliente.getDataNascimento());
 	}
 
-	public Boolean deleteCategoria(Integer id) {
-		Categoria categoriaDeleted = categoriaRepository.findById(id).orElse(null);
-		if (categoriaDeleted != null) {
-			categoriaRepository.deleteById(id);
-			categoriaDeleted = categoriaRepository.findById(id).orElse(null);
-			if (categoriaDeleted != null) {
+	public Boolean deleteCliente(Integer id) {
+		Cliente clienteDeleted = clienteRepository.findById(id).orElse(null);
+		if (clienteDeleted != null) {
+			clienteRepository.deleteById(id);
+			clienteDeleted = clienteRepository.findById(id).orElse(null);
+			if (clienteDeleted != null) {
 				return false;
 			} else {
 				return true;
