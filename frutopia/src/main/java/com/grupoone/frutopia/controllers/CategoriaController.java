@@ -30,6 +30,11 @@ public class CategoriaController {
 	public ResponseEntity<List<Categoria>> getAllCategorias() {
 		return new ResponseEntity<>(categoriaService.getAllCategorias(), HttpStatus.OK);
 	}
+	
+	@GetMapping("/categorias")
+	public ResponseEntity<List<CategoriaDTO>> getAllCategoriasDTO() {
+		return new ResponseEntity<>(categoriaService.getAllCategoriasDTO(), HttpStatus.OK);
+	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Categoria> getCategoriaById(@Valid @PathVariable Integer id) {

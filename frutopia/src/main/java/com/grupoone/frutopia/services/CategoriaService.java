@@ -3,11 +3,20 @@ package com.grupoone.frutopia.services;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.grupoone.frutopia.dto.CategoriaDTO;
+import com.grupoone.frutopia.dto.ItemPedidoDTO;
 import com.grupoone.frutopia.entities.Categoria;
+import com.grupoone.frutopia.entities.ItemPedido;
+import com.grupoone.frutopia.entities.Pedido;
+import com.grupoone.frutopia.entities.Produto;
 import com.grupoone.frutopia.repositories.CategoriaRepository;
+import com.residencia.biblioteca.dto.LivroResumidoDTO;
+import com.residencia.biblioteca.entities.Editora;
 
 import jakarta.persistence.EntityNotFoundException;
 
@@ -16,6 +25,22 @@ public class CategoriaService {
 
 	@Autowired
 	CategoriaRepository categoriaRepository;
+	
+	@Autowired
+	private ModelMapper modelMapper;
+	
+	public List<CategoriaDTO> getAllCategoriasDTO() {
+		List<Categoria> listaCategoria = categoriaRepository.findAll();
+		List<CategoriaDTO> listaCategoriaDTO = modelMapper.map(listaCategoria, new TypeToken<List<CategoriaDTO>>() {}.getType());
+		
+		for (int i = 0; i < listaCategoria.size(); i++) {
+			ProdutoDTO produtoDTO = new Produto();
+			produtoDTO.setNome(Produto.getNome());
+			listaCategoriaDTO.add(ProdutoDTO);
+		}
+		
+		return listaCategoriaDTO;
+	}
 
 	public List<Categoria> getAllCategorias() {
 		return categoriaRepository.findAll();

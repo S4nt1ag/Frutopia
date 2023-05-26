@@ -62,6 +62,11 @@ import jakarta.validation.constraints.NotBlank;
 	@OneToMany(mappedBy = "produto")
 	private List<ItemPedido> listaItensPedidos;
 
+	
+	public Produto() {
+		
+	}
+
 	public Produto(Integer idProduto, @NotBlank String nome, @NotBlank String descricao, @NotBlank Integer qtdEstoque,
 			@NotBlank Date dataCadastro, @NotBlank Double valorUnitario, @NotBlank String imagem,
 			@NotBlank Categoria categoria) {

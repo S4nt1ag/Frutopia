@@ -11,10 +11,7 @@ import org.springframework.stereotype.Service;
 import com.grupoone.frutopia.dto.ItemPedidoDTO;
 import com.grupoone.frutopia.entities.ItemPedido;
 import com.grupoone.frutopia.entities.Pedido;
-<<<<
-====
 import com.grupoone.frutopia.entities.Produto;
->>>>
 import com.grupoone.frutopia.repositories.ItemPedidoRepository;
 
 import jakarta.persistence.EntityNotFoundException;
