@@ -11,6 +11,10 @@ import org.springframework.stereotype.Service;
 import com.grupoone.frutopia.dto.ItemPedidoDTO;
 import com.grupoone.frutopia.entities.ItemPedido;
 import com.grupoone.frutopia.entities.Pedido;
+<<<<
+====
+import com.grupoone.frutopia.entities.Produto;
+>>>>
 import com.grupoone.frutopia.repositories.ItemPedidoRepository;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -30,7 +34,7 @@ public class ItemPedidoService {
 				
 			for (int i = 0; i < listaItens.size(); i++) {
 			Produto produto = listaItens.get(i).getProduto();
-			Integer idProduto = produto.getId(); // verificar classe	
+			Integer idProduto = produto.getIdProduto(); // verificar classe	
 			listaItensDto.get(i).getProduto().setIdProduto(idProduto); // verificar classe
 
 			Pedido pedido = listaItens.get(i).getPedido();

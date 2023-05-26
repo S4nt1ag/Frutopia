@@ -28,7 +28,7 @@ public class ClienteController {
 
 	@GetMapping
 	public ResponseEntity<List<Cliente>> getAllClientes() {
-		return new ResponseEntity<>(clienteService.getAllClientees(), HttpStatus.OK);
+		return new ResponseEntity<>(clienteService.getAllClientes(), HttpStatus.OK);
 	}
 
 	@GetMapping("/{id}")

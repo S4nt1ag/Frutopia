@@ -68,7 +68,7 @@ public class Cliente {
 	public Cliente(Integer idCliente, @NotBlank @Email String email, @NotBlank String nomeCompleto,
 			@NotBlank @Pattern(regexp = "^[0-9]{11}") String cpf,
 			@NotBlank @Pattern(regexp = "^[0-9]{9,15}") String telefone, @NotBlank Date dataNascimento,
-			List<Pedido> pedido, Endereco endereco) {
+			Endereco endereco) {
 		super();
 		this.idCliente = idCliente;
 		this.email = email;
@@ -76,7 +76,6 @@ public class Cliente {
 		this.cpf = cpf;
 		this.telefone = telefone;
 		this.dataNascimento = dataNascimento;
-		this.pedido = pedido;
 		this.endereco = endereco;
 	}
 
@@ -128,12 +127,12 @@ public class Cliente {
 		this.dataNascimento = dataNascimento;
 	}
 
-	public List<Pedido> getPedido() {
-		return pedido;
+	public List<Pedido> getListaPedidos() {
+		return listaPedidos;
 	}
 
-	public void setPedido(List<Pedido> pedido) {
-		this.pedido = pedido;
+	public void setListaPedidos(List<Pedido> listaPedidos) {
+		this.listaPedidos = listaPedidos;
 	}
 
 	public Endereco getEndereco() {
