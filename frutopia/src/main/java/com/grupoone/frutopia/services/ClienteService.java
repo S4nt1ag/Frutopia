@@ -1,12 +1,15 @@
 package com.grupoone.frutopia.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.grupoone.frutopia.dto.ClienteDTO;
 import com.grupoone.frutopia.entities.Cliente;
+import com.grupoone.frutopia.entities.Pedido;
 import com.grupoone.frutopia.repositories.ClienteRepository;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -17,6 +20,38 @@ public class ClienteService {
 	@Autowired
 	ClienteRepository clienteRepository;
 
+	public ClienteDTO getClienteDtoById(Integer id) {
+		Cliente cliente = clienteRepository.findById(id).orElse(null);
+		ClienteDTO clienteDto = new ClienteDTO();
+		
+		if(null == cliente) return null;
+		
+		clienteDto.setCpf(cliente.getCpf()); 
+		clienteDto.setDataNascimento(cliente.getDataNascimento());
+		clienteDto.setEmail(cliente.getEmail());
+		clienteDto.setNomeCompleto(cliente.getNomeCompleto());
+		clienteDto.setTelefone(cliente.getTelefone());
+		clienteDto.setEndereco(cliente.getEndereco());
+		
+		
+		List<Pedido> listaPedidos = new ArrayList<>();
+		for (Pedido pedido : cliente.getListaPedidos()) {
+			Pedido pedidoDTO = new Pedido();
+			pedidoDTO.setIdPedido(pedido.getIdPedido());
+			pedidoDTO.setDataPedido(pedido.getDataPedido());
+			pedidoDTO.setDataEntrega(pedido.getDataEntrega());
+			pedidoDTO.setDataEnvio(pedido.getDataEnvio());
+			pedidoDTO.setStatus(pedido.getStatus());
+			pedidoDTO.setValorTotal(pedido.getValorTotal());
+			
+			listaPedidos.add(pedidoDTO);
+		}
+		
+		clienteDto.setListaPedidos(listaPedidos);
+		
+		return clienteDto;
+	}
+	
 	public List<Cliente> getAllClientes() {
 		return clienteRepository.findAll();
 	}
