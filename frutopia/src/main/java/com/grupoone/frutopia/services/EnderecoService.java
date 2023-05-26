@@ -34,7 +34,7 @@ public class EnderecoService {
 	public Endereco updateEndereco(Endereco endereco, Integer id) {
 		try {
 			Endereco updateEndereco = enderecoRepository.getReferenceById(id);
-			updateAtributos(updateEndereco, endereco);
+			updateData(updateEndereco, endereco);
 			return enderecoRepository.save(updateEndereco);
 		}
 		catch (EntityNotFoundException e) {
@@ -42,7 +42,7 @@ public class EnderecoService {
 		}
 	}
 	
-	private void updateAtributos(Endereco updateEndereco, Endereco instrutor) {
+	private void updateData(Endereco updateEndereco, Endereco instrutor) {
 		updateEndereco.setCep(instrutor.getCep());
 		updateEndereco.setRua(instrutor.getRua());
 		updateEndereco.setBairro(instrutor.getBairro());
