@@ -10,6 +10,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.grupoone.frutopia.dto.EnderecoDTO;
+import com.grupoone.frutopia.entities.Cliente;
 import com.grupoone.frutopia.entities.Endereco;
 import com.grupoone.frutopia.exceptions.IdNotFoundException;
 import com.grupoone.frutopia.repositories.EnderecoRepository;
@@ -26,17 +27,20 @@ public class EnderecoService {
 	private ModelMapper modelMapper;
 	
 	public List<EnderecoDTO> getAllEnderecosDTO() {
-		EnderecoDTO enderecoDTO = new EnderecoDTO();
+		//EnderecoDTO enderecoDTO = new EnderecoDTO();
 		List<Endereco> listaEndereco = enderecoRepository.findAll();
 		List<EnderecoDTO> listaEnderecoDTO = modelMapper.map(listaEndereco, new TypeToken<List<EnderecoDTO>>() {}.getType());		
+		
+		for (int i = 0; i < listaEndereco.size(); i++) {
+			
+			Cliente cliente = listaEndereco.get(i).getCliente();
+			Integer idCliente = cliente.getIdCliente();
+			listaEnderecoDTO.get(i).getCliente().setIdCliente(idCliente);
+		}
 		
 		return listaEnderecoDTO;
 	}
 	
-	public List<Endereco> getAllEnderecos() {
-		return enderecoRepository.findAll();
-	}
-
 	public Endereco getEnderecoById(Integer id) {
 		return enderecoRepository.findById(id).orElseThrow(() -> new NoSuchElementException(""));
 	}

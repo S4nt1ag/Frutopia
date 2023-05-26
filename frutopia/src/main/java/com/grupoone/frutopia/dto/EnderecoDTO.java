@@ -1,5 +1,7 @@
 package com.grupoone.frutopia.dto;
 
+import com.grupoone.frutopia.entities.Cliente;
+
 public class EnderecoDTO {
 
 	private Integer idEndereco;
@@ -10,13 +12,14 @@ public class EnderecoDTO {
 	private Integer numero;
 	private String complemento;
 	private String uf;
+	private Cliente cliente;
 	
 	public EnderecoDTO() {
 		super();	
 	}
 
 	public EnderecoDTO(Integer idEndereco, String cep, String rua, String bairro, String cidade, Integer numero,
-			String complemento, String uf) {
+			String complemento, String uf, Cliente cliente) {
 		super();
 		this.idEndereco = idEndereco;
 		this.cep = cep;
@@ -26,6 +29,7 @@ public class EnderecoDTO {
 		this.numero = numero;
 		this.complemento = complemento;
 		this.uf = uf;
+		this.cliente = cliente;
 	}
 
 	public Integer getIdEndereco() {
@@ -90,6 +94,14 @@ public class EnderecoDTO {
 
 	public void setUf(String uf) {
 		this.uf = uf;
+	}
+	
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 	
 }

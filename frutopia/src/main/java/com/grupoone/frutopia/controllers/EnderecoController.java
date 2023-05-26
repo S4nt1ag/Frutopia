@@ -28,11 +28,6 @@ public class EnderecoController {
 	EnderecoService enderecoService;
 
 	@GetMapping
-	public ResponseEntity<List<Endereco>> getAllEnderecos() {
-		return new ResponseEntity<>(enderecoService.getAllEnderecos(), HttpStatus.OK);
-	}
-
-	@GetMapping("/enderecos")
 	public ResponseEntity<List<EnderecoDTO>> getAllEnderecosDTO() {
 		return new ResponseEntity<>(enderecoService.getAllEnderecosDTO(), HttpStatus.OK);
 	}
