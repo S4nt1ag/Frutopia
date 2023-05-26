@@ -54,6 +54,10 @@ public class Cliente {
 	@Column(name = "data_nascimento")
 	private Date dataNascimento;
 
+	@NotBlank
+	@Column(name = "senha")
+	private String senha;
+	
 	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> listaPedidos;
 
