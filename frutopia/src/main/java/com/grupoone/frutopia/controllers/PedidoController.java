@@ -15,44 +15,46 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.grupoone.frutopia.entities.Categoria;
-import com.grupoone.frutopia.services.CategoriaService;
+import com.grupoone.frutopia.entities.Pedido;
+import com.grupoone.frutopia.services.PedidoService;
 
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/categorias")
-public class CategoriaController {
-
+@RequestMapping("/pedidos")
+public class PedidoController {
+	
 	@Autowired
-	CategoriaService categoriaService;
-
+	PedidoService pedidoService;
+	
 	@GetMapping
-	public ResponseEntity<List<Categoria>> getAllCategorias() {
-		return new ResponseEntity<>(categoriaService.getAllCategorias(), HttpStatus.OK);
+	public ResponseEntity<List<Pedido>> getAllPedidos() {
+		return new ResponseEntity<>(pedidoService.getAllPedidos(), HttpStatus.OK);
 	}
-
+	
 	@GetMapping("/{id}")
-	public ResponseEntity<Categoria> getCategoriaById(@Valid @PathVariable Integer id) {
-		return new ResponseEntity<>(categoriaService.getCategoriaById(id), HttpStatus.OK);
+	public ResponseEntity<Pedido> getPedidobyId(@Valid @PathVariable Integer id) {
+		return new ResponseEntity<>(pedidoService.getPedidoById(id), HttpStatus.OK);
 	}
-
+	
 	@PostMapping
-	public ResponseEntity<Categoria> saveCategoria(@Valid @RequestBody Categoria categoria) {
-		return new ResponseEntity<>(categoriaService.saveCategoria(categoria), HttpStatus.CREATED);
+	public ResponseEntity<Pedido> savePedido(@Valid @RequestBody Pedido pedido) {
+		return new ResponseEntity<>(pedidoService.savePedido(pedido), HttpStatus.CREATED);
 	}
-
+	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Categoria> updateCategoria(@Valid @RequestBody Categoria categoria,
+	public ResponseEntity<Pedido> updatePedido(@Valid @RequestBody Pedido pedido,
 			@Valid @PathVariable Integer id) {
-		return new ResponseEntity<>(categoriaService.updateCategoria(categoria, id), HttpStatus.OK);
+		return new ResponseEntity<>(pedidoService.updatePedido(pedido, id), HttpStatus.OK);
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Boolean> deleteCategoria(@Valid @PathVariable Integer id) {
-		Boolean resp = categoriaService.deleteCategoria(id);
+	public ResponseEntity<Boolean> deletePedido(@Valid @PathVariable Integer id) {
+		Boolean resp = pedidoService.deletePedido(id);
 		if (resp)
 			return new ResponseEntity<>(resp, HttpStatus.OK);
 		else
 			return new ResponseEntity<>(resp, HttpStatus.NOT_MODIFIED);
 	}
+	
 }

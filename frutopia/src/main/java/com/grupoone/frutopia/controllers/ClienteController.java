@@ -14,42 +14,42 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.grupoone.frutopia.entities.Categoria;
-import com.grupoone.frutopia.services.CategoriaService;
+import com.grupoone.frutopia.entities.Cliente;
+import com.grupoone.frutopia.services.ClienteService;
 
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/categorias")
-public class CategoriaController {
+@RequestMapping("/clientes")
+public class ClienteController {
 
 	@Autowired
-	CategoriaService categoriaService;
+	ClienteService clienteService;
 
 	@GetMapping
-	public ResponseEntity<List<Categoria>> getAllCategorias() {
-		return new ResponseEntity<>(categoriaService.getAllCategorias(), HttpStatus.OK);
+	public ResponseEntity<List<Cliente>> getAllClientes() {
+		return new ResponseEntity<>(clienteService.getAllClientees(), HttpStatus.OK);
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Categoria> getCategoriaById(@Valid @PathVariable Integer id) {
-		return new ResponseEntity<>(categoriaService.getCategoriaById(id), HttpStatus.OK);
+	public ResponseEntity<Cliente> getClienteById(@Valid @PathVariable Integer id) {
+		return new ResponseEntity<>(clienteService.getClienteById(id), HttpStatus.OK);
 	}
 
 	@PostMapping
-	public ResponseEntity<Categoria> saveCategoria(@Valid @RequestBody Categoria categoria) {
-		return new ResponseEntity<>(categoriaService.saveCategoria(categoria), HttpStatus.CREATED);
+	public ResponseEntity<Cliente> saveCliente(@Valid @RequestBody Cliente cliente) {
+		return new ResponseEntity<>(clienteService.saveCliente(cliente), HttpStatus.CREATED);
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Categoria> updateCategoria(@Valid @RequestBody Categoria categoria,
+	public ResponseEntity<Cliente> updateCliente(@Valid @RequestBody Cliente cliente,
 			@Valid @PathVariable Integer id) {
-		return new ResponseEntity<>(categoriaService.updateCategoria(categoria, id), HttpStatus.OK);
+		return new ResponseEntity<>(clienteService.updateCliente(cliente, id), HttpStatus.OK);
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Boolean> deleteCategoria(@Valid @PathVariable Integer id) {
-		Boolean resp = categoriaService.deleteCategoria(id);
+	public ResponseEntity<Boolean> deleteCliente(@Valid @PathVariable Integer id) {
+		Boolean resp = clienteService.deleteCliente(id);
 		if (resp)
 			return new ResponseEntity<>(resp, HttpStatus.OK);
 		else
