@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.grupoone.frutopia.dto.EnderecoDTO;
 import com.grupoone.frutopia.entities.Endereco;
 import com.grupoone.frutopia.services.EnderecoService;
 
@@ -27,10 +28,10 @@ public class EnderecoController {
 	EnderecoService enderecoService;
 
 	@GetMapping
-	public ResponseEntity<List<Endereco>> getAllEnderecoes() {
-		return new ResponseEntity<>(enderecoService.getAllEnderecos(), HttpStatus.OK);
+	public ResponseEntity<List<EnderecoDTO>> getAllEnderecosDTO() {
+		return new ResponseEntity<>(enderecoService.getAllEnderecosDTO(), HttpStatus.OK);
 	}
-
+	
 	@GetMapping("/{id}")
 	public ResponseEntity<Endereco> getEnderecoById(@Valid @PathVariable Integer id) {
 		return new ResponseEntity<>(enderecoService.getEnderecoById(id), HttpStatus.OK);
