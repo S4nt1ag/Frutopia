@@ -51,11 +51,7 @@ public class Cliente {
 	@Column(name = "telefone", unique = true)
 	private String telefone;
 
-<<<<<<< HEAD
 	@NotNull
-=======
-//	@NotBlank
->>>>>>> Breno
 	@Column(name = "data_nascimento")
 	private Date dataNascimento;
 
