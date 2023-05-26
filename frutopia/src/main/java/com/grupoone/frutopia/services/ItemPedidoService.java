@@ -13,11 +13,8 @@ import com.grupoone.frutopia.dto.ItemPedidoDTO;
 import com.grupoone.frutopia.entities.ItemPedido;
 import com.grupoone.frutopia.entities.Pedido;
 import com.grupoone.frutopia.entities.Produto;
-<<<<<<< HEAD
-=======
 import com.grupoone.frutopia.exceptions.IdNotFoundException;
 import com.grupoone.frutopia.exceptions.NullPointExPedidoProduto;
->>>>>>> main
 import com.grupoone.frutopia.repositories.ItemPedidoRepository;
 import com.grupoone.frutopia.repositories.PedidoRepository;
 import com.grupoone.frutopia.repositories.ProdutoRepository;
