@@ -50,7 +50,7 @@ public class Cliente {
 	@Column(name = "telefone", unique = true)
 	private String telefone;
 
-	@NotBlank
+//	@NotBlank
 	@Column(name = "data_nascimento")
 	private Date dataNascimento;
 
