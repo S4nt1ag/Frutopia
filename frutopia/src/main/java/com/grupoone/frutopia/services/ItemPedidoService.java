@@ -49,7 +49,6 @@ public class ItemPedidoService {
 			listaItensDto.get(i).getPedidoDTO().setIdPedido(idPedido);
 		}
 		return listaItensDto;
-
 	}
 
 	public ItemPedidoDTO getItemPedidoDtoById(Integer id) {
@@ -65,8 +64,7 @@ public class ItemPedidoService {
 		itemPedidoDto.setValorBruto(itemPedido.getValorBruto());
 		itemPedidoDto.setValorLiquido(itemPedido.getValorLiquido());
 		try {
-			itemPedidoDto.getPedidoDTO()
-			.setIdPedido(itemPedido.getPedido().getIdPedido());
+			itemPedidoDto.getPedidoDTO().setIdPedido(itemPedido.getPedido().getIdPedido());
 			itemPedidoDto.getProdutoDTO().setIdProduto(itemPedido.getProduto().getIdProduto());
 		} 
 		catch (NullPointerException e) {
