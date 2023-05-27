@@ -10,11 +10,10 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.grupoone.frutopia.dto.ItemPedidoDTO;
+import com.grupoone.frutopia.dto.PedidoResumidoDTO;
+import com.grupoone.frutopia.dto.ProdutoDTO;
 import com.grupoone.frutopia.entities.ItemPedido;
-import com.grupoone.frutopia.entities.Pedido;
-import com.grupoone.frutopia.entities.Produto;
 import com.grupoone.frutopia.exceptions.IdNotFoundException;
-import com.grupoone.frutopia.exceptions.NullPointExPedidoProduto;
 import com.grupoone.frutopia.repositories.ItemPedidoRepository;
 import com.grupoone.frutopia.repositories.PedidoRepository;
 import com.grupoone.frutopia.repositories.ProdutoRepository;
@@ -40,61 +39,55 @@ public class ItemPedidoService {
 		}.getType());
 
 		for (int i = 0; i < listaItens.size(); i++) {
-			Produto produto = listaItens.get(i).getProduto();
-			Integer idProduto = produto.getIdProduto();
-			listaItensDto.get(i).getProdutoDTO().setIdProduto(idProduto);
+			ProdutoDTO produtoDto = modelMapper.map(listaItens.get(i).getProduto(), ProdutoDTO.class);
+			listaItensDto.get(i).setProdutoDTO(produtoDto);
 
-			Pedido pedido = listaItens.get(i).getPedido();
-			Integer idPedido = pedido.getIdPedido();
-			listaItensDto.get(i).getPedidoDTO().setIdPedido(idPedido);
+			PedidoResumidoDTO pedidoDto = modelMapper.map(listaItens.get(i).getPedido(), PedidoResumidoDTO.class);
+			listaItensDto.get(i).setPedidoResumidoDTO(pedidoDto);
 		}
 		return listaItensDto;
-	}
-
+	}	
+	
+		
 	public ItemPedidoDTO getItemPedidoDtoById(Integer id) {
 		ItemPedido itemPedido = itemPedidoRepository.findById(id)
 				.orElseThrow(() -> new IdNotFoundException("Entidade não foi encontrada"));
+		
 		ItemPedidoDTO itemPedidoDto = new ItemPedidoDTO();
-
-		// alterar Model
 		itemPedidoDto.setId(itemPedido.getIdItemPedido());
 		itemPedidoDto.setPrecoVenda(itemPedido.getPrecoVenda());
 		itemPedidoDto.setQuantidade(itemPedido.getQuantidade());
 		itemPedidoDto.setPercentualDesconto(itemPedido.getPercentualDesconto());
 		itemPedidoDto.setValorBruto(itemPedido.getValorBruto());
 		itemPedidoDto.setValorLiquido(itemPedido.getValorLiquido());
-		try {
-			itemPedidoDto.getPedidoDTO().setIdPedido(itemPedido.getPedido().getIdPedido());
-			itemPedidoDto.getProdutoDTO().setIdProduto(itemPedido.getProduto().getIdProduto());
-		} 
-		catch (NullPointerException e) {
-			throw new NullPointExPedidoProduto("");
-		}
+
+		PedidoResumidoDTO pedidoDto = modelMapper.map(itemPedido.getPedido(), PedidoResumidoDTO.class);
+		itemPedidoDto.setPedidoResumidoDTO(pedidoDto);
+		
+		ProdutoDTO produtoDto = modelMapper.map(itemPedido.getProduto(), ProdutoDTO.class);
+		itemPedidoDto.setProdutoDTO(produtoDto);
+		
 		return itemPedidoDto;
 	}
 
 	public ItemPedido saveItemPedido(ItemPedido ItemPedido) {
 		try {
 			return itemPedidoRepository.save(ItemPedido);
-		} 
-		catch (DataAccessException e) {
+		} catch (DataAccessException e) {
 			throw new IdNotFoundException("");
 		}
 	}
 
 	public ItemPedido updateItemPedido(ItemPedido itemPedido, Integer id) {
 		try {
-			System.out.println("TESTE");
-			if (produtoRepository.existsById(id) && pedidoRepository.existsById(id)) {
+			if (itemPedido != null) {
 				ItemPedido updateItemPedido = itemPedidoRepository.findById(id).get();
 				updateData(updateItemPedido, itemPedido);
 				return itemPedidoRepository.save(updateItemPedido);
-			} 
-			else {
+			} else {
 				throw new NoSuchElementException("");
 			}
-		} 
-		catch (DataAccessException e) {
+		} catch (DataAccessException e) {
 			throw new IdNotFoundException("");
 		}
 	}
@@ -108,20 +101,7 @@ public class ItemPedidoService {
 		updateItemPedido.setProduto(itemPedido.getProduto());
 	}
 
-	public Boolean deleteItemPedido(Integer id) {
-		ItemPedido ItemPedidoDeleted = itemPedidoRepository.findById(id).orElse(null);
-		if (ItemPedidoDeleted != null) {
-			itemPedidoRepository.deleteById(id);
-			ItemPedidoDeleted = itemPedidoRepository.findById(id).orElse(null);
-			if (ItemPedidoDeleted != null) {
-				return false;
-			} 
-			else {
-				return true;
-			}
-		} 
-		else {
-			return false;
-		}
+	public void deleteItemPedido(Integer id) {
+		itemPedidoRepository.deleteById(id);		
 	}
 }

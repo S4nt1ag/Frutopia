@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import com.grupoone.frutopia.dto.ClienteDTO;
 import com.grupoone.frutopia.dto.EnderecoResumidoDTO;
 import com.grupoone.frutopia.entities.Cliente;
-import com.grupoone.frutopia.entities.Endereco;
 import com.grupoone.frutopia.entities.Pedido;
 import com.grupoone.frutopia.exceptions.IdNotFoundException;
 import com.grupoone.frutopia.repositories.ClienteRepository;
