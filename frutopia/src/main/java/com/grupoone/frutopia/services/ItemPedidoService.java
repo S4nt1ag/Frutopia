@@ -42,11 +42,11 @@ public class ItemPedidoService {
 		for (int i = 0; i < listaItens.size(); i++) {
 			Produto produto = listaItens.get(i).getProduto();
 			Integer idProduto = produto.getIdProduto();
-			listaItensDto.get(i).getProduto().setIdProduto(idProduto);
+			listaItensDto.get(i).getProdutoDTO().setIdProduto(idProduto);
 
 			Pedido pedido = listaItens.get(i).getPedido();
 			Integer idPedido = pedido.getIdPedido();
-			listaItensDto.get(i).getPedido().setIdPedido(idPedido);
+			listaItensDto.get(i).getPedidoDTO().setIdPedido(idPedido);
 		}
 		return listaItensDto;
 
@@ -65,8 +65,9 @@ public class ItemPedidoService {
 		itemPedidoDto.setValorBruto(itemPedido.getValorBruto());
 		itemPedidoDto.setValorLiquido(itemPedido.getValorLiquido());
 		try {
-			itemPedidoDto.getPedido().setIdPedido(itemPedido.getPedido().getIdPedido());
-			itemPedidoDto.getProduto().setIdProduto(itemPedido.getProduto().getIdProduto());
+			itemPedidoDto.getPedidoDTO()
+			.setIdPedido(itemPedido.getPedido().getIdPedido());
+			itemPedidoDto.getProdutoDTO().setIdProduto(itemPedido.getProduto().getIdProduto());
 		} 
 		catch (NullPointerException e) {
 			throw new NullPointExPedidoProduto("");
@@ -77,7 +78,6 @@ public class ItemPedidoService {
 	public ItemPedido saveItemPedido(ItemPedido ItemPedido) {
 		try {
 			return itemPedidoRepository.save(ItemPedido);
-
 		} 
 		catch (DataAccessException e) {
 			throw new IdNotFoundException("");

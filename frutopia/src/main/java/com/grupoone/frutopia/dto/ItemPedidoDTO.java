@@ -1,11 +1,5 @@
 package com.grupoone.frutopia.dto;
 
-import com.grupoone.frutopia.entities.Pedido;
-
-
-import com.grupoone.frutopia.entities.Produto;
-
-
 public class ItemPedidoDTO {
 
 	private Integer id;
@@ -14,15 +8,15 @@ public class ItemPedidoDTO {
 	private Double percentualDesconto;
 	private Double valorBruto;
 	private Double valorLiquido;
-	private Pedido pedido;
-	private Produto produto;
+	private PedidoDTO pedidoDto;
+	private ProdutoDTO produtoDto;
 	
 	public ItemPedidoDTO() {
 		super();
 	}
 
 	public ItemPedidoDTO(Integer id, Integer quantidade, Double precoVenda, Double percentualDesconto,
-			Double valorBruto, Double valorLiquido, Pedido pedido, Produto produto) {
+			Double valorBruto, Double valorLiquido, PedidoDTO pedidoDto, ProdutoDTO produtoDto) {
 		super();
 		this.id = id;
 		this.quantidade = quantidade;
@@ -30,8 +24,8 @@ public class ItemPedidoDTO {
 		this.percentualDesconto = percentualDesconto;
 		this.valorBruto = valorBruto;
 		this.valorLiquido = valorLiquido;
-		this.pedido = pedido;
-		this.produto = produto;
+		this.pedidoDto = pedidoDto;
+		this.produtoDto = produtoDto;
 	}
 
 	public Integer getId() {
@@ -82,25 +76,25 @@ public class ItemPedidoDTO {
 		this.valorLiquido = valorLiquido;
 	}
 
-	public Pedido getPedido() {
-		return pedido;
+	public PedidoDTO getPedidoDTO() {
+		return pedidoDto;
 	}
 
-	public void setPedido(Pedido pedido) {
-		this.pedido = pedido;
+	public void setPedidoDTO(PedidoDTO pedidoDto) {
+		this.pedidoDto = pedidoDto;
 	}
 
-	public Produto getProduto() {
-		return produto;
+	public ProdutoDTO getProdutoDTO() {
+		return produtoDto;
 	}
 
-	public void setProduto(Produto produto) {
-		this.produto = produto;
+	public void setProdutoDTO(ProdutoDTO produtoDto) {
+		this.produtoDto = produtoDto;
 	}
 
 	@Override
 	public String toString() {
-		return "ItemPedidoDTO [id=" + id + ", quantidade=" + quantidade + ", precoVenda=" + precoVenda
+		return "Item Pedido [id=" + id + ", quantidade=" + quantidade + ", precoVenda=" + precoVenda
 				+ ", percentualDesconto=" + percentualDesconto + ", valorBruto=" + valorBruto + ", valorLiquido="
 				+ valorLiquido + "]";
 	}
