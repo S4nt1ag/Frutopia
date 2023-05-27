@@ -28,21 +28,11 @@ public class CategoriaService {
 	private ModelMapper modelMapper;
 
 	public List<CategoriaDTO> getAllCategoriasDTO() {
-		CategoriaDTO categoriaDTO = new CategoriaDTO();
-		List<Categoria> listaCategoria = categoriaRepository.findAll();
-		List<CategoriaDTO> listaCategoriaDTO = modelMapper.map(listaCategoria, new TypeToken<List<CategoriaDTO>>() {
+		List<Categoria> listaCategorias = categoriaRepository.findAll();
+		List<CategoriaDTO> listaCategoriasDto = modelMapper.map(listaCategorias, new TypeToken<List<CategoriaDTO>>() {
 		}.getType());
-		List<ProdutoNomeDTO> listaProdutosDTO = new ArrayList<>();
 
-		for (int i = 0; i < listaCategoria.size(); i++) {
-			Produto produto = new Produto();
-			ProdutoNomeDTO produtoDTO = new ProdutoNomeDTO();
-			produtoDTO.setNome(produto.getNome());
-			listaProdutosDTO.add(produtoDTO);
-		}
-		categoriaDTO.setListaProdutosDTO(listaProdutosDTO);
-
-		return listaCategoriaDTO;
+		return listaCategoriasDto;
 	}
 
 	public List<Categoria> getAllCategorias() {
