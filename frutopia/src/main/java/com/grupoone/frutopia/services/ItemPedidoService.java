@@ -9,9 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.grupoone.frutopia.dto.ClienteDTO;
+import com.grupoone.frutopia.dto.EnderecoResumidoDTO;
 import com.grupoone.frutopia.dto.ItemPedidoDTO;
 import com.grupoone.frutopia.dto.PedidoDTO;
 import com.grupoone.frutopia.dto.ProdutoDTO;
+import com.grupoone.frutopia.entities.Cliente;
 import com.grupoone.frutopia.entities.ItemPedido;
 import com.grupoone.frutopia.exceptions.IdNotFoundException;
 import com.grupoone.frutopia.repositories.ItemPedidoRepository;
@@ -46,7 +49,8 @@ public class ItemPedidoService {
 			listaItensDto.get(i).setPedidoDTO(pedidoDto);
 		}
 		return listaItensDto;
-	}
+	}	
+	
 
 	public ItemPedidoDTO getItemPedidoDtoById(Integer id) {
 		ItemPedido itemPedido = itemPedidoRepository.findById(id)
