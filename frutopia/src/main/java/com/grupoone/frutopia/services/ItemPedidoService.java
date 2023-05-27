@@ -10,7 +10,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.grupoone.frutopia.dto.ItemPedidoDTO;
-import com.grupoone.frutopia.dto.PedidoDTO;
+import com.grupoone.frutopia.dto.PedidoResumidoDTO;
 import com.grupoone.frutopia.dto.ProdutoDTO;
 import com.grupoone.frutopia.entities.ItemPedido;
 import com.grupoone.frutopia.exceptions.IdNotFoundException;
@@ -42,13 +42,13 @@ public class ItemPedidoService {
 			ProdutoDTO produtoDto = modelMapper.map(listaItens.get(i).getProduto(), ProdutoDTO.class);
 			listaItensDto.get(i).setProdutoDTO(produtoDto);
 
-			PedidoDTO pedidoDto = modelMapper.map(listaItens.get(i).getPedido(), PedidoDTO.class);
-			listaItensDto.get(i).setPedidoDTO(pedidoDto);
+			PedidoResumidoDTO pedidoDto = modelMapper.map(listaItens.get(i).getPedido(), PedidoResumidoDTO.class);
+			listaItensDto.get(i).setPedidoResumidoDTO(pedidoDto);
 		}
 		return listaItensDto;
 	}	
 	
-
+		
 	public ItemPedidoDTO getItemPedidoDtoById(Integer id) {
 		ItemPedido itemPedido = itemPedidoRepository.findById(id)
 				.orElseThrow(() -> new IdNotFoundException("Entidade não foi encontrada"));
@@ -61,8 +61,8 @@ public class ItemPedidoService {
 		itemPedidoDto.setValorBruto(itemPedido.getValorBruto());
 		itemPedidoDto.setValorLiquido(itemPedido.getValorLiquido());
 
-		PedidoDTO pedidoDto = modelMapper.map(itemPedido.getPedido(), PedidoDTO.class);
-		itemPedidoDto.setPedidoDTO(pedidoDto);
+		PedidoResumidoDTO pedidoDto = modelMapper.map(itemPedido.getPedido(), PedidoResumidoDTO.class);
+		itemPedidoDto.setPedidoResumidoDTO(pedidoDto);
 		
 		ProdutoDTO produtoDto = modelMapper.map(itemPedido.getProduto(), ProdutoDTO.class);
 		itemPedidoDto.setProdutoDTO(produtoDto);
