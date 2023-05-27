@@ -52,8 +52,8 @@ public class ItemPedidoService {
 	public ItemPedidoDTO getItemPedidoDtoById(Integer id) {
 		ItemPedido itemPedido = itemPedidoRepository.findById(id)
 				.orElseThrow(() -> new IdNotFoundException("Entidade não foi encontrada"));
+		
 		ItemPedidoDTO itemPedidoDto = new ItemPedidoDTO();
-
 		itemPedidoDto.setId(itemPedido.getIdItemPedido());
 		itemPedidoDto.setPrecoVenda(itemPedido.getPrecoVenda());
 		itemPedidoDto.setQuantidade(itemPedido.getQuantidade());
