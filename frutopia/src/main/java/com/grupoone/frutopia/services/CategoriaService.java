@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.grupoone.frutopia.dto.CategoriaDTO;
-import com.grupoone.frutopia.dto.ProdutoDTO;
+import com.grupoone.frutopia.dto.ProdutoNomeDTO;
 import com.grupoone.frutopia.entities.Categoria;
 import com.grupoone.frutopia.entities.Produto;
 import com.grupoone.frutopia.exceptions.IdNotFoundException;
@@ -23,24 +23,25 @@ public class CategoriaService {
 
 	@Autowired
 	CategoriaRepository categoriaRepository;
-	
+
 	@Autowired
 	private ModelMapper modelMapper;
-	
+
 	public List<CategoriaDTO> getAllCategoriasDTO() {
 		CategoriaDTO categoriaDTO = new CategoriaDTO();
 		List<Categoria> listaCategoria = categoriaRepository.findAll();
-		List<CategoriaDTO> listaCategoriaDTO = modelMapper.map(listaCategoria, new TypeToken<List<CategoriaDTO>>() {}.getType());
-		List<ProdutoDTO> listaProdutosDTO = new ArrayList<>();
-		
+		List<CategoriaDTO> listaCategoriaDTO = modelMapper.map(listaCategoria, new TypeToken<List<CategoriaDTO>>() {
+		}.getType());
+		List<ProdutoNomeDTO> listaProdutosDTO = new ArrayList<>();
+
 		for (int i = 0; i < listaCategoria.size(); i++) {
 			Produto produto = new Produto();
-			ProdutoDTO produtoDTO = new ProdutoDTO();
+			ProdutoNomeDTO produtoDTO = new ProdutoNomeDTO();
 			produtoDTO.setNome(produto.getNome());
 			listaProdutosDTO.add(produtoDTO);
 		}
 		categoriaDTO.setListaProdutosDTO(listaProdutosDTO);
-		
+
 		return listaCategoriaDTO;
 	}
 
@@ -49,8 +50,30 @@ public class CategoriaService {
 	}
 
 	public Categoria getCategoriaById(Integer id) {
-	
+
 		return categoriaRepository.findById(id).orElseThrow(() -> new IdNotFoundException(""));
+	}
+
+	public CategoriaDTO getCategoriaDTOById(Integer id) {
+		Categoria categoria = categoriaRepository.findById(id).orElse(null);
+
+		if (categoria == null)
+			return null;
+
+		CategoriaDTO categoriaDTO = new CategoriaDTO();
+		categoriaDTO.setNome(categoria.getNome());
+		categoriaDTO.setDescricao(categoria.getDescricao());
+
+		List<ProdutoNomeDTO> produtoNomeDTO = new ArrayList<>();
+
+		for (Produto produto : categoria.getListaProdutos()) {
+			ProdutoNomeDTO listaProdutoNomeDTO = new ProdutoNomeDTO();
+			listaProdutoNomeDTO.setNome(produto.getNome());
+			produtoNomeDTO.add(listaProdutoNomeDTO);
+		}
+
+		categoriaDTO.setListaProdutosDTO(produtoNomeDTO);
+		return categoriaDTO;
 	}
 
 	public Categoria saveCategoria(Categoria categoria) {
