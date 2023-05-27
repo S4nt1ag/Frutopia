@@ -33,7 +33,7 @@ public class EnderecoController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Endereco> getEnderecoById(@Valid @PathVariable Integer id) {
+	public ResponseEntity<EnderecoDTO> getEnderecoDTOById(@Valid @PathVariable Integer id) {
 		return new ResponseEntity<>(enderecoService.getEnderecoById(id), HttpStatus.OK);
 	}
 

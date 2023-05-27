@@ -8,29 +8,38 @@ import com.grupoone.frutopia.entities.Pedido;
 
 public class ClienteDTO {
 
-//	private Integer idCliente;
+	private Integer idCliente;
 	private String cpf;
 	private Date dataNascimento;
 	private String email;
-	private Endereco endereco;
+	private EnderecoResumidoDTO enderecoResumidoDto;
 	private String nomeCompleto;
 	private String telefone;
 	private List<Pedido> listaPedidos;
-	
+
 	public ClienteDTO() {
 		super();
 	}
-	
-	public ClienteDTO(String cpf, Date dataNascimento, String email, Endereco endereco, String nomeCompleto,
-			String telefone, List<Pedido> listaPedidos) {
+
+	public ClienteDTO(Integer idCliente, String cpf, Date dataNascimento, String email,
+			EnderecoResumidoDTO enderecoResumidoDto, String nomeCompleto, String telefone, List<Pedido> listaPedidos) {
 		super();
+		this.idCliente = idCliente;
 		this.cpf = cpf;
 		this.dataNascimento = dataNascimento;
 		this.email = email;
-		this.endereco = endereco;
+		this.enderecoResumidoDto = enderecoResumidoDto;
 		this.nomeCompleto = nomeCompleto;
 		this.telefone = telefone;
 		this.listaPedidos = listaPedidos;
+	}
+
+	public Integer getIdCliente() {
+		return idCliente;
+	}
+
+	public void setIdCliente(Integer idCliente) {
+		this.idCliente = idCliente;
 	}
 
 	public String getCpf() {
@@ -57,12 +66,12 @@ public class ClienteDTO {
 		this.email = email;
 	}
 
-	public Endereco getEndereco() {
-		return endereco;
+	public EnderecoResumidoDTO getEnderecoResumidoDto() {
+		return enderecoResumidoDto;
 	}
 
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
+	public void setEnderecoResumidoDto(EnderecoResumidoDTO enderecoResumidoDto) {
+		this.enderecoResumidoDto = enderecoResumidoDto;
 	}
 
 	public String getNomeCompleto() {
@@ -92,8 +101,8 @@ public class ClienteDTO {
 	@Override
 	public String toString() {
 		return "ClienteDTO [cpf=" + cpf + ", dataNascimento=" + dataNascimento + ", email=" + email + ", endereco="
-				+ endereco + ", nomeCompleto=" + nomeCompleto + ", telefone=" + telefone + ", listaPedidos="
+				+ enderecoResumidoDto + ", nomeCompleto=" + nomeCompleto + ", telefone=" + telefone + ", listaPedidos="
 				+ listaPedidos + "]";
 	}
-	
+
 }
