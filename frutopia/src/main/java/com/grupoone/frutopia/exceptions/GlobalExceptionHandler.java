@@ -65,6 +65,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 problemDetailBody.setProperty("message", "Validation failed for object='" + 
                 		result.getObjectName() + "'. " + "Error count: " + result.getErrorCount());
                 
+                // se precisar verificar detalhes do erro
 //                problemDetailBody.setProperty("errors", result.getAllErrors());
             }
         }
