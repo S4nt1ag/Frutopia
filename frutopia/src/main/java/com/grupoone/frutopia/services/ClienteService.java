@@ -11,6 +11,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.grupoone.frutopia.dto.ClienteDTO;
+import com.grupoone.frutopia.dto.EnderecoResumidoDTO;
 import com.grupoone.frutopia.entities.Cliente;
 import com.grupoone.frutopia.entities.Endereco;
 import com.grupoone.frutopia.entities.Pedido;
@@ -27,35 +28,38 @@ public class ClienteService {
 
 	@Autowired
 	private ModelMapper modelMapper;
-	
+
 	public List<ClienteDTO> getAllClientesDto() {
 		List<Cliente> listaClientes = clienteRepository.findAll();
-		List<ClienteDTO> listaClientesDto = modelMapper.map(listaClientes, new TypeToken<List<ClienteDTO>> (){}.getType());
+		List<ClienteDTO> listaClientesDto = modelMapper.map(listaClientes, new TypeToken<List<ClienteDTO>>() {
+		}.getType());
 
 		for (int i = 0; i < listaClientes.size(); i++) {
-			Endereco endereco = listaClientes.get(i).getEndereco();
-			Integer idEndereco = endereco.getIdEndereco();
-			listaClientesDto.get(i).getEndereco().setIdEndereco(idEndereco);
+
+			EnderecoResumidoDTO enderecoDto = modelMapper.map(listaClientes.get(i).getEndereco(),
+					EnderecoResumidoDTO.class);
+			listaClientesDto.get(i).setEnderecoResumidoDto(enderecoDto);
 
 		}
 		return listaClientesDto;
 
 	}
-	
+
 	public ClienteDTO getClienteDtoById(Integer id) {
 		Cliente cliente = clienteRepository.findById(id).orElse(null);
 		ClienteDTO clienteDto = new ClienteDTO();
-		
-		if(null == cliente) return null;
-		
-		clienteDto.setCpf(cliente.getCpf()); 
+
+		if (null == cliente)
+			return null;
+
+		clienteDto.setCpf(cliente.getCpf());
 		clienteDto.setDataNascimento(cliente.getDataNascimento());
 		clienteDto.setEmail(cliente.getEmail());
 		clienteDto.setNomeCompleto(cliente.getNomeCompleto());
 		clienteDto.setTelefone(cliente.getTelefone());
-		clienteDto.setEndereco(cliente.getEndereco());
-		
-		
+		clienteDto.setEnderecoResumidoDto(modelMapper.map(cliente.getEndereco(),
+				EnderecoResumidoDTO.class));
+
 		List<Pedido> listaPedidos = new ArrayList<>();
 		for (Pedido pedido : cliente.getListaPedidos()) {
 			Pedido pedidoDTO = new Pedido();
@@ -65,15 +69,15 @@ public class ClienteService {
 			pedidoDTO.setDataEnvio(pedido.getDataEnvio());
 			pedidoDTO.setStatus(pedido.getStatus());
 			pedidoDTO.setValorTotal(pedido.getValorTotal());
-			
+
 			listaPedidos.add(pedidoDTO);
 		}
-		
+
 		clienteDto.setListaPedidos(listaPedidos);
-		
+
 		return clienteDto;
 	}
-	
+
 	public List<Cliente> getAllClientes() {
 		return clienteRepository.findAll();
 	}
@@ -84,12 +88,12 @@ public class ClienteService {
 
 	public Cliente saveCliente(Cliente cliente) {
 		try {
-			
-		Cliente novoCliente = clienteRepository.save(cliente);
-		return novoCliente;
-		}catch(DataAccessException e) {
-            throw new IdNotFoundException("");
-        }
+
+			Cliente novoCliente = clienteRepository.save(cliente);
+			return novoCliente;
+		} catch (DataAccessException e) {
+			throw new IdNotFoundException("");
+		}
 	}
 
 	public Cliente updateCliente(Cliente cliente, Integer id) {

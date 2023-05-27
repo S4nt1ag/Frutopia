@@ -2,6 +2,9 @@ package com.grupoone.frutopia.entities;
 
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,6 +15,11 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "idEndereco"
+        )
 
 @Entity
 @Table(name="endereco")
@@ -48,10 +56,11 @@ public class Endereco {
 	private String complemento;
 	
 	@NotBlank
-	@Pattern(regexp = "^[a-z]{2}")
+	@Pattern(regexp = "^[A-Z]{2}")
 	@Column(name = "uf")
 	private String uf;
 	
+	//@NotNull
 	@OneToOne(mappedBy = "endereco") // (1,1)
 	private Cliente cliente;
 	
