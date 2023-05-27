@@ -1,5 +1,6 @@
 package com.grupoone.frutopia.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -9,14 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.grupoone.frutopia.dto.ClienteResumidoDTO;
+import com.grupoone.frutopia.dto.ItemPedidoResumidoDTO;
 import com.grupoone.frutopia.dto.PedidoDTO;
-import com.grupoone.frutopia.entities.Cliente;
+import com.grupoone.frutopia.entities.ItemPedido;
 import com.grupoone.frutopia.entities.Pedido;
 import com.grupoone.frutopia.exceptions.IdNotFoundException;
-import com.grupoone.frutopia.exceptions.NullPointExPedidoProduto;
 import com.grupoone.frutopia.repositories.PedidoRepository;
-
-import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class PedidoService {
@@ -34,9 +34,16 @@ public class PedidoService {
 				modelMapper.map(listaPedidos, new TypeToken<List<PedidoDTO>>() {}.getType());
 		
 		for(int i = 0; i < listaPedidos.size(); i++) {
-			Cliente cliente = listaPedidos.get(i).getCliente();
-			Integer idCliente = cliente.getIdCliente();
-			listaPedidosDto.get(i).getCliente().setIdCliente(idCliente);
+			ClienteResumidoDTO clienteDto = modelMapper.map(listaPedidos.get(i).getCliente(),ClienteResumidoDTO.class);
+			listaPedidosDto.get(i).setCliente(clienteDto);
+
+			List<ItemPedidoResumidoDTO> listaItemPedido = new ArrayList<>();
+			for(ItemPedido item : listaPedidos.get(i).getListaItemPedido()) {
+				ItemPedidoResumidoDTO itemPedidoDTO = modelMapper.map(item, ItemPedidoResumidoDTO.class);
+				listaItemPedido.add(itemPedidoDTO);
+			}
+			
+			listaPedidosDto.get(i).setListaItemPedido(listaItemPedido);
 		}
 		
 		return listaPedidosDto;
@@ -45,19 +52,23 @@ public class PedidoService {
 	public PedidoDTO getPedidoDtoById(Integer id) {
 		Pedido pedido = pedidoRepository.findById(id).orElseThrow(() -> new IdNotFoundException("Entidade não foi encontrada"));
 		PedidoDTO pedidoDTO = new PedidoDTO();
-	
-		//ver do model depois
+
 		pedidoDTO.setIdPedido(pedido.getIdPedido());
 		pedidoDTO.setDataPedido(pedido.getDataPedido());
 		pedidoDTO.setDataEntrega(pedido.getDataEntrega());
 		pedidoDTO.setDataEnvio(pedido.getDataEnvio());
 		pedidoDTO.setStatus(pedido.getStatus());
 		pedidoDTO.setValorTotal(pedido.getValorTotal());
-		try {
-			pedidoDTO.setCliente(pedido.getCliente());
-		} catch (NullPointerException e) {
-			throw new NullPointExPedidoProduto("");
+		ClienteResumidoDTO clienteDto = modelMapper.map(pedido.getCliente(),ClienteResumidoDTO.class);
+		pedidoDTO.setCliente(clienteDto);
+		
+		List<ItemPedidoResumidoDTO> listaItemPedido = new ArrayList<>();
+		for(ItemPedido item : pedido.getListaItemPedido()) {
+			ItemPedidoResumidoDTO itemPedidoDTO = modelMapper.map(item, ItemPedidoResumidoDTO.class);
+			listaItemPedido.add(itemPedidoDTO);
 		}
+		
+		pedidoDTO.setListaItemPedido(listaItemPedido);
 		
 		return pedidoDTO;
 	}
