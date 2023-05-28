@@ -1,44 +1,31 @@
 package com.grupoone.frutopia.dto;
 
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.grupoone.frutopia.entities.enums.StatusPedido;
 
-public class PedidoDTO {
-	
-	private Integer idPedido;	
+public class PedidoResumidoDTO {
+
 	private Instant dataPedido;
 	private Instant dataEntrega;
 	private Instant dataEnvio;
 	private Integer status;
 	private Double valorTotal;
-	private ClienteResumidoDTO cliente;
-	private List<ItemPedidoResumidoDTO> listaItemPedido = new ArrayList<>();
+	private ClienteResumidoDTO clienteResumidoDTO;
 	
-	public PedidoDTO() {
+	public PedidoResumidoDTO() {
 		super();
 	}
 
-	public PedidoDTO(Integer idPedido, Instant dataPedido, Instant dataEntrega, Instant dataEnvio, StatusPedido status,
-			Double valorTotal, ClienteResumidoDTO cliente) {
+	public PedidoResumidoDTO(Instant dataPedido, Instant dataEntrega, Instant dataEnvio, StatusPedido status, Double valorTotal,
+			ClienteResumidoDTO clienteResumidoDTO) {
 		super();
-		this.idPedido = idPedido;
 		this.dataPedido = dataPedido;
 		this.dataEntrega = dataEntrega;
 		this.dataEnvio = dataEnvio;
 		setStatus(status);
 		this.valorTotal = valorTotal;
-		this.cliente = cliente;
-	}
-
-	public Integer getIdPedido() {
-		return idPedido;
-	}
-
-	public void setIdPedido(Integer idPedido) {
-		this.idPedido = idPedido;
+		this.clienteResumidoDTO = clienteResumidoDTO;
 	}
 
 	public Instant getDataPedido() {
@@ -83,20 +70,11 @@ public class PedidoDTO {
 		this.valorTotal = valorTotal;
 	}
 
-	public ClienteResumidoDTO getCliente() {
-		return cliente;
+	public ClienteResumidoDTO getClienteResumidoDTO() {
+		return clienteResumidoDTO;
 	}
 
-	public void setCliente(ClienteResumidoDTO cliente) {
-		this.cliente = cliente;
+	public void setClienteResumidoDTO(ClienteResumidoDTO clienteResumidoDTO) {
+		this.clienteResumidoDTO = clienteResumidoDTO;
 	}
-
-	public List<ItemPedidoResumidoDTO> getListaItemPedido() {
-		return listaItemPedido;
-	}
-
-	public void setListaItemPedido(List<ItemPedidoResumidoDTO> listaItemPedido) {
-		this.listaItemPedido = listaItemPedido;
-	}
-
 }

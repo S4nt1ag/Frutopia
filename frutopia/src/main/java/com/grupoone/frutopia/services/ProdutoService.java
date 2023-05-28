@@ -14,7 +14,6 @@ import com.grupoone.frutopia.dto.ItemPedidoDTO;
 import com.grupoone.frutopia.dto.ProdutoDTO;
 import com.grupoone.frutopia.entities.Produto;
 import com.grupoone.frutopia.exceptions.IdNotFoundException;
-import com.grupoone.frutopia.exceptions.NullPointExPedidoProduto;
 import com.grupoone.frutopia.repositories.ProdutoRepository;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -59,11 +58,7 @@ public class ProdutoService {
 		produtoDto.setValorUnitario(produto.getValorUnitario());
 		produtoDto.setImagem(produto.getImagem());
 
-		try {
-
-		} catch (NullPointerException e) {
-			throw new NullPointExPedidoProduto("");
-		}
+	
 		return produtoDto;
 	}
 
@@ -80,7 +75,7 @@ public class ProdutoService {
 
 	public Produto updateProduto(Produto produto, Integer id) {
 		try {
-			Produto updateProduto = produtoRepository.getReferenceById(id);
+			Produto updateProduto = produtoRepository.findById(id).get();
 			updateData(updateProduto, produto);
 			return produtoRepository.save(updateProduto);
 		} catch (EntityNotFoundException e) {

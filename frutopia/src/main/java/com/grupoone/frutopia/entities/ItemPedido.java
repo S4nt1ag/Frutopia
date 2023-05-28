@@ -142,7 +142,7 @@ public class ItemPedido {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(idItemPedido);
+		return Objects.hash(idItemPedido, pedido, produto);
 	}
 
 	@Override
@@ -154,6 +154,7 @@ public class ItemPedido {
 		if (getClass() != obj.getClass())
 			return false;
 		ItemPedido other = (ItemPedido) obj;
-		return Objects.equals(idItemPedido, other.idItemPedido);
+		return Objects.equals(idItemPedido, other.idItemPedido) && Objects.equals(pedido, other.pedido)
+				&& Objects.equals(produto, other.produto);
 	}
 }

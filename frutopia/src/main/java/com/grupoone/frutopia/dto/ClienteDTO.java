@@ -1,28 +1,28 @@
 package com.grupoone.frutopia.dto;
 
-import java.util.Date;
+import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 
-import com.grupoone.frutopia.entities.Endereco;
 import com.grupoone.frutopia.entities.Pedido;
 
 public class ClienteDTO {
 
 	private Integer idCliente;
 	private String cpf;
-	private Date dataNascimento;
+	private Instant dataNascimento;
 	private String email;
 	private EnderecoResumidoDTO enderecoResumidoDto;
 	private String nomeCompleto;
 	private String telefone;
-	private List<Pedido> listaPedidos;
+	private List<Pedido> listaPedidos = new ArrayList<>();
 
 	public ClienteDTO() {
 		super();
 	}
 
-	public ClienteDTO(Integer idCliente, String cpf, Date dataNascimento, String email,
-			EnderecoResumidoDTO enderecoResumidoDto, String nomeCompleto, String telefone, List<Pedido> listaPedidos) {
+	public ClienteDTO(Integer idCliente, String cpf, Instant dataNascimento, String email,
+			EnderecoResumidoDTO enderecoResumidoDto, String nomeCompleto, String telefone) {
 		super();
 		this.idCliente = idCliente;
 		this.cpf = cpf;
@@ -31,7 +31,6 @@ public class ClienteDTO {
 		this.enderecoResumidoDto = enderecoResumidoDto;
 		this.nomeCompleto = nomeCompleto;
 		this.telefone = telefone;
-		this.listaPedidos = listaPedidos;
 	}
 
 	public Integer getIdCliente() {
@@ -50,11 +49,11 @@ public class ClienteDTO {
 		this.cpf = cpf;
 	}
 
-	public Date getDataNascimento() {
+	public Instant getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(Date dataNascimento) {
+	public void setDataNascimento(Instant dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 

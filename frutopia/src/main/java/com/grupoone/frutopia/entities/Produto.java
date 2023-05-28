@@ -1,11 +1,9 @@
 package com.grupoone.frutopia.entities;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,10 +17,10 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "idProduto"
-        )
+//@JsonIdentityInfo(
+//        generator = ObjectIdGenerators.PropertyGenerator.class,
+//        property = "idProduto"
+//        )
 @Entity
 @Table(name = "produto")
     public class Produto {
@@ -60,8 +58,8 @@ import jakarta.validation.constraints.NotNull;
 	@JoinColumn(name = "id_categoria_FK", referencedColumnName = "id_categoria")
 	private Categoria categoria;
 
-	@OneToMany(mappedBy = "produto")
-	private List<ItemPedido> listaItensPedidos;
+	@OneToMany(mappedBy = "produto") // quando busca produtos vai querer mostrar itensPedidos? Deveria mostrar produto com categoria
+	private List<ItemPedido> listaItensPedidos = new ArrayList<>();
 
 	
 	public Produto() {
@@ -170,8 +168,5 @@ import jakarta.validation.constraints.NotNull;
 		Produto other = (Produto) obj;
 		return Objects.equals(idProduto, other.idProduto);
 	}
-	
 }
 	
-	
-		

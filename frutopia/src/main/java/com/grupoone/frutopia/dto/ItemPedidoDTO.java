@@ -8,7 +8,7 @@ public class ItemPedidoDTO {
 	private Double percentualDesconto;
 	private Double valorBruto;
 	private Double valorLiquido;
-	private PedidoDTO pedidoDto;
+	private PedidoResumidoDTO pedidoResumidoDTO;
 	private ProdutoDTO produtoDto;
 	
 	public ItemPedidoDTO() {
@@ -16,7 +16,7 @@ public class ItemPedidoDTO {
 	}
 
 	public ItemPedidoDTO(Integer id, Integer quantidade, Double precoVenda, Double percentualDesconto,
-			Double valorBruto, Double valorLiquido, PedidoDTO pedidoDto, ProdutoDTO produtoDto) {
+			Double valorBruto, Double valorLiquido, PedidoResumidoDTO pedidoResumidoDTO, ProdutoDTO produtoDto) {
 		super();
 		this.id = id;
 		this.quantidade = quantidade;
@@ -24,7 +24,7 @@ public class ItemPedidoDTO {
 		this.percentualDesconto = percentualDesconto;
 		this.valorBruto = valorBruto;
 		this.valorLiquido = valorLiquido;
-		this.pedidoDto = pedidoDto;
+		this.pedidoResumidoDTO = pedidoResumidoDTO;
 		this.produtoDto = produtoDto;
 	}
 
@@ -76,12 +76,12 @@ public class ItemPedidoDTO {
 		this.valorLiquido = valorLiquido;
 	}
 
-	public PedidoDTO getPedidoDTO() {
-		return pedidoDto;
+	public PedidoResumidoDTO getPedidoResumidoDTO() {
+		return pedidoResumidoDTO;
 	}
 
-	public void setPedidoDTO(PedidoDTO pedidoDto) {
-		this.pedidoDto = pedidoDto;
+	public void setPedidoResumidoDTO(PedidoResumidoDTO pedidoResumidoDTO) {
+		this.pedidoResumidoDTO = pedidoResumidoDTO;
 	}
 
 	public ProdutoDTO getProdutoDTO() {

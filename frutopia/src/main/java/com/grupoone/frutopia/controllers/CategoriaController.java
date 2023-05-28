@@ -34,8 +34,8 @@ public class CategoriaController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Categoria> getCategoriaById(@Valid @PathVariable Integer id) {
-		return new ResponseEntity<>(categoriaService.getCategoriaById(id), HttpStatus.OK);
+	public ResponseEntity<CategoriaDTO> getCategoriaById(@Valid @PathVariable Integer id) {
+		return new ResponseEntity<>(categoriaService.getCategoriaDTOById(id), HttpStatus.OK);
 	}
 
 	@PostMapping

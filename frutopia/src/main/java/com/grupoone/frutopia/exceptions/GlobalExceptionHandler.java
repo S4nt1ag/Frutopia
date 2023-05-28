@@ -39,8 +39,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		problemDetail.setDetail("Id not found");
 		return problemDetail;
 	}
-
-//	// verifica nullpointer, não está precisando por enquanto
+//
 //	@ExceptionHandler(NullPointExPedidoProduto.class)
 //	ProblemDetail handleNullPointEx(NullPointExPedidoProduto e) {
 //		ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, e.getMessage());
@@ -61,12 +60,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
             problemDetailBody.setProperty("message", ex.getMessage());
             if (ex instanceof MethodArgumentNotValidException subEx) {
                 BindingResult result = subEx.getBindingResult();                
-                problemDetailBody.setTitle("Erro na requisição");
-                problemDetailBody.setDetail("Ocorreu um erro ao processar a Requisição");
+                problemDetailBody.setTitle("Erro de validação na requisição");
+                problemDetailBody.setDetail("Ocorreu um erro ao processar a requisição");
                 problemDetailBody.setProperty("message", "Validation failed for object='" + 
                 		result.getObjectName() + "'. " + "Error count: " + result.getErrorCount());
                 
-                problemDetailBody.setProperty("errors", result.getAllErrors());
+                // se precisar verificar detalhes do erro
+//                problemDetailBody.setProperty("errors", result.getAllErrors());
             }
         }
         return response;
