@@ -102,6 +102,9 @@ public class ItemPedidoService {
 	}
 
 	public void deleteItemPedido(Integer id) {
-		itemPedidoRepository.deleteById(id);		
+		ItemPedido itemPedido = itemPedidoRepository.findById(id)
+				.orElseThrow(() -> new IdNotFoundException("Entidade não foi encontrada"));
+		
+		itemPedidoRepository.delete(itemPedido);		
 	}
 }

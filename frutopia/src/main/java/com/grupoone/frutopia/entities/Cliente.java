@@ -1,6 +1,7 @@
 package com.grupoone.frutopia.entities;
 
-import java.util.Date;
+import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -21,8 +22,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idCliente")
-
+@JsonIdentityInfo(
+		generator = ObjectIdGenerators.PropertyGenerator.class, 
+		property = "idCliente")
 @Entity
 @Table(name = "cliente")
 public class Cliente {
@@ -53,14 +55,14 @@ public class Cliente {
 
 	@NotNull
 	@Column(name = "data_nascimento")
-	private Date dataNascimento;
+	private Instant dataNascimento;
 
 	@NotBlank
 	@Column(name = "senha")
 	private String senha;
 
 	@OneToMany(mappedBy = "cliente")
-	private List<Pedido> listaPedidos;
+	private List<Pedido> listaPedidos = new ArrayList<>();
 
 	@NotNull
 	@OneToOne
@@ -73,7 +75,7 @@ public class Cliente {
 
 	public Cliente(Integer idCliente, @NotBlank @Email String email, @NotBlank String nomeCompleto,
 			@NotBlank @Pattern(regexp = "^[0-9]{11}") String cpf,
-			@NotBlank @Pattern(regexp = "^[0-9]{8,15}") String telefone, @NotBlank Date dataNascimento,
+			@NotBlank @Pattern(regexp = "^[0-9]{8,15}") String telefone, @NotBlank Instant dataNascimento,
 			@NotBlank String senha, List<Pedido> listaPedidos, Endereco endereco) {
 		super();
 		this.idCliente = idCliente;
@@ -127,11 +129,11 @@ public class Cliente {
 		this.telefone = telefone;
 	}
 
-	public Date getDataNascimento() {
+	public Instant getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(Date dataNascimento) {
+	public void setDataNascimento(Instant dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 

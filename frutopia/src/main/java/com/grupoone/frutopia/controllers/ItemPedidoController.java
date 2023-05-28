@@ -51,6 +51,6 @@ public class ItemPedidoController {
 	@DeleteMapping("/{id}")
 	public ResponseEntity<ItemPedido> deleteItemPedido(@Valid @PathVariable Integer id) {
 		itemPedidoService.deleteItemPedido(id);
-		return ResponseEntity.ok().build();
+		return ResponseEntity.noContent().build();
 	}
 }

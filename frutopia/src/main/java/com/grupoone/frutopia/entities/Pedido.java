@@ -1,10 +1,13 @@
 package com.grupoone.frutopia.entities;
 
-import java.util.Date;
+import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.grupoone.frutopia.entities.enums.StatusPedido;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -18,63 +21,57 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "idPedido"
-        )
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idPedido")
 
 @Entity
 @Table(name = "pedido")
 public class Pedido {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_pedido")
 	private Integer idPedido;
-	
+
 	@NotNull
-	@Column(name = "data_pedido")
-	private Date dataPedido;
-	
+	@Column(name = "data_pedido")  // para garantir formato do Instant salvo no Json
+	private Instant dataPedido;
+
 	@Column(name = "data_entrega")
-	private Date dataEntrega;
-	
+	private Instant dataEntrega;
+
 	@Column(name = "data_envio")
-	private Date dataEnvio;
-	
-	@NotBlank
+	private Instant dataEnvio;
+
+	@NotNull
 	@Column(name = "status")
-	private String status;
-	
+	private Integer status;  // passa o Enum como Integer, para especificar que está gravando no banco de dados o número inteiro
+
 	@Column(name = "valor_total")
 	private Double valorTotal;
-	
+
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "id_cliente_FK", referencedColumnName = "id_cliente")
 	private Cliente cliente;
-	
-	@OneToMany(mappedBy = "pedido")
-	private List<ItemPedido> listaItemPedido;
 
+	@OneToMany(mappedBy = "pedido")
+	private List<ItemPedido> listaItenPedidos = new ArrayList<>();
 
 	public Pedido() {
 		super();
 	}
 
-	public Pedido(Integer idPedido, @NotBlank Date dataPedido, Date dataEntrega, Date dataEnvio,
-			@NotBlank String status, Double valorTotal, Cliente cliente) {
+	public Pedido(Integer idPedido, @NotBlank Instant dataPedido, Instant dataEntrega, Instant dataEnvio,
+			@NotBlank StatusPedido status, Double valorTotal, Cliente cliente) {
 		super();
 		this.idPedido = idPedido;
 		this.dataPedido = dataPedido;
 		this.dataEntrega = dataEntrega;
 		this.dataEnvio = dataEnvio;
-		this.status = status;
+		setStatus(status);
 		this.valorTotal = valorTotal;
 		this.cliente = cliente;
 	}
-
-
 
 	public Integer getIdPedido() {
 		return idPedido;
@@ -84,36 +81,38 @@ public class Pedido {
 		this.idPedido = idPedido;
 	}
 
-	public Date getDataPedido() {
+	public Instant getDataPedido() {
 		return dataPedido;
 	}
 
-	public void setDataPedido(Date dataPedido) {
+	public void setDataPedido(Instant dataPedido) {
 		this.dataPedido = dataPedido;
 	}
 
-	public Date getDataEntrega() {
+	public Instant getDataEntrega() {
 		return dataEntrega;
 	}
 
-	public void setDataEntrega(Date dataEntrega) {
+	public void setDataEntrega(Instant dataEntrega) {
 		this.dataEntrega = dataEntrega;
 	}
 
-	public Date getDataEnvio() {
+	public Instant getDataEnvio() {
 		return dataEnvio;
 	}
 
-	public void setDataEnvio(Date dataEnvio) {
+	public void setDataEnvio(Instant dataEnvio) {
 		this.dataEnvio = dataEnvio;
 	}
 
-	public String getStatus() {
-		return status;
+	public StatusPedido getStatus() { // pega o valor numérico no banco e converte para Enum
+		return StatusPedido.valueOf(status);
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setStatus(StatusPedido status) {
+		if(status != null) {
+			this.status = status.getCode(); // pega o código para setar o status
+		}
 	}
 
 	public Double getValorTotal() {
@@ -133,11 +132,27 @@ public class Pedido {
 	}
 
 	public List<ItemPedido> getListaItemPedido() {
-		return listaItemPedido;
+		return listaItenPedidos;
 	}
 
 	public void setListaItemPedido(List<ItemPedido> listaItemPedido) {
-		this.listaItemPedido = listaItemPedido;
+		this.listaItenPedidos = listaItemPedido;
 	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(idPedido);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Pedido other = (Pedido) obj;
+		return Objects.equals(idPedido, other.idPedido);
+	}
 }

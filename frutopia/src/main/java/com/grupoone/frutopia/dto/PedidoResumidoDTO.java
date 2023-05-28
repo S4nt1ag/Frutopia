@@ -1,13 +1,15 @@
 package com.grupoone.frutopia.dto;
 
-import java.util.Date;
+import java.time.Instant;
+
+import com.grupoone.frutopia.entities.enums.StatusPedido;
 
 public class PedidoResumidoDTO {
 
-	private Date dataPedido;
-	private Date dataEntrega;
-	private Date dataEnvio;
-	private String status;
+	private Instant dataPedido;
+	private Instant dataEntrega;
+	private Instant dataEnvio;
+	private Integer status;
 	private Double valorTotal;
 	private ClienteResumidoDTO clienteResumidoDTO;
 	
@@ -15,47 +17,49 @@ public class PedidoResumidoDTO {
 		super();
 	}
 
-	public PedidoResumidoDTO(Date dataPedido, Date dataEntrega, Date dataEnvio, String status, Double valorTotal,
+	public PedidoResumidoDTO(Instant dataPedido, Instant dataEntrega, Instant dataEnvio, StatusPedido status, Double valorTotal,
 			ClienteResumidoDTO clienteResumidoDTO) {
 		super();
 		this.dataPedido = dataPedido;
 		this.dataEntrega = dataEntrega;
 		this.dataEnvio = dataEnvio;
-		this.status = status;
+		setStatus(status);
 		this.valorTotal = valorTotal;
 		this.clienteResumidoDTO = clienteResumidoDTO;
 	}
 
-	public Date getDataPedido() {
+	public Instant getDataPedido() {
 		return dataPedido;
 	}
 
-	public void setDataPedido(Date dataPedido) {
+	public void setDataPedido(Instant dataPedido) {
 		this.dataPedido = dataPedido;
 	}
 
-	public Date getDataEntrega() {
+	public Instant getDataEntrega() {
 		return dataEntrega;
 	}
 
-	public void setDataEntrega(Date dataEntrega) {
+	public void setDataEntrega(Instant dataEntrega) {
 		this.dataEntrega = dataEntrega;
 	}
 
-	public Date getDataEnvio() {
+	public Instant getDataEnvio() {
 		return dataEnvio;
 	}
 
-	public void setDataEnvio(Date dataEnvio) {
+	public void setDataEnvio(Instant dataEnvio) {
 		this.dataEnvio = dataEnvio;
 	}
 
-	public String getStatus() {
-		return status;
+	public StatusPedido getStatus() {
+		return StatusPedido.valueOf(status);
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setStatus(StatusPedido status) {
+		if(status != null) {
+			this.status = status.getCode();
+		}
 	}
 
 	public Double getValorTotal() {
