@@ -72,23 +72,18 @@ public class EnderecoService {
 	}
 
 	public Endereco updateEndereco(Endereco endereco, Integer id) {
-		try {
-			Endereco updateEndereco = enderecoRepository.getReferenceById(id);
-			updateData(updateEndereco, endereco);
-			return enderecoRepository.save(updateEndereco);
-		} catch (EntityNotFoundException e) {
-			throw new NoSuchElementException("");
-		}
+	//Fazer tratamento depois.
+			return enderecoRepository.save(endereco);	
 	}
 
-	private void updateData(Endereco updateEndereco, Endereco instrutor) {
-		updateEndereco.setCep(instrutor.getCep());
-		updateEndereco.setRua(instrutor.getRua());
-		updateEndereco.setBairro(instrutor.getBairro());
-		updateEndereco.setCidade(instrutor.getCidade());
-		updateEndereco.setNumero(instrutor.getNumero());
-		updateEndereco.setComplemento(instrutor.getComplemento());
-		updateEndereco.setUf(instrutor.getUf());
+	private void updateData(Endereco updateEndereco, Endereco endereco) {
+		updateEndereco.setCep(endereco.getCep());
+		updateEndereco.setRua(endereco.getRua());
+		updateEndereco.setBairro(endereco.getBairro());
+		updateEndereco.setCidade(endereco.getCidade());
+		updateEndereco.setNumero(endereco.getNumero());
+		updateEndereco.setComplemento(endereco.getComplemento());
+		updateEndereco.setUf(endereco.getUf());
 	}
 
 	public Boolean deleteEndereco(Integer id) {

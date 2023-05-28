@@ -34,7 +34,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, e.getMessage());
 
 		problemDetail.setType(URI.create("https://api.frutopia.com/errors/id-not-found"));
-		problemDetail.setTitle("O id passado não existe no banco de dados");
+		problemDetail.setTitle("O id inserido não existe no banco de dados");
 		problemDetail.setStatus(HttpStatus.NOT_FOUND);
 		problemDetail.setDetail("Id not found");
 		return problemDetail;
