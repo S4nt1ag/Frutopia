@@ -79,8 +79,4 @@ public class PedidoResumidoDTO {
 		this.idProduto = idProduto;
 	}
 
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
-
 }
