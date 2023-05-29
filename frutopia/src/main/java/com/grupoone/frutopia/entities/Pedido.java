@@ -19,7 +19,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idPedido")
@@ -62,8 +61,8 @@ public class Pedido {
 		super();
 	}
 
-	public Pedido(Integer idPedido, @NotBlank Instant dataPedido, LocalDateTime dataEntrega, LocalDateTime dataEnvio,
-			@NotBlank StatusPedido status, Double valorTotal, Cliente cliente) {
+	public Pedido(Integer idPedido, Instant dataPedido, LocalDateTime dataEntrega, LocalDateTime dataEnvio,
+			StatusPedido status, Double valorTotal, Cliente cliente) {
 		super();
 		this.idPedido = idPedido;
 		this.dataPedido = dataPedido;

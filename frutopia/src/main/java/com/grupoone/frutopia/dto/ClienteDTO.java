@@ -4,8 +4,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.grupoone.frutopia.entities.Pedido;
-
 public class ClienteDTO {
 
 	private Integer idCliente;
@@ -15,7 +13,7 @@ public class ClienteDTO {
 	private EnderecoResumidoDTO enderecoResumidoDto;
 	private String nomeCompleto;
 	private String telefone;
-	private List<Pedido> listaPedidos = new ArrayList<>();
+	private List<PedidoResumidoDTO> listaPedidosResumidosDto = new ArrayList<>();
 
 	public ClienteDTO() {
 		super();
@@ -89,19 +87,20 @@ public class ClienteDTO {
 		this.telefone = telefone;
 	}
 
-	public List<Pedido> getListaPedidos() {
-		return listaPedidos;
+	public List<PedidoResumidoDTO> getListaPedidosResumidosDto() {
+		return listaPedidosResumidosDto;
 	}
 
-	public void setListaPedidos(List<Pedido> listaPedidos) {
-		this.listaPedidos = listaPedidos;
+	public void setListaPedidosResumidosDto(List<PedidoResumidoDTO> listaPedidosResumidosDto) {
+		this.listaPedidosResumidosDto = listaPedidosResumidosDto;
 	}
 
 	@Override
 	public String toString() {
-		return "ClienteDTO [cpf=" + cpf + ", dataNascimento=" + dataNascimento + ", email=" + email + ", endereco="
-				+ enderecoResumidoDto + ", nomeCompleto=" + nomeCompleto + ", telefone=" + telefone + ", listaPedidos="
-				+ listaPedidos + "]";
+		return "ClienteDTO [idCliente=" + idCliente + ", cpf=" + cpf + ", dataNascimento=" + dataNascimento + ", email="
+				+ email + ", enderecoResumidoDto=" + enderecoResumidoDto + ", nomeCompleto=" + nomeCompleto
+				+ ", telefone=" + telefone + ", listaPedidosResumidosDto=" + listaPedidosResumidosDto + "]";
 	}
+
 
 }
