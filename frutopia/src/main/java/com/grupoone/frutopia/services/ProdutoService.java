@@ -10,8 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
-import com.grupoone.frutopia.dto.ItemPedidoDTO;
+import com.grupoone.frutopia.dto.CategoriaDTO;
+import com.grupoone.frutopia.dto.CategoriaResumidaDTO;
+import com.grupoone.frutopia.dto.ItemPedidoResumidoDTO;
 import com.grupoone.frutopia.dto.ProdutoDTO;
+import com.grupoone.frutopia.dto.ProdutoResumidoDTO;
+import com.grupoone.frutopia.entities.ItemPedido;
 import com.grupoone.frutopia.entities.Produto;
 import com.grupoone.frutopia.exceptions.IdNotFoundException;
 import com.grupoone.frutopia.repositories.ProdutoRepository;
@@ -20,6 +24,7 @@ import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class ProdutoService {
+
 	@Autowired
 	ProdutoRepository produtoRepository;
 
@@ -27,39 +32,47 @@ public class ProdutoService {
 	private ModelMapper modelMapper;
 
 	public List<ProdutoDTO> getAllProdutoDto() {
-		List<Produto> listaProduto = produtoRepository.findAll();
-		List<ProdutoDTO> produtoDto = modelMapper.map(listaProduto, new TypeToken<List<ProdutoDTO>>() {
-		}.getType());
-		List<ItemPedidoDTO> listaItemPedidosDTO = new ArrayList<>();
+		List<Produto> listaProdutos = produtoRepository.findAll();
+		List<ProdutoDTO> listaProdutosDto 
+		= modelMapper.map(listaProdutos, new TypeToken<List<ProdutoDTO>>() {}.getType());
 
-		for (int i = 0; i < listaProduto.size(); i++) {
-			ItemPedidoDTO itemPedidoDTO = new ItemPedidoDTO();
-			itemPedidoDTO.setId(itemPedidoDTO.getId());
-			listaItemPedidosDTO.add(itemPedidoDTO);
-			// Categoria categoria = listaProduto.get(i).getCategoria();
-			// Integer idCategoria = categoria.getIdCategoria();
-			// produtoDto.get(i).getCategoriaDTO().set(idCategoria);
+		for (int i = 0; i < listaProdutos.size(); i++) {
+			CategoriaDTO categoriaDTO = modelMapper.map(listaProdutos.get(i).getCategoria(), CategoriaDTO.class);
+			listaProdutosDto.get(i).setCategoriaDTO(categoriaDTO);
 
+			List<ItemPedidoResumidoDTO> listaItenPedidos = new ArrayList<>();
+			for (ItemPedido item : listaProdutos.get(i).getListaItensPedidos()) {
+				ItemPedidoResumidoDTO itemPedidoDTO = modelMapper.map(item, ItemPedidoResumidoDTO.class);
+				listaItenPedidos.add(itemPedidoDTO);
+			}
+			listaProdutosDto.get(i).setListaItensPedidos(listaItenPedidos);
 		}
-		return produtoDto;
+		return listaProdutosDto;
 	}
 
-	public ProdutoDTO getProdutoDtoById(Integer id) {
+	public ProdutoResumidoDTO getProdutoDtoById(Integer id) {
 		Produto produto = produtoRepository.findById(id)
 				.orElseThrow(() -> new IdNotFoundException("Entidade não foi encontrada"));
-		ProdutoDTO produtoDto = new ProdutoDTO();
+		ProdutoResumidoDTO produtoResDto = new ProdutoResumidoDTO();
 
-		// alterar Model
-		produtoDto.setIdProduto(produto.getIdProduto());
-		produtoDto.setNome(produto.getNome());
-		produtoDto.setDescricao(produto.getDescricao());
-		produtoDto.setQtdEstoque(produto.getQtdEstoque());
-		produtoDto.setDataCadastro(produto.getDataCadastro());
-		produtoDto.setValorUnitario(produto.getValorUnitario());
-		produtoDto.setImagem(produto.getImagem());
-
-	
-		return produtoDto;
+		produtoResDto.setIdProduto(produto.getIdProduto());
+		produtoResDto.setNome(produto.getNome());
+		produtoResDto.setDescricao(produto.getDescricao());
+		produtoResDto.setQtdEstoque(produto.getQtdEstoque());
+		produtoResDto.setDataCadastro(produto.getDataCadastro());
+		produtoResDto.setValorUnitario(produto.getValorUnitario());
+		produtoResDto.setImagem(produto.getImagem());
+		CategoriaResumidaDTO categoriaResDto = modelMapper.map(produto.getCategoria(), CategoriaResumidaDTO.class);
+		produtoResDto.setCategoriaResDTO(categoriaResDto);
+		
+		List<ItemPedidoResumidoDTO> listaItensPedidos = new ArrayList<>();
+		for(ItemPedido item : produto.getListaItensPedidos()) {
+			ItemPedidoResumidoDTO itemPedidoDTO = modelMapper.map(item, ItemPedidoResumidoDTO.class);
+			listaItensPedidos.add(itemPedidoDTO);
+		}		
+		produtoResDto.setListaItensPedidos(listaItensPedidos);	
+		
+		return produtoResDto;
 	}
 
 	public Produto saveProduto(Produto produto) {
@@ -70,8 +83,6 @@ public class ProdutoService {
 			throw new IdNotFoundException("");
 		}
 	}
-
-
 
 	public Produto updateProduto(Produto produto, Integer id) {
 		try {

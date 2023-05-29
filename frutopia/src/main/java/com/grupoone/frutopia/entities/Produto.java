@@ -1,7 +1,7 @@
 package com.grupoone.frutopia.entities;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -43,7 +43,7 @@ import jakarta.validation.constraints.NotNull;
 
 	@NotNull
 	@Column(name = "data_cadastro")
-	private Date dataCadastro;
+	private LocalDate dataCadastro;
 
 	@NotNull
 	@Column(name = "valor_unitario")
@@ -53,22 +53,19 @@ import jakarta.validation.constraints.NotNull;
 	@Column(name = "imagem")
 	private String imagem;
 
-	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "id_categoria_FK", referencedColumnName = "id_categoria")
 	private Categoria categoria;
 
-	@OneToMany(mappedBy = "produto") // quando busca produtos vai querer mostrar itensPedidos? Deveria mostrar produto com categoria
+	@OneToMany(mappedBy = "produto")
 	private List<ItemPedido> listaItensPedidos = new ArrayList<>();
-
 	
 	public Produto() {
 		
 	}
 
-	public Produto(Integer idProduto, @NotBlank String nome, @NotBlank String descricao, @NotBlank Integer qtdEstoque,
-			@NotBlank Date dataCadastro, @NotBlank Double valorUnitario, @NotBlank String imagem,
-			@NotBlank Categoria categoria) {
+	public Produto(Integer idProduto, String nome, String descricao, Integer qtdEstoque,
+			LocalDate dataCadastro, Double valorUnitario, String imagem, Categoria categoria) {
 		super();
 		this.idProduto = idProduto;
 		this.nome = nome;
@@ -112,11 +109,11 @@ import jakarta.validation.constraints.NotNull;
 		this.qtdEstoque = qtdEstoque;
 	}
 
-	public Date getDataCadastro() {
+	public LocalDate getDataCadastro() {
 		return dataCadastro;
 	}
 
-	public void setDataCadastro(Date dataCadastro) {
+	public void setDataCadastro(LocalDate dataCadastro) {
 		this.dataCadastro = dataCadastro;
 	}
 
@@ -168,5 +165,4 @@ import jakarta.validation.constraints.NotNull;
 		Produto other = (Produto) obj;
 		return Objects.equals(idProduto, other.idProduto);
 	}
-}
-	
+}	

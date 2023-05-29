@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProdutoDTO {
+public class ProdutoResumidoDTO {
 	
 	private Integer idProduto;
 	private String nome;
@@ -13,15 +13,15 @@ public class ProdutoDTO {
 	private LocalDate dataCadastro;
 	private Double valorUnitario;
 	private String imagem;
-	private CategoriaDTO categoriaDTO;
+	private CategoriaResumidaDTO categoriaResDTO;
 	private List<ItemPedidoResumidoDTO> listaItensPedidos = new ArrayList<>();
 	
-	public ProdutoDTO() {
+	public ProdutoResumidoDTO() {
 		super();
 	}
 
-	public ProdutoDTO(Integer idProduto, String nome, String descricao, Integer qtdEstoque, LocalDate dataCadastro,
-			Double valorUnitario, String imagem, CategoriaDTO categoriaDTO) {
+	public ProdutoResumidoDTO(Integer idProduto, String nome, String descricao, Integer qtdEstoque, LocalDate dataCadastro,
+			Double valorUnitario, String imagem, CategoriaResumidaDTO categoriaResDTO) {
 		super();
 		this.idProduto = idProduto;
 		this.nome = nome;
@@ -30,7 +30,7 @@ public class ProdutoDTO {
 		this.dataCadastro = dataCadastro;
 		this.valorUnitario = valorUnitario;
 		this.imagem = imagem;
-		this.categoriaDTO = categoriaDTO;
+		this.categoriaResDTO = categoriaResDTO;
 	}
 
 	public Integer getIdProduto() {
@@ -89,12 +89,12 @@ public class ProdutoDTO {
 		this.imagem = imagem;
 	}
 
-	public CategoriaDTO getCategoriaDTO() {
-		return categoriaDTO;
+	public CategoriaResumidaDTO getCategoriaResDTO() {
+		return categoriaResDTO;
 	}
 
-	public void setCategoriaDTO(CategoriaDTO categoriaDTO) {
-		this.categoriaDTO = categoriaDTO;
+	public void setCategoriaResDTO(CategoriaResumidaDTO categoriaResDTO) {
+		this.categoriaResDTO = categoriaResDTO;
 	}	
 
 	public List<ItemPedidoResumidoDTO> getListaItensPedidos() {
@@ -113,6 +113,6 @@ public class ProdutoDTO {
 				+ ", data cadastro = " + dataCadastro 
 				+ ", valor unitario = " + valorUnitario 
 				+ ", imagem = " + imagem 
-				+ ", categoria = " + categoriaDTO + "]";
+				+ ", categoria = " + categoriaResDTO + "]";
 	}
 }
