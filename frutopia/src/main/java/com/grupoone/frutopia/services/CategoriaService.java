@@ -7,6 +7,7 @@ import java.util.NoSuchElementException;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.grupoone.frutopia.dto.CategoriaDTO;
@@ -31,24 +32,13 @@ public class CategoriaService {
 		List<Categoria> listaCategorias = categoriaRepository.findAll();
 		List<CategoriaDTO> listaCategoriasDto = modelMapper.map(listaCategorias, new TypeToken<List<CategoriaDTO>>() {
 		}.getType());
-
+		
 		return listaCategoriasDto;
 	}
 
-	public List<Categoria> getAllCategorias() {
-		return categoriaRepository.findAll();
-	}
-
-	public Categoria getCategoriaById(Integer id) {
-
-		return categoriaRepository.findById(id).orElseThrow(() -> new IdNotFoundException(""));
-	}
-
 	public CategoriaDTO getCategoriaDTOById(Integer id) {
-		Categoria categoria = categoriaRepository.findById(id).orElse(null);
-
-		if (categoria == null)
-			return null;
+		Categoria categoria = categoriaRepository.findById(id)
+				.orElseThrow(() -> new IdNotFoundException("Entidade nÃ£o encontrada"));
 
 		CategoriaDTO categoriaDTO = new CategoriaDTO();
 		categoriaDTO.setNome(categoria.getNome());
@@ -67,8 +57,12 @@ public class CategoriaService {
 	}
 
 	public Categoria saveCategoria(Categoria categoria) {
-		Categoria novoCategoria = categoriaRepository.save(categoria);
-		return novoCategoria;
+		try {
+			Categoria novoCategoria = categoriaRepository.save(categoria);
+			return novoCategoria;
+		} catch (DataAccessException e) {
+			throw new IdNotFoundException("");
+		}
 	}
 
 	public Categoria updateCategoria(Categoria categoria, Integer id) {
@@ -82,23 +76,22 @@ public class CategoriaService {
 	}
 
 	private void updateData(Categoria updateCategoria, Categoria categoria) {
-		updateCategoria.setNome(categoria.getNome());
-		updateCategoria.setDescricao(categoria.getDescricao());
+		try {
+			if (categoria != null) {
+				updateCategoria.setNome(categoria.getNome());
+				updateCategoria.setDescricao(categoria.getDescricao());
+			} else {
+				throw new NoSuchElementException("");
+			}
+		} catch (DataAccessException e) {
+			throw new IdNotFoundException("");
+		}
 	}
 
-	public Boolean deleteCategoria(Integer id) {
-		Categoria categoriaDeleted = categoriaRepository.findById(id).orElse(null);
-		if (categoriaDeleted != null) {
-			categoriaRepository.deleteById(id);
-			categoriaDeleted = categoriaRepository.findById(id).orElse(null);
-			if (categoriaDeleted != null) {
-				return false;
-			} else {
-				return true;
-			}
-
-		} else {
-			return false;
-		}
+	public void deleteCategoria(Integer id) {
+		Categoria categoriaDeleted = categoriaRepository.findById(id)
+				.orElseThrow(() -> new IdNotFoundException("Entidade nÃ£o foi encontrada"));
+		
+		categoriaRepository.delete(categoriaDeleted);
 	}
 }
