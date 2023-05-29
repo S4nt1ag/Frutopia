@@ -26,13 +26,12 @@ public class CategoriaController {
 
 	@Autowired
 	CategoriaService categoriaService;
-
 	
 	@GetMapping
 	public ResponseEntity<List<CategoriaDTO>> getAllCategoriasDTO() {
 		return new ResponseEntity<>(categoriaService.getAllCategoriasDTO(), HttpStatus.OK);
 	}
-
+	
 	@GetMapping("/{id}")
 	public ResponseEntity<CategoriaDTO> getCategoriaById(@Valid @PathVariable Integer id) {
 		return new ResponseEntity<>(categoriaService.getCategoriaDTOById(id), HttpStatus.OK);
@@ -50,11 +49,8 @@ public class CategoriaController {
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Boolean> deleteCategoria(@Valid @PathVariable Integer id) {
-		Boolean resp = categoriaService.deleteCategoria(id);
-		if (resp)
-			return new ResponseEntity<>(resp, HttpStatus.OK);
-		else
-			return new ResponseEntity<>(resp, HttpStatus.NOT_MODIFIED);
+	public ResponseEntity<Categoria> deleteCategoria(@Valid @PathVariable Integer id) {
+		categoriaService.deleteCategoria(id);
+		return ResponseEntity.noContent().build();
 	}
 }

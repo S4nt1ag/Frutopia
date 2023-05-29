@@ -1,5 +1,6 @@
 package com.grupoone.frutopia.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -37,21 +38,17 @@ public class Categoria {
 	private String descricao;
 	
 	@OneToMany(mappedBy = "categoria")  
-	private List<Produto> listaProdutos;
-	
+	private List<Produto> listaProdutos = new ArrayList<>();	
 	
 	public Categoria() {
 
 	}
-
 	
 	public Categoria(Integer idCategoria, @NotBlank String nome, @NotBlank String descricao) {
 		this.idCategoria = idCategoria;
 		this.nome = nome;
 		this.descricao = descricao;
 	}
-
-
 
 	public Integer getIdCategoria() {
 		return idCategoria;
@@ -77,6 +74,14 @@ public class Categoria {
 		this.descricao = descricao;
 	}
 
+	public List<Produto> getListaProdutos() {
+		return listaProdutos;
+	}
+
+	public void setListaProdutos(List<Produto> listaProdutos) {
+		this.listaProdutos = listaProdutos;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(idCategoria);
@@ -94,12 +99,10 @@ public class Categoria {
 		return Objects.equals(idCategoria, other.idCategoria);
 	}
 
-	public List<Produto> getListaProdutos() {
-		return listaProdutos;
+	@Override
+	public String toString() {
+		return "Categoria [idCategoria=" + idCategoria + ", nome=" + nome + ", descricao=" + descricao
+				+ ", listaProdutos=" + listaProdutos + "]";
 	}
-
-	public void setListaProdutos(List<Produto> listaProdutos) {
-		this.listaProdutos = listaProdutos;
-	}
-
+	
 }

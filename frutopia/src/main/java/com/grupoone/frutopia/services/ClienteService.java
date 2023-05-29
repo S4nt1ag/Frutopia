@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.grupoone.frutopia.dto.ClienteDTO;
 import com.grupoone.frutopia.dto.EnderecoResumidoDTO;
+import com.grupoone.frutopia.dto.PedidoResumidoDTO;
 import com.grupoone.frutopia.entities.Cliente;
 import com.grupoone.frutopia.entities.Pedido;
 import com.grupoone.frutopia.exceptions.IdNotFoundException;
@@ -38,19 +39,25 @@ public class ClienteService {
 			EnderecoResumidoDTO enderecoDto = modelMapper.map(listaClientes.get(i).getEndereco(),
 					EnderecoResumidoDTO.class);
 			listaClientesDto.get(i).setEnderecoResumidoDto(enderecoDto);
-
+			
+			List<PedidoResumidoDTO> listaPedido = new ArrayList<>();
+			for(Pedido item : listaClientes.get(i).getListaPedidos()) {
+				PedidoResumidoDTO itemPedidoDTO = modelMapper.map(item, PedidoResumidoDTO.class);
+				listaPedido.add(itemPedidoDTO);
+			}
+			
+			listaClientesDto.get(i).setListaPedidosResumidosDto(listaPedido);
 		}
 		return listaClientesDto;
 
 	}
 
 	public ClienteDTO getClienteDtoById(Integer id) {
-		Cliente cliente = clienteRepository.findById(id).orElse(null);
 		ClienteDTO clienteDto = new ClienteDTO();
+		Cliente cliente = clienteRepository.findById(id)
+                .orElseThrow(() -> new IdNotFoundException("Entidade não foi encontrada"));
 
-		if (null == cliente)
-			return null;
-
+		clienteDto.setIdCliente(cliente.getIdCliente());
 		clienteDto.setCpf(cliente.getCpf());
 		clienteDto.setDataNascimento(cliente.getDataNascimento());
 		clienteDto.setEmail(cliente.getEmail());
@@ -59,20 +66,20 @@ public class ClienteService {
 		clienteDto.setEnderecoResumidoDto(modelMapper.map(cliente.getEndereco(),
 				EnderecoResumidoDTO.class));
 
-		List<Pedido> listaPedidos = new ArrayList<>();
+		List<PedidoResumidoDTO> listaPedidos = new ArrayList<>();
 		for (Pedido pedido : cliente.getListaPedidos()) {
-			Pedido pedidoDTO = new Pedido();
-			pedidoDTO.setIdPedido(pedido.getIdPedido());
-			pedidoDTO.setDataPedido(pedido.getDataPedido());
-			pedidoDTO.setDataEntrega(pedido.getDataEntrega());
-			pedidoDTO.setDataEnvio(pedido.getDataEnvio());
-			pedidoDTO.setStatus(pedido.getStatus());
-			pedidoDTO.setValorTotal(pedido.getValorTotal());
+			PedidoResumidoDTO pedidoResumidoDTO = new PedidoResumidoDTO();
+			pedidoResumidoDTO.setIdProduto(pedido.getIdPedido());
+			pedidoResumidoDTO.setDataPedido(pedido.getDataPedido());
+			pedidoResumidoDTO.setDataEntrega(pedido.getDataEntrega());
+			pedidoResumidoDTO.setDataEnvio(pedido.getDataEnvio());
+			pedidoResumidoDTO.setStatus(pedido.getStatus());
+			pedidoResumidoDTO.setValorTotal(pedido.getValorTotal());
 
-			listaPedidos.add(pedidoDTO);
+			listaPedidos.add(pedidoResumidoDTO);
 		}
 
-		clienteDto.setListaPedidos(listaPedidos);
+		clienteDto.setListaPedidosResumidosDto(listaPedidos);
 
 		return clienteDto;
 	}
