@@ -1,6 +1,7 @@
 package com.grupoone.frutopia.entities;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -33,14 +34,14 @@ public class Pedido {
 	private Integer idPedido;
 
 	@NotNull
-	@Column(name = "data_pedido")  // para garantir formato do Instant salvo no Json
+	@Column(name = "data_pedido")  // para garantir formato do LocalDateTime salvo no Json
 	private Instant dataPedido;
 
 	@Column(name = "data_entrega")
-	private Instant dataEntrega;
+	private LocalDateTime dataEntrega;
 
 	@Column(name = "data_envio")
-	private Instant dataEnvio;
+	private LocalDateTime dataEnvio;
 
 	@NotNull
 	@Column(name = "status")
@@ -61,7 +62,7 @@ public class Pedido {
 		super();
 	}
 
-	public Pedido(Integer idPedido, @NotBlank Instant dataPedido, Instant dataEntrega, Instant dataEnvio,
+	public Pedido(Integer idPedido, @NotBlank Instant dataPedido, LocalDateTime dataEntrega, LocalDateTime dataEnvio,
 			@NotBlank StatusPedido status, Double valorTotal, Cliente cliente) {
 		super();
 		this.idPedido = idPedido;
@@ -89,19 +90,19 @@ public class Pedido {
 		this.dataPedido = dataPedido;
 	}
 
-	public Instant getDataEntrega() {
+	public LocalDateTime getDataEntrega() {
 		return dataEntrega;
 	}
 
-	public void setDataEntrega(Instant dataEntrega) {
+	public void setDataEntrega(LocalDateTime dataEntrega) {
 		this.dataEntrega = dataEntrega;
 	}
 
-	public Instant getDataEnvio() {
+	public LocalDateTime getDataEnvio() {
 		return dataEnvio;
 	}
 
-	public void setDataEnvio(Instant dataEnvio) {
+	public void setDataEnvio(LocalDateTime dataEnvio) {
 		this.dataEnvio = dataEnvio;
 	}
 

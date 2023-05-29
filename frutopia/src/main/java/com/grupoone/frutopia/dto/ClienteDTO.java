@@ -1,6 +1,6 @@
 package com.grupoone.frutopia.dto;
 
-import java.time.Instant;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +10,7 @@ public class ClienteDTO {
 
 	private Integer idCliente;
 	private String cpf;
-	private Instant dataNascimento;
+	private LocalDate dataNascimento;
 	private String email;
 	private EnderecoResumidoDTO enderecoResumidoDto;
 	private String nomeCompleto;
@@ -21,7 +21,7 @@ public class ClienteDTO {
 		super();
 	}
 
-	public ClienteDTO(Integer idCliente, String cpf, Instant dataNascimento, String email,
+	public ClienteDTO(Integer idCliente, String cpf, LocalDate dataNascimento, String email,
 			EnderecoResumidoDTO enderecoResumidoDto, String nomeCompleto, String telefone) {
 		super();
 		this.idCliente = idCliente;
@@ -49,11 +49,11 @@ public class ClienteDTO {
 		this.cpf = cpf;
 	}
 
-	public Instant getDataNascimento() {
+	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(Instant dataNascimento) {
+	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 
