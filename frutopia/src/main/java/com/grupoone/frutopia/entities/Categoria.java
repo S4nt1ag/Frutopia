@@ -98,4 +98,11 @@ public class Categoria {
 		Categoria other = (Categoria) obj;
 		return Objects.equals(idCategoria, other.idCategoria);
 	}
+
+	@Override
+	public String toString() {
+		return "Categoria [idCategoria=" + idCategoria + ", nome=" + nome + ", descricao=" + descricao
+				+ ", listaProdutos=" + listaProdutos + "]";
+	}
+	
 }

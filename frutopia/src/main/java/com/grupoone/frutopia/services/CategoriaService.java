@@ -21,7 +21,9 @@ import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class CategoriaService {
-
+	@Autowired
+	private EmailService emailService;
+	
 	@Autowired
 	CategoriaRepository categoriaRepository;
 
@@ -32,7 +34,6 @@ public class CategoriaService {
 		List<Categoria> listaCategorias = categoriaRepository.findAll();
 		List<CategoriaDTO> listaCategoriasDto = modelMapper.map(listaCategorias, new TypeToken<List<CategoriaDTO>>() {
 		}.getType());
-		
 		return listaCategoriasDto;
 	}
 
@@ -53,6 +54,8 @@ public class CategoriaService {
 		}
 
 		categoriaDTO.setListaProdutosDTO(produtoNomeDTO);
+		
+		emailService.enviarEmail("filipec.oliveira@gmail.com", "Boa tarde", categoria.toString());
 		return categoriaDTO;
 	}
 
