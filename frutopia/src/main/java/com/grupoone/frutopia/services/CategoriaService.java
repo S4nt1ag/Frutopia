@@ -70,25 +70,21 @@ public class CategoriaService {
 
 	public Categoria updateCategoria(Categoria categoria, Integer id) {
 		try {
+			if (categoria != null) {
 			Categoria updateCategoria = categoriaRepository.getReferenceById(id);
 			updateData(updateCategoria, categoria);
 			return categoriaRepository.save(updateCategoria);
-		} catch (EntityNotFoundException e) {
-			throw new NoSuchElementException("");
-		}
-	}
-
-	private void updateData(Categoria updateCategoria, Categoria categoria) {
-		try {
-			if (categoria != null) {
-				updateCategoria.setNome(categoria.getNome());
-				updateCategoria.setDescricao(categoria.getDescricao());
 			} else {
 				throw new NoSuchElementException("");
 			}
 		} catch (DataAccessException e) {
 			throw new IdNotFoundException("");
 		}
+	}
+
+	private void updateData(Categoria updateCategoria, Categoria categoria) {
+		updateCategoria.setNome(categoria.getNome());
+		updateCategoria.setDescricao(categoria.getDescricao());
 	}
 
 	public void deleteCategoria(Integer id) {
