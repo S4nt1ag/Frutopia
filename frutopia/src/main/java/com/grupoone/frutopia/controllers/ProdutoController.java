@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.grupoone.frutopia.dto.ProdutoDTO;
+import com.grupoone.frutopia.dto.ProdutoResumidoDTO;
 import com.grupoone.frutopia.entities.Produto;
 import com.grupoone.frutopia.services.ProdutoService;
 
@@ -30,8 +31,9 @@ public class ProdutoController {
 	public ResponseEntity<List<ProdutoDTO>> getAllProdutosDto() {
 		return new ResponseEntity<>(produtoService.getAllProdutoDto(), HttpStatus.OK);
 	}
+	
 	@GetMapping("/{id}")
-	public ResponseEntity<ProdutoDTO> getProdutoDtoByIdDto(@Valid @PathVariable Integer id) {
+	public ResponseEntity<ProdutoResumidoDTO> getProdutoDtoByIdDto(@Valid @PathVariable Integer id) {
 		return new ResponseEntity<>(produtoService.getProdutoDtoById(id), HttpStatus.OK);
 	}
 

@@ -1,7 +1,6 @@
 package com.grupoone.frutopia.services;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -46,13 +45,12 @@ public class ItemPedidoService {
 			listaItensDto.get(i).setPedidoResumidoDTO(pedidoDto);
 		}
 		return listaItensDto;
-	}	
-	
-		
+	}
+
 	public ItemPedidoDTO getItemPedidoDtoById(Integer id) {
 		ItemPedido itemPedido = itemPedidoRepository.findById(id)
 				.orElseThrow(() -> new IdNotFoundException("Entidade não foi encontrada"));
-		
+
 		ItemPedidoDTO itemPedidoDto = new ItemPedidoDTO();
 		itemPedidoDto.setId(itemPedido.getIdItemPedido());
 		itemPedidoDto.setPrecoVenda(itemPedido.getPrecoVenda());
@@ -63,10 +61,10 @@ public class ItemPedidoService {
 
 		PedidoResumidoDTO pedidoDto = modelMapper.map(itemPedido.getPedido(), PedidoResumidoDTO.class);
 		itemPedidoDto.setPedidoResumidoDTO(pedidoDto);
-		
+
 		ProdutoDTO produtoDto = modelMapper.map(itemPedido.getProduto(), ProdutoDTO.class);
 		itemPedidoDto.setProdutoDTO(produtoDto);
-		
+
 		return itemPedidoDto;
 	}
 
@@ -80,13 +78,10 @@ public class ItemPedidoService {
 
 	public ItemPedido updateItemPedido(ItemPedido itemPedido, Integer id) {
 		try {
-			if (itemPedido != null) {
-				ItemPedido updateItemPedido = itemPedidoRepository.findById(id).get();
-				updateData(updateItemPedido, itemPedido);
-				return itemPedidoRepository.save(updateItemPedido);
-			} else {
-				throw new NoSuchElementException("");
-			}
+			ItemPedido updateItemPedido = itemPedidoRepository.findById(id)
+					.orElseThrow(() -> new IdNotFoundException("Entidade não foi encontrada"));
+			updateData(updateItemPedido, itemPedido);
+			return itemPedidoRepository.save(updateItemPedido);
 		} catch (DataAccessException e) {
 			throw new IdNotFoundException("");
 		}
@@ -104,7 +99,7 @@ public class ItemPedidoService {
 	public void deleteItemPedido(Integer id) {
 		ItemPedido itemPedido = itemPedidoRepository.findById(id)
 				.orElseThrow(() -> new IdNotFoundException("Entidade não foi encontrada"));
-		
-		itemPedidoRepository.delete(itemPedido);		
+
+		itemPedidoRepository.delete(itemPedido);
 	}
 }
