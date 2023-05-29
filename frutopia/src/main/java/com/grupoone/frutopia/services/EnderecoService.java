@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 
 import com.grupoone.frutopia.dto.ClienteDTO;
 import com.grupoone.frutopia.dto.EnderecoDTO;
+import com.grupoone.frutopia.entities.Categoria;
 import com.grupoone.frutopia.entities.Endereco;
+import com.grupoone.frutopia.entities.Pedido;
 import com.grupoone.frutopia.exceptions.IdNotFoundException;
 import com.grupoone.frutopia.repositories.EnderecoRepository;
 
@@ -72,18 +74,33 @@ public class EnderecoService {
 	}
 
 	public Endereco updateEndereco(Endereco endereco, Integer id) {
-	//Fazer tratamento depois.
-			return enderecoRepository.save(endereco);	
+	
+		try {
+			// if(endereco != null) {
+				Endereco updateEndereco = enderecoRepository.findById(id)
+						.orElseThrow(() -> new IdNotFoundException("Entidade não foi encontrada!"));
+				
+				updateData(updateEndereco, endereco);
+				return enderecoRepository.save(updateEndereco);
+			//} else {
+				//throw new NoSuchElementException("");
+			//}
+			
+		} catch (DataAccessException e) {
+			throw new IdNotFoundException("");
+		}
+					
 	}
 
 	private void updateData(Endereco updateEndereco, Endereco endereco) {
+		
 		updateEndereco.setCep(endereco.getCep());
 		updateEndereco.setRua(endereco.getRua());
 		updateEndereco.setBairro(endereco.getBairro());
 		updateEndereco.setCidade(endereco.getCidade());
 		updateEndereco.setNumero(endereco.getNumero());
 		updateEndereco.setComplemento(endereco.getComplemento());
-		updateEndereco.setUf(endereco.getUf());
+		updateEndereco.setUf(endereco.getUf());	
 	}
 
 	public Boolean deleteEndereco(Integer id) {
