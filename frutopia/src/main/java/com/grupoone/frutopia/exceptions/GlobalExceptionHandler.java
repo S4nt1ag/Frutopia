@@ -39,17 +39,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		problemDetail.setDetail("Id not found");
 		return problemDetail;
 	}
-//
-//	@ExceptionHandler(NullPointExPedidoProduto.class)
-//	ProblemDetail handleNullPointEx(NullPointExPedidoProduto e) {
-//		ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, e.getMessage());
-//
-//		problemDetail.setType(URI.create("https://api.frutopia.com/errors/id-null"));
-//		problemDetail.setTitle("O id do Pedido ou do Produto está nulo");
-//		problemDetail.setStatus(HttpStatus.NOT_FOUND);
-//		problemDetail.setDetail("Id not found");
-//		return problemDetail;
-//	}
 	
 	// pega validação @NotNull, @Valid, @NotBlank
     protected ResponseEntity<Object> handleExceptionInternal(Exception ex, @Nullable Object body, 
