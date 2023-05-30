@@ -84,10 +84,16 @@ public class Pedido {
 	public Instant getDataPedido() {
 		return dataPedido;
 	}
-
+	
 	public void setDataPedido(Instant dataPedido) {
-		this.dataPedido = dataPedido;
-	}
+        Instant currentDate = Instant.now(); 
+
+       if (dataPedido.isAfter(currentDate)) {
+           this.dataPedido = dataPedido;
+       } else {
+           throw new IllegalArgumentException("Data de Pedido inválida: Datas retroativas não são permitidas.");
+       }
+    }
 
 	public LocalDateTime getDataEntrega() {
 		return dataEntrega;

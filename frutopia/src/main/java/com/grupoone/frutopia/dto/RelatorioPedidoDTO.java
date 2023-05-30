@@ -58,8 +58,17 @@ public class RelatorioPedidoDTO {
 
 	@Override
 	public String toString() {
-		return "RelatorioPedidoDTO [idPedido=" + idPedido + ", dataPedido=" + dataPedido + ", valorTotal=" + valorTotal
-				+ ", listaItemPedido=" + listaItemPedido + "]";
+		
+		String itensPedidos = "";
+		
+		for(RelatorioPedidoItemDTO item : this.listaItemPedido) {
+			itensPedidos += "\n  -- " + item.toString();
+		}
+		
+		return "-Relatorio de Pedido-\n\nId do Pedido: " + idPedido + ""
+				+ "\nData do Pedido: " + dataPedido + "\nValor Total:" + valorTotal
+				+ "\nLista de Itens do Pedido:\n" + itensPedidos;
+		
 	}
 	
 }
