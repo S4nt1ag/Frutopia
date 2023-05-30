@@ -283,6 +283,16 @@
 				{
 					"name": "ItemPedido GetAll",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJCcmVubyIsImlhdCI6MTY4NTQxNzg2OSwiZXhwIjoxNjg1NTA0MjY5fQ.wtUXtj0v7LwVVpQ7o9T7Gwytczz2zV_xnP05SoIRM-arN47ckgOL9fGgdKqNWy4o",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -409,6 +419,36 @@
 						}
 					},
 					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJCcmVubyIsImlhdCI6MTY4NTQxNzg2OSwiZXhwIjoxNjg1NTA0MjY5fQ.wtUXtj0v7LwVVpQ7o9T7Gwytczz2zV_xnP05SoIRM-arN47ckgOL9fGgdKqNWy4o",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
 				}
 			]
 		},
@@ -688,10 +728,20 @@
 				{
 					"name": "Endereço GetAll",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJCcmVubyIsImlhdCI6MTY4NTQyMDUzMiwiZXhwIjoxNjg1NTA2OTMyfQ.Ofh0GzP_iKnVxQ0_pRJ_UTwn5cbl_oTSGr8WmlcDktDFI8Q2zr2P7UFuH4P2w2iM",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/frutopia/categorias",
+							"raw": "http://localhost:8080/frutopia/enderecos",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -699,7 +749,7 @@
 							"port": "8080",
 							"path": [
 								"frutopia",
-								"categorias"
+								"enderecos"
 							]
 						}
 					},
@@ -810,6 +860,189 @@
 								"frutopia",
 								"enderecos",
 								"100"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Security Roles",
+			"item": [
+				{
+					"name": "Role_User Save",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"name\": \"ROLE_USER\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/frutopia/roles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"frutopia",
+								"roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Role_Admin Save",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"name\": \"ROLE_ADMIN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/frutopia/roles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"frutopia",
+								"roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Signup Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"username\" : \"Breno\",\r\n\t\"email\": \"admin@mail.com\",\r\n\t\"password\": \"12345678\",\r\n\t\"role\": [\"admin\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/frutopia/auth/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"frutopia",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Signup User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"username\" : \"NomeUser\",\r\n\t\"email\": \"user@mail.com\",\r\n\t\"password\": \"12345678\",\r\n\t\"role\": [\"user\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/frutopia/auth/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"frutopia",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Signin Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"username\" : \"Breno\",\r\n\t\"password\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/frutopia/auth/signin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"frutopia",
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Signin User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"username\" : \"NomeUser\",\r\n\t\"password\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/frutopia/auth/signin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"frutopia",
+								"auth",
+								"signin"
 							]
 						}
 					},
