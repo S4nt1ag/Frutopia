@@ -43,8 +43,12 @@ public class WebSecurityConfig {
             .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) //define a politica de sessao
             .authorizeHttpRequests(auth -> auth
                     .requestMatchers("/auth/**","/roles/**","/swagger-ui/**", "/v3/api-docs/**").permitAll() //define as rotas publicas/abertas
-                    .requestMatchers(HttpMethod.GET, "/produtos/**","/categorias/**").hasAnyRole("USER","ADMIN") //user só pode ver turmas
-                    .requestMatchers("/pedidos/**","/itens_pedidos/**","/usuarios/**","/enderecos/**","/clientes/**").hasRole("ADMIN") // autoriza o acesso a rotas por perfil
+                    .requestMatchers(HttpMethod.GET, "/produtos/**","/categorias/**").permitAll() //user só pode ver turmas
+                    .requestMatchers("/pedidos/**","/itens_pedidos/**").hasAnyRole("USER","ADMIN")// autoriza o acesso a rotas por perfil
+                    .requestMatchers(HttpMethod.POST, "/produtos/**","/categorias/**").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.PUT,"/produtos/**","/categorias/**").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.DELETE,"/produtos/**","/categorias/**").hasRole("ADMIN")
+                    .requestMatchers("/usuarios/**","/enderecos/**","/clientes/**").hasRole("ADMIN")
                     .anyRequest().authenticated()) //demais rotas, nao configuradas acima, so poderao ser acessadas mediante autenticacao
 		;		
 		
