@@ -11,8 +11,11 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.grupoone.frutopia.dto.CategoriaDTO;
+import com.grupoone.frutopia.dto.EnderecoResumidoDTO;
+import com.grupoone.frutopia.dto.PedidoResumidoDTO;
 import com.grupoone.frutopia.dto.ProdutoNomeDTO;
 import com.grupoone.frutopia.entities.Categoria;
+import com.grupoone.frutopia.entities.Pedido;
 import com.grupoone.frutopia.entities.Produto;
 import com.grupoone.frutopia.exceptions.IdNotFoundException;
 import com.grupoone.frutopia.repositories.CategoriaRepository;
@@ -34,6 +37,16 @@ public class CategoriaService {
 		List<Categoria> listaCategorias = categoriaRepository.findAll();
 		List<CategoriaDTO> listaCategoriasDto = modelMapper.map(listaCategorias, new TypeToken<List<CategoriaDTO>>() {
 		}.getType());
+		for (int i = 0; i < listaCategorias.size(); i++) {
+			
+			List<ProdutoNomeDTO> listaProdutoNomeDto = new ArrayList<>();
+			for(Produto item : listaCategorias.get(i).getListaProdutos()) {
+				ProdutoNomeDTO produtoNome = modelMapper.map(item, ProdutoNomeDTO.class);
+				listaProdutoNomeDto.add(produtoNome);
+			}
+			
+			listaCategoriasDto.get(i).setListaProdutosDTO(listaProdutoNomeDto);
+		}
 		return listaCategoriasDto;
 	}
 
