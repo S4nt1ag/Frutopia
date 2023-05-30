@@ -69,7 +69,7 @@ public class ClienteService {
 		List<PedidoResumidoDTO> listaPedidos = new ArrayList<>();
 		for (Pedido pedido : cliente.getListaPedidos()) {
 			PedidoResumidoDTO pedidoResumidoDTO = new PedidoResumidoDTO();
-			pedidoResumidoDTO.setIdProduto(pedido.getIdPedido());
+			pedidoResumidoDTO.setIdPedido(pedido.getIdPedido());
 			pedidoResumidoDTO.setDataPedido(pedido.getDataPedido());
 			pedidoResumidoDTO.setDataEntrega(pedido.getDataEntrega());
 			pedidoResumidoDTO.setDataEnvio(pedido.getDataEnvio());

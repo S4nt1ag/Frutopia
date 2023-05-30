@@ -81,5 +81,14 @@ public class RelatorioPedidoItemDTO {
 	public void setValorLiquido(Double valorLiquido) {
 		this.valorLiquido = valorLiquido;
 	}
+
+	@Override
+	public String toString() {
+		return "codigo do produto: " + codigoProduto + "\n    nome do produto:" + nomeProduto
+				+ "\n    preco na venda:" + precoVenda + "\n    quantidade:" + quantidade + "\n    valor bruto:" + valorBruto
+				+ "\n    percentual de desconto:" + percentualDesconto + "%\n    valor liquido:" + String.format("%,.2f", valorLiquido) + "\n";
+	}
+	
+	
 	
 }
