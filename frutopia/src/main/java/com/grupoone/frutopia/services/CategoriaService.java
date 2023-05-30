@@ -11,16 +11,11 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.grupoone.frutopia.dto.CategoriaDTO;
-import com.grupoone.frutopia.dto.EnderecoResumidoDTO;
-import com.grupoone.frutopia.dto.PedidoResumidoDTO;
 import com.grupoone.frutopia.dto.ProdutoNomeDTO;
 import com.grupoone.frutopia.entities.Categoria;
-import com.grupoone.frutopia.entities.Pedido;
 import com.grupoone.frutopia.entities.Produto;
 import com.grupoone.frutopia.exceptions.IdNotFoundException;
 import com.grupoone.frutopia.repositories.CategoriaRepository;
-
-import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class CategoriaService {
@@ -68,7 +63,7 @@ public class CategoriaService {
 
 		categoriaDTO.setListaProdutosDTO(produtoNomeDTO);
 		
-		emailService.enviarEmail("filipec.oliveira@gmail.com", "Boa tarde", categoria.toString());
+		emailService.enviarEmail("frutopia.projeto.api@gmail.com", "Boa tarde", categoria.toString());
 		return categoriaDTO;
 	}
 
