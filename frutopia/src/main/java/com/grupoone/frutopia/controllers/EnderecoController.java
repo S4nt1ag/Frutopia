@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,8 +21,10 @@ import com.grupoone.frutopia.services.EnderecoService;
 
 import jakarta.validation.Valid;
 
+
 @RestController
 @RequestMapping("/enderecos")
+@Validated
 public class EnderecoController {
 
 	@Autowired
@@ -31,7 +34,7 @@ public class EnderecoController {
 	public ResponseEntity<List<EnderecoDTO>> getAllEnderecosDTO() {
 		return new ResponseEntity<>(enderecoService.getAllEnderecosDTO(), HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/{id}")
 	public ResponseEntity<EnderecoDTO> getEnderecoDTOById(@Valid @PathVariable Integer id) {
 		return new ResponseEntity<>(enderecoService.getEnderecoById(id), HttpStatus.OK);
@@ -55,4 +58,6 @@ public class EnderecoController {
 		else
 			return new ResponseEntity<>(resp, HttpStatus.NOT_MODIFIED);
 	}
+
+	
 }
