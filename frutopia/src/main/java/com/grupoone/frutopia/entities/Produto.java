@@ -5,12 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -49,9 +53,10 @@ import jakarta.validation.constraints.NotNull;
 	@Column(name = "valor_unitario")
 	private Double valorUnitario;
 
-	@NotBlank
-	@Column(name = "imagem")
-	private String imagem;
+	@Lob
+	@JdbcTypeCode(SqlTypes.BINARY)
+    @Column(name = "imagem", length = 200)
+    private byte[] imagem;
 
 	@ManyToOne
 	@JoinColumn(name = "id_categoria_FK", referencedColumnName = "id_categoria")
@@ -65,7 +70,7 @@ import jakarta.validation.constraints.NotNull;
 	}
 
 	public Produto(Integer idProduto, String nome, String descricao, Integer qtdEstoque,
-			LocalDate dataCadastro, Double valorUnitario, String imagem, Categoria categoria) {
+			LocalDate dataCadastro, Double valorUnitario, byte[] imagem, Categoria categoria) {
 		super();
 		this.idProduto = idProduto;
 		this.nome = nome;
@@ -125,11 +130,11 @@ import jakarta.validation.constraints.NotNull;
 		this.valorUnitario = valorUnitario;
 	}
 
-	public String getImagem() {
+	public byte[] getImagem() {
 		return imagem;
 	}
 
-	public void setImagem(String imagem) {
+	public void setImagem(byte[] imagem) {
 		this.imagem = imagem;
 	}
 

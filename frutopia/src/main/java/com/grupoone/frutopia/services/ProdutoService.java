@@ -1,5 +1,7 @@
 package com.grupoone.frutopia.services;
 
+import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -9,12 +11,14 @@ import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.grupoone.frutopia.dto.CategoriaDTO;
 import com.grupoone.frutopia.dto.CategoriaResumidaDTO;
 import com.grupoone.frutopia.dto.ItemPedidoResumidoDTO;
 import com.grupoone.frutopia.dto.ProdutoDTO;
 import com.grupoone.frutopia.dto.ProdutoResumidoDTO;
+import com.grupoone.frutopia.entities.Categoria;
 import com.grupoone.frutopia.entities.ItemPedido;
 import com.grupoone.frutopia.entities.Produto;
 import com.grupoone.frutopia.exceptions.IdNotFoundException;
@@ -61,7 +65,6 @@ public class ProdutoService {
 		produtoResDto.setQtdEstoque(produto.getQtdEstoque());
 		produtoResDto.setDataCadastro(produto.getDataCadastro());
 		produtoResDto.setValorUnitario(produto.getValorUnitario());
-		produtoResDto.setImagem(produto.getImagem());
 		CategoriaResumidaDTO categoriaResDto = modelMapper.map(produto.getCategoria(), CategoriaResumidaDTO.class);
 		produtoResDto.setCategoriaResDTO(categoriaResDto);
 		
@@ -74,11 +77,29 @@ public class ProdutoService {
 		
 		return produtoResDto;
 	}
-
-	public Produto saveProduto(Produto produto) {
+	
+	public Produto saveProduto(String nome, String descricao, String qtdEstoque, String dataCadastro, 
+			String valorUnitario, MultipartFile imagem, String categoria){
 		try {
+			Produto produto = new Produto();
+			produto.setNome(nome);
+			produto.setDescricao(descricao);
+			produto.setQtdEstoque(Integer.parseInt(qtdEstoque));
+			produto.setDataCadastro(LocalDate.parse(dataCadastro));
+			produto.setValorUnitario(Double.parseDouble(valorUnitario));
+			
+			try {
+				produto.setImagem(imagem.getBytes());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			Categoria novaCategoria = new Categoria();
+			novaCategoria.setIdCategoria(Integer.parseInt(categoria));
+			produto.setCategoria(novaCategoria);
+					
 			return produtoRepository.save(produto);
-
+			
 		} catch (DataAccessException e) {
 			throw new IdNotFoundException("");
 		}
@@ -104,19 +125,10 @@ public class ProdutoService {
 		updateProduto.setCategoria(produto.getCategoria());
 	}
 
-	public Boolean deleteProduto(Integer id) {
-		Produto produtoDeleted = produtoRepository.findById(id).orElse(null);
-		if (produtoDeleted != null) {
-			produtoRepository.deleteById(id);
-			produtoDeleted = produtoRepository.findById(id).orElse(null);
-			if (produtoDeleted != null) {
-				return false;
-			} else {
-				return true;
-			}
+	public void deleteProduto(Integer id) {
+		Produto produtoDeleted = produtoRepository.findById(id)
+				.orElseThrow(() -> new IdNotFoundException("Entidade não foi encontrada"));
 
-		} else {
-			return false;
-		}
+		produtoRepository.delete(produtoDeleted);
 	}
 }

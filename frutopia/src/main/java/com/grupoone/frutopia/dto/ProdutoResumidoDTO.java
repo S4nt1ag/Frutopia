@@ -12,7 +12,6 @@ public class ProdutoResumidoDTO {
 	private Integer qtdEstoque;
 	private LocalDate dataCadastro;
 	private Double valorUnitario;
-	private String imagem;
 	private CategoriaResumidaDTO categoriaResDTO;
 	private List<ItemPedidoResumidoDTO> listaItensPedidos = new ArrayList<>();
 	
@@ -21,7 +20,7 @@ public class ProdutoResumidoDTO {
 	}
 
 	public ProdutoResumidoDTO(Integer idProduto, String nome, String descricao, Integer qtdEstoque, LocalDate dataCadastro,
-			Double valorUnitario, String imagem, CategoriaResumidaDTO categoriaResDTO) {
+			Double valorUnitario, CategoriaResumidaDTO categoriaResDTO) {
 		super();
 		this.idProduto = idProduto;
 		this.nome = nome;
@@ -29,7 +28,6 @@ public class ProdutoResumidoDTO {
 		this.qtdEstoque = qtdEstoque;
 		this.dataCadastro = dataCadastro;
 		this.valorUnitario = valorUnitario;
-		this.imagem = imagem;
 		this.categoriaResDTO = categoriaResDTO;
 	}
 
@@ -81,14 +79,6 @@ public class ProdutoResumidoDTO {
 		this.valorUnitario = valorUnitario;
 	}
 
-	public String getImagem() {
-		return imagem;
-	}
-
-	public void setImagem(String imagem) {
-		this.imagem = imagem;
-	}
-
 	public CategoriaResumidaDTO getCategoriaResDTO() {
 		return categoriaResDTO;
 	}
@@ -111,8 +101,7 @@ public class ProdutoResumidoDTO {
 				+ ", descrição = " + descricao 
 				+ ", qtd estoque = " + qtdEstoque 
 				+ ", data cadastro = " + dataCadastro 
-				+ ", valor unitario = " + valorUnitario 
-				+ ", imagem = " + imagem 
+				+ ", valor unitario = " + valorUnitario
 				+ ", categoria = " + categoriaResDTO + "]";
 	}
 }
