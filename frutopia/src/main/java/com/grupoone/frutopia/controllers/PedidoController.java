@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.grupoone.frutopia.dto.PedidoDTO;
+import com.grupoone.frutopia.dto.RelatorioPedidoDTO;
 import com.grupoone.frutopia.entities.Pedido;
 import com.grupoone.frutopia.services.PedidoService;
 
@@ -35,6 +36,11 @@ public class PedidoController {
 	@GetMapping("/{id}")
 	public ResponseEntity<PedidoDTO> getPedidoDtobyId(@Valid @PathVariable Integer id) {
 		return new ResponseEntity<>(pedidoService.getPedidoDtoById(id), HttpStatus.OK);
+	}
+	
+	@GetMapping("/relatorio/{id}")
+	public ResponseEntity<RelatorioPedidoDTO> geraRelatorio(@PathVariable Integer id) {
+		return new ResponseEntity<>(pedidoService.geraRelatorioPedido(id), HttpStatus.OK);
 	}
 	
 	@PostMapping
