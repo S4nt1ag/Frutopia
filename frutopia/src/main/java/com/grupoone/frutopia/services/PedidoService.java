@@ -17,14 +17,26 @@ import com.grupoone.frutopia.dto.RelatorioPedidoDTO;
 import com.grupoone.frutopia.dto.RelatorioPedidoItemDTO;
 import com.grupoone.frutopia.entities.ItemPedido;
 import com.grupoone.frutopia.entities.Pedido;
+import com.grupoone.frutopia.entities.Produto;
 import com.grupoone.frutopia.exceptions.IdNotFoundException;
+import com.grupoone.frutopia.repositories.ItemPedidoRepository;
 import com.grupoone.frutopia.repositories.PedidoRepository;
+import com.grupoone.frutopia.repositories.ProdutoRepository;
 
 @Service
 public class PedidoService {
 
 	@Autowired
 	PedidoRepository pedidoRepository;
+	
+	@Autowired
+	ItemPedidoRepository itemPedidoRepository;
+	
+	@Autowired
+	ProdutoRepository produtoRepository;
+	
+	@Autowired
+	EmailService emailService;
 	
 	
 	@Autowired
@@ -155,6 +167,8 @@ public class PedidoService {
 			itemRelatorio.setPercentualDesconto(item.getPercentualDesconto());
 			itemRelatorio.setValorLiquido(valorLiquido);
 			
+			atualizaItemPedido(item, valorBruto, valorLiquido);
+			
 			itensRelatorio.add(itemRelatorio);
 			
 			valorTotal += valorLiquido;
@@ -163,6 +177,25 @@ public class PedidoService {
 		relatorio.setValorTotal(valorTotal);
 		relatorio.setListaItemPedido(itensRelatorio);
 		
+		emailService.enviarEmail("frutopia.projeto.api@gmail.com", "Boa tarde", relatorio.toString());
+		
 		return relatorio;
+	}
+	
+	private void atualizaItemPedido(ItemPedido item, Double valorBruto, Double valorLiquido) {
+		ItemPedido itemPedido = itemPedidoRepository.findById(item.getIdItemPedido()).orElse(null);
+				
+		if(itemPedido != null) {
+			itemPedido.setValorBruto(valorBruto);
+			itemPedido.setValorLiquido(valorLiquido);
+			itemPedidoRepository.save(itemPedido);
+		}
+		
+		Produto produto = produtoRepository.findById(item.getProduto().getIdProduto()).orElse(null);
+		
+		if(produto != null) {
+			produto.setQtdEstoque(produto.getQtdEstoque() - item.getQuantidade());
+			produtoRepository.save(produto);
+		}
 	}
 }

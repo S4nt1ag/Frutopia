@@ -7,7 +7,7 @@ import com.grupoone.frutopia.entities.enums.StatusPedido;
 
 public class PedidoResumidoDTO {
 
-	private Integer idProduto;
+	private Integer idPedido;
 	private Instant dataPedido;
 	private LocalDateTime dataEntrega;
 	private LocalDateTime dataEnvio;
@@ -18,10 +18,10 @@ public class PedidoResumidoDTO {
 		super();
 	}
 
-	public PedidoResumidoDTO(Integer idProduto, Instant dataPedido, LocalDateTime dataEntrega, LocalDateTime dataEnvio,
+	public PedidoResumidoDTO(Integer idPedido, Instant dataPedido, LocalDateTime dataEntrega, LocalDateTime dataEnvio,
 			StatusPedido status, Double valorTotal) {
 		super();
-		this.idProduto = idProduto;
+		this.idPedido = idPedido;
 		this.dataPedido = dataPedido;
 		this.dataEntrega = dataEntrega;
 		this.dataEnvio = dataEnvio;
@@ -71,12 +71,12 @@ public class PedidoResumidoDTO {
 		this.valorTotal = valorTotal;
 	}
 
-	public Integer getIdProduto() {
-		return idProduto;
+	public Integer getIdPedido() {
+		return idPedido;
 	}
 
-	public void setIdProduto(Integer idProduto) {
-		this.idProduto = idProduto;
+	public void setIdPedido(Integer idPedido) {
+		this.idPedido = idPedido;
 	}
 
 }
