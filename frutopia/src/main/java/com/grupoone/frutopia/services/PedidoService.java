@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import com.grupoone.frutopia.dto.ClienteResumidoDTO;
 import com.grupoone.frutopia.dto.ItemPedidoResumidoDTO;
 import com.grupoone.frutopia.dto.PedidoDTO;
+import com.grupoone.frutopia.dto.RelatorioPedidoDTO;
+import com.grupoone.frutopia.dto.RelatorioPedidoItemDTO;
 import com.grupoone.frutopia.entities.ItemPedido;
 import com.grupoone.frutopia.entities.Pedido;
 import com.grupoone.frutopia.exceptions.IdNotFoundException;
@@ -75,7 +77,11 @@ public class PedidoService {
 	
 	public Pedido savePedido(Pedido pedido) {
 		try {
-			return pedidoRepository.save(pedido);
+			//calculo de valores brutos e liquidos
+			Pedido pedidoResponse =  pedidoRepository.save(pedido);
+			
+//			geraRelatorioPedido(pedido);
+			return pedido;
 		} catch(DataAccessException e) {
 			throw new IdNotFoundException("");
 		}
@@ -121,5 +127,38 @@ public class PedidoService {
 		} else {
 			return false;
 		}
+	}
+	
+	public RelatorioPedidoDTO geraRelatorioPedido(Integer id) {
+		Pedido pedido = pedidoRepository.findById(id).get();
+		RelatorioPedidoDTO relatorio = new RelatorioPedidoDTO();
+		relatorio.setIdPedido(pedido.getIdPedido());
+		relatorio.setDataPedido(pedido.getDataPedido());
+		
+		Double valorTotal = 0.0;
+		
+		List<RelatorioPedidoItemDTO> itensRelatorio = new ArrayList<>();
+		
+		for(ItemPedido item : pedido.getListaItemPedido()) {
+			RelatorioPedidoItemDTO itemRelatorio = new RelatorioPedidoItemDTO();
+			
+			itemRelatorio.setCodigoProduto(item.getProduto().getIdProduto());
+			itemRelatorio.setNomeProduto(item.getProduto().getNome());
+			itemRelatorio.setPrecoVenda(item.getPrecoVenda());
+			itemRelatorio.setQuantidade(item.getQuantidade());
+			itemRelatorio.setValorBruto(item.getValorBruto());
+			itemRelatorio.setPercentualDesconto(item.getValorBruto());
+			itemRelatorio.setPercentualDesconto(item.getPercentualDesconto());
+			itemRelatorio.setPercentualDesconto(item.getValorLiquido());
+			
+			itensRelatorio.add(itemRelatorio);
+			
+			valorTotal += item.getValorLiquido();
+		}
+		
+		relatorio.setValorTotal(valorTotal);
+		relatorio.setListaItemPedido(itensRelatorio);
+		
+		return relatorio;
 	}
 }

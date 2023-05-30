@@ -155,4 +155,5 @@ public class Pedido {
 		Pedido other = (Pedido) obj;
 		return Objects.equals(idPedido, other.idPedido);
 	}
+	
 }
