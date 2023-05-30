@@ -140,20 +140,24 @@ public class PedidoService {
 		List<RelatorioPedidoItemDTO> itensRelatorio = new ArrayList<>();
 		
 		for(ItemPedido item : pedido.getListaItemPedido()) {
+			
+			Double percentualDesconto = 1 - ((item.getPercentualDesconto())/100.00) ;
+			Double valorBruto = (item.getPrecoVenda())*(item.getQuantidade());
+			Double valorLiquido = valorBruto*percentualDesconto;
+			
 			RelatorioPedidoItemDTO itemRelatorio = new RelatorioPedidoItemDTO();
 			
 			itemRelatorio.setCodigoProduto(item.getProduto().getIdProduto());
 			itemRelatorio.setNomeProduto(item.getProduto().getNome());
 			itemRelatorio.setPrecoVenda(item.getPrecoVenda());
 			itemRelatorio.setQuantidade(item.getQuantidade());
-			itemRelatorio.setValorBruto(item.getValorBruto());
-			itemRelatorio.setPercentualDesconto(item.getValorBruto());
+			itemRelatorio.setValorBruto(valorBruto);
 			itemRelatorio.setPercentualDesconto(item.getPercentualDesconto());
-			itemRelatorio.setPercentualDesconto(item.getValorLiquido());
+			itemRelatorio.setValorLiquido(valorLiquido);
 			
 			itensRelatorio.add(itemRelatorio);
 			
-			valorTotal += item.getValorLiquido();
+			valorTotal += valorLiquido;
 		}
 		
 		relatorio.setValorTotal(valorTotal);
