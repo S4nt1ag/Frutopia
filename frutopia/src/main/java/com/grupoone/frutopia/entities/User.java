@@ -11,6 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.Email;
@@ -37,6 +38,9 @@ public class User {
 	@NotBlank
 	@Size(max = 120)
 	private String password;
+	
+	@OneToOne(mappedBy = "user")
+	private Cliente Cliente;
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -44,11 +48,23 @@ public class User {
 
 	public User() {
 	}
+	
+	
 
 	public User(String username, String email, String password) {
+		super();
 		this.username = username;
 		this.email = email;
 		this.password = password;
+	}
+
+
+
+	public User(String username, String email, String password, Cliente cliente) {
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.Cliente = cliente;
 	}
 
 	public Integer getId() {
@@ -89,5 +105,13 @@ public class User {
 
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
+	}
+
+	public Cliente getCliente() {
+		return Cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		Cliente = cliente;
 	}
 }

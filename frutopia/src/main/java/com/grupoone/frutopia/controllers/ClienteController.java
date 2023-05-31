@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.grupoone.frutopia.dto.ClienteDTO;
+import com.grupoone.frutopia.entities.Categoria;
 import com.grupoone.frutopia.entities.Cliente;
 import com.grupoone.frutopia.services.ClienteService;
 
@@ -49,11 +50,8 @@ public class ClienteController {
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Boolean> deleteCliente(@Valid @PathVariable Integer id) {
-		Boolean resp = clienteService.deleteCliente(id);
-		if (resp)
-			return new ResponseEntity<>(resp, HttpStatus.OK);
-		else
-			return new ResponseEntity<>(resp, HttpStatus.NOT_MODIFIED);
+	public ResponseEntity<String> deleteCliente(@Valid @PathVariable Integer id) {
+		clienteService.deleteCliente(id);
+		return ResponseEntity.ok("Entidade deleteda");
 	}
 }
