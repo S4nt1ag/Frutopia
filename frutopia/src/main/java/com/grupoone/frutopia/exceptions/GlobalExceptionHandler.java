@@ -40,6 +40,18 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		return problemDetail;
 	}
 	
+	// verifica se id não existe no database
+		@ExceptionHandler(UploadArquivoException.class)
+		ProblemDetail handleIdNotFoundException(UploadArquivoException e) {
+			ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, e.getMessage());
+
+			problemDetail.setType(URI.create("https://api.frutopia.com/errors/ioexception"));
+			problemDetail.setTitle("Problemas com o envio do arquivo para o database");
+			problemDetail.setStatus(HttpStatus.BAD_REQUEST);
+			problemDetail.setDetail("IOexception");
+			return problemDetail;
+		}
+	
 	// pega validação @NotNull, @Valid, @NotBlank
     protected ResponseEntity<Object> handleExceptionInternal(Exception ex, @Nullable Object body, 
     		HttpHeaders headers, HttpStatusCode statusCode, WebRequest request) {

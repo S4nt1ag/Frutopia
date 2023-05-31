@@ -47,7 +47,7 @@ public class AuthController {
 
 	@Autowired
 	PasswordEncoder encoder;
-
+	
 	@Autowired
 	JwtUtils jwtUtils;
 
@@ -116,7 +116,7 @@ public class AuthController {
 
 		user.setRoles(roles);
 		userRepository.save(user);
-
+		
 		return ResponseEntity.ok(new MessageResponseDTO("Usuário registrado com sucesso!"));
 	}
 }

@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.grupoone.frutopia.dto.ClienteDTO;
-import com.grupoone.frutopia.entities.Categoria;
 import com.grupoone.frutopia.entities.Cliente;
 import com.grupoone.frutopia.services.ClienteService;
 

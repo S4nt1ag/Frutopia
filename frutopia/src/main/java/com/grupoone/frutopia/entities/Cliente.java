@@ -64,7 +64,6 @@ public class Cliente {
 	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> listaPedidos = new ArrayList<>();
 
-	@NotNull
 	@OneToOne
 	@JoinColumn(name = "id_endereco_FK", referencedColumnName = "id_endereco")
 	private Endereco endereco;
