@@ -68,6 +68,35 @@
 					"response": []
 				},
 				{
+					"name": "Role_Cliente Save",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"name\": \"ROLE_CLIENTE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/frutopia/roles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"frutopia",
+								"roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Signup Admin",
 					"request": {
 						"method": "POST",
@@ -75,6 +104,36 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n\t\"username\" : \"Breno\",\r\n\t\"email\": \"admin@mail.com\",\r\n\t\"password\": \"12345678\",\r\n\t\"role\": [\"admin\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/frutopia/auth/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"frutopia",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Signup Cliente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"username\" : \"Teste\",\r\n\t\"email\": \"teste@gmail.com\",\r\n\t\"password\": \"12345678\",\r\n\t\"cliente\":{\r\n\t\t\"idCliente\": 6\r\n\t},\r\n\t\"role\": [\"cliente\"]\t\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -135,6 +194,36 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n\t\"username\" : \"Breno\",\r\n\t\"password\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/frutopia/auth/signin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"frutopia",
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Signin Cliente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"username\" : \"Teste\",\r\n\t\"password\": \"12345678\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

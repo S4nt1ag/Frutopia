@@ -64,19 +64,20 @@ public class Cliente {
 	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> listaPedidos = new ArrayList<>();
 
-	@NotNull
 	@OneToOne
 	@JoinColumn(name = "id_endereco_FK", referencedColumnName = "id_endereco")
 	private Endereco endereco;
+	
+	@OneToOne
+   @JoinColumn(name = "user_id")
+    private User user;
 
 	public Cliente() {
 		super();
 	}
 
-	public Cliente(Integer idCliente, @NotBlank @Email String email, @NotBlank String nomeCompleto,
-			@NotBlank @Pattern(regexp = "^[0-9]{11}") String cpf,
-			@NotBlank @Pattern(regexp = "^[0-9]{8,15}") String telefone, @NotBlank LocalDate dataNascimento,
-			@NotBlank String senha, Endereco endereco) {
+	public Cliente(Integer idCliente, String email, String nomeCompleto, String cpf,
+			String telefone, @NotBlank LocalDate dataNascimento, String senha, Endereco endereco, User user) {
 		super();
 		this.idCliente = idCliente;
 		this.email = email;
@@ -86,6 +87,7 @@ public class Cliente {
 		this.dataNascimento = dataNascimento;
 		this.senha = senha;
 		this.endereco = endereco;
+		this.user = user;
 	}
 
 	public Integer getIdCliente() {
@@ -158,6 +160,16 @@ public class Cliente {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+	
+	
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Override

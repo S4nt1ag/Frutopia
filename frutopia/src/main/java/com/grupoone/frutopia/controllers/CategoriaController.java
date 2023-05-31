@@ -49,8 +49,8 @@ public class CategoriaController {
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Categoria> deleteCategoria(@Valid @PathVariable Integer id) {
+	public ResponseEntity<String> deleteCategoria(@Valid @PathVariable Integer id) {
 		categoriaService.deleteCategoria(id);
-		return ResponseEntity.noContent().build();
+		return ResponseEntity.ok("Entidade deleteda");
 	}
 }

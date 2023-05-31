@@ -22,6 +22,7 @@ import com.grupoone.frutopia.entities.Categoria;
 import com.grupoone.frutopia.entities.ItemPedido;
 import com.grupoone.frutopia.entities.Produto;
 import com.grupoone.frutopia.exceptions.IdNotFoundException;
+import com.grupoone.frutopia.exceptions.UploadArquivoException;
 import com.grupoone.frutopia.repositories.ProdutoRepository;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -91,7 +92,7 @@ public class ProdutoService {
 			try {
 				produto.setImagem(imagem.getBytes());
 			} catch (IOException e) {
-				e.printStackTrace();
+				throw new UploadArquivoException();
 			}
 			
 			Categoria novaCategoria = new Categoria();

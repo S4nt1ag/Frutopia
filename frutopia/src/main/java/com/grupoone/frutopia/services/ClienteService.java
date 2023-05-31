@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.grupoone.frutopia.dto.ClienteDTO;
 import com.grupoone.frutopia.dto.EnderecoResumidoDTO;
 import com.grupoone.frutopia.dto.PedidoResumidoDTO;
+import com.grupoone.frutopia.entities.Categoria;
 import com.grupoone.frutopia.entities.Cliente;
 import com.grupoone.frutopia.entities.Pedido;
 import com.grupoone.frutopia.exceptions.IdNotFoundException;
@@ -120,19 +121,10 @@ public class ClienteService {
 		updateCliente.setDataNascimento(cliente.getDataNascimento());
 	}
 
-	public Boolean deleteCliente(Integer id) {
-		Cliente clienteDeleted = clienteRepository.findById(id).orElse(null);
-		if (clienteDeleted != null) {
-			clienteRepository.deleteById(id);
-			clienteDeleted = clienteRepository.findById(id).orElse(null);
-			if (clienteDeleted != null) {
-				return false;
-			} else {
-				return true;
-			}
-
-		} else {
-			return false;
-		}
-	}
+	public void deleteCliente(Integer id) {
+		Cliente clienteDeleted = clienteRepository.findById(id)
+				.orElseThrow(() -> new IdNotFoundException("Entidade nÃ£o foi encontrada"));
+		
+		clienteRepository.delete(clienteDeleted);
+	}	
 }

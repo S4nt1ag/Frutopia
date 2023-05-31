@@ -62,8 +62,6 @@ public class CategoriaService {
 		}
 
 		categoriaDTO.setListaProdutosDTO(produtoNomeDTO);
-		
-		emailService.enviarEmail("frutopia.projeto.api@gmail.com", "Boa tarde", categoria.toString());
 		return categoriaDTO;
 	}
 
