@@ -84,9 +84,9 @@ public class RelatorioPedidoItemDTO {
 
 	@Override
 	public String toString() {
-		return "codigo do produto: " + codigoProduto + "\n    nome do produto:" + nomeProduto
-				+ "\n    preco na venda:" + precoVenda + "\n    quantidade:" + quantidade + "\n    valor bruto:" + valorBruto
-				+ "\n    percentual de desconto:" + percentualDesconto + "%\n    valor liquido:" + String.format("%,.2f", valorLiquido) + "\n";
+		return "código do produto: " + codigoProduto + "\n    nome do produto:" + nomeProduto
+				+ "\n    preço na venda:" + precoVenda + "\n    quantidade:" + quantidade + "\n    valor bruto:" + valorBruto
+				+ "\n    percentual de desconto:" + percentualDesconto + "%\n    valor líquido:" + String.format("%,.2f", valorLiquido) + "\n";
 	}
 	
 	
