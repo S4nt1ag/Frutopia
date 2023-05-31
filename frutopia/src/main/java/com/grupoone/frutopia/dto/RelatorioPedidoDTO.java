@@ -65,7 +65,7 @@ public class RelatorioPedidoDTO {
 			itensPedidos += "\n  -- " + item.toString();
 		}
 		
-		return "-Relatorio de Pedido-\n\nId do Pedido: " + idPedido + ""
+		return "-Relatório de Pedido-\n\nId do Pedido: " + idPedido + ""
 				+ "\nData do Pedido: " + dataPedido + "\nValor Total:" + valorTotal
 				+ "\nLista de Itens do Pedido:\n" + itensPedidos;
 		

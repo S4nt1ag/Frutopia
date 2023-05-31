@@ -1,5 +1,7 @@
 package com.grupoone.frutopia.services;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -177,7 +179,16 @@ public class PedidoService {
 		relatorio.setValorTotal(valorTotal);
 		relatorio.setListaItemPedido(itensRelatorio);
 		
-		emailService.enviarEmail("frutopia.projeto.api@gmail.com", "Boa tarde", relatorio.toString());
+		LocalDateTime agora = LocalDateTime.now();
+		DateTimeFormatter format = DateTimeFormatter.ofPattern("HH");
+		Integer hora = Integer.parseInt(agora.format(format));
+		String mensagem = "";
+	
+		if(hora >= 6 && hora < 13) mensagem = "Bom dia";
+		else if(hora >= 13 && hora < 19) mensagem = "Boa tarde";
+		else mensagem = "Boa noite";
+		
+		emailService.enviarEmail("frutopia.projeto.api@gmail.com", mensagem, relatorio.toString());
 		
 		return relatorio;
 	}
