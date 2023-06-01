@@ -5,7 +5,6 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -36,15 +35,15 @@ public class Endereco {
 	@Column(name = "cep")
 	private String cep;
 	
-	@NotBlank
+	//@NotBlank
 	@Column(name = "rua")
 	private String rua;
 	
-	@NotBlank
+	//@NotBlank
 	@Column(name = "bairro")
 	private String bairro;
 	
-	@NotBlank
+	//@NotBlank
 	@Column(name = "cidade")
 	private String cidade;
 	
@@ -52,16 +51,14 @@ public class Endereco {
 	@Column(name = "numero")
 	private Integer numero;
 	
-	@NotBlank
 	@Column(name = "complemento")
 	private String complemento;
 	
-	@NotBlank
+	//@NotBlank
 	@Pattern(regexp = "^[A-Z]{2}")
 	@Column(name = "uf")
 	private String uf;
 	
-	//@NotNull
 	@OneToOne(mappedBy = "endereco") // (1,1)
 	private Cliente cliente;
 	

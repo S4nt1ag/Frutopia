@@ -1,12 +1,283 @@
 {
 	"info": {
-		"_postman_id": "856ccbdd-471e-4af0-b2c5-3446da67d1b1",
+		"_postman_id": "c11a24d3-8108-4724-a001-30f09a516036",
 		"name": "Frutopia",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "27165111",
-		"_collection_link": "https://orange-moon-858539.postman.co/workspace/Frutopia~789be928-b243-48cd-845f-b7f127585469/collection/27165111-856ccbdd-471e-4af0-b2c5-3446da67d1b1?action=share&creator=27165111&source=collection_link"
+		"_exporter_id": "20884477"
 	},
 	"item": [
+		{
+			"name": "Security Roles",
+			"item": [
+				{
+					"name": "Role_User Save",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"name\": \"ROLE_USER\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/frutopia/roles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"frutopia",
+								"roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Role_Admin Save",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"name\": \"ROLE_ADMIN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/frutopia/roles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"frutopia",
+								"roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Role_Cliente Save",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"name\": \"ROLE_CLIENTE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/frutopia/roles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"frutopia",
+								"roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Signup Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"username\" : \"Breno\",\r\n\t\"email\": \"admin@mail.com\",\r\n\t\"password\": \"12345678\",\r\n\t\"role\": [\"admin\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/frutopia/auth/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"frutopia",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Signup Cliente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"username\" : \"Teste\",\r\n\t\"email\": \"teste@gmail.com\",\r\n\t\"password\": \"12345678\",\r\n\t\"cliente\":{\r\n\t\t\"idCliente\": 6\r\n\t},\r\n\t\"role\": [\"cliente\"]\t\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/frutopia/auth/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"frutopia",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Signup User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"username\" : \"NomeUser\",\r\n\t\"email\": \"user@mail.com\",\r\n\t\"password\": \"12345678\",\r\n\t\"role\": [\"user\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/frutopia/auth/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"frutopia",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Signin Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"username\" : \"Breno\",\r\n\t\"password\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/frutopia/auth/signin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"frutopia",
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Signin Cliente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"username\" : \"Teste\",\r\n\t\"password\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/frutopia/auth/signin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"frutopia",
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Signin User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"username\" : \"NomeUser\",\r\n\t\"password\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/frutopia/auth/signin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"frutopia",
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
 		{
 			"name": "Categoria",
 			"item": [
@@ -36,7 +307,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/frutopia/categorias/1",
+							"raw": "http://localhost:8080/frutopia/categorias/4",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -45,7 +316,7 @@
 							"path": [
 								"frutopia",
 								"categorias",
-								"1"
+								"4"
 							]
 						}
 					},
@@ -54,6 +325,16 @@
 				{
 					"name": "Categoria Save",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJCcmVubyIsImlhdCI6MTY4NTQ4MTYyNCwiZXhwIjoxNjg1NTY4MDI0fQ.nH1yj6gqUMl-2gkbls8JprYOgVCHVwGAxeSTX0L6Ymbv8k5Yoj-0l1Tv-vUGhlzH",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -83,11 +364,21 @@
 				{
 					"name": "Categoria Update",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJCcmVubyIsImlhdCI6MTY4NTQ4MTYyNCwiZXhwIjoxNjg1NTY4MDI0fQ.nH1yj6gqUMl-2gkbls8JprYOgVCHVwGAxeSTX0L6Ymbv8k5Yoj-0l1Tv-vUGhlzH",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"nome\": \"TesteCategoria\",\r\n\t\"descricao\": \"Testando categoria\"\r\n}\r\n",
+							"raw": "{\r\n\t\"nome\": \"TesteCategoria333\",\r\n\t\"descricao\": \"Testando categoria333\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -113,6 +404,16 @@
 				{
 					"name": "Categoria Update Copy",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJCcmVubyIsImlhdCI6MTY4NTQ4MTYyNCwiZXhwIjoxNjg1NTY4MDI0fQ.nH1yj6gqUMl-2gkbls8JprYOgVCHVwGAxeSTX0L6Ymbv8k5Yoj-0l1Tv-vUGhlzH",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"body": {
@@ -125,7 +426,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/frutopia/categorias/100",
+							"raw": "http://localhost:8080/frutopia/categorias/4",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -134,587 +435,7 @@
 							"path": [
 								"frutopia",
 								"categorias",
-								"100"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Produto",
-			"item": [
-				{
-					"name": "Produto GetAll",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/frutopia/produtos",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"frutopia",
-								"produtos"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Produto GetById",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/frutopia/produtos/2",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"frutopia",
-								"produtos",
-								"2"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Produto Save",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\t\r\n\t\"nome\": \"Carro\",\r\n\t\"descricao\": \"20 Km\",\r\n\t\"qtdEstoque\": 30,\r\n  \"dataCadastro\": \"1970-04-22T00:35:00.000-03:00\",\r\n\t\"valorUnitario\": 200,\r\n\t\"imagem\": \"Imagem\",\r\n\t\"categoria\": {\r\n\t\t\"idCategoria\": 2\r\n\t}\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/frutopia/produtos",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"frutopia",
-								"produtos"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Produto Update",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\t\r\n\t\"nome\": \"Carro\",\r\n\t\"descricao\": \"20 Km\",\r\n\t\"qtdEstoque\": 30,\r\n  \"dataCadastro\": \"1970-04-22T00:35:00.000-03:00\",\r\n\t\"valorUnitario\": 200,\r\n\t\"imagem\": \"Imagem\",\r\n\t\"categoria\": {\r\n\t\t\"idCategoria\": 2\r\n\t}\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/frutopia/produtos/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"frutopia",
-								"produtos",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Produto Delete",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/frutopia/produtos/100",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"frutopia",
-								"produtos",
-								"100"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Item_Pedido",
-			"item": [
-				{
-					"name": "ItemPedido GetAll",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJCcmVubyIsImlhdCI6MTY4NTQxNzg2OSwiZXhwIjoxNjg1NTA0MjY5fQ.wtUXtj0v7LwVVpQ7o9T7Gwytczz2zV_xnP05SoIRM-arN47ckgOL9fGgdKqNWy4o",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/frutopia/itens_pedidos",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"frutopia",
-								"itens_pedidos"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "ItemPedido GetById",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/frutopia/itens_pedidos/2",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"frutopia",
-								"itens_pedidos",
-								"2"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "ItemPedido Save",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\t\r\n\t\"quantidade\": 10,\r\n\t\"precoVenda\": 200,\r\n\t\"percentualDesconto\": 10,\r\n\t\"valorBruto\": 250,\r\n\t\"valorLiquido\": 300,\r\n\t\"pedido\":{\r\n\t\t\"idPedido\": 2\r\n\t},\r\n\t\"produto\":{\r\n\t\t\"idProduto\": 4\r\n\t}\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/frutopia/itens_pedidos",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"frutopia",
-								"itens_pedidos"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "ItemPedido Update",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\t\r\n\t\"quantidade\": 10,\r\n\t\"precoVenda\": 200,\r\n\t\"percentualDesconto\": 10,\r\n\t\"valorBruto\": 250,\r\n\t\"valorLiquido\": 300,\r\n\t\"pedido\":{\r\n\t\t\"idPedido\": 2\r\n\t},\r\n\t\"produto\":{\r\n\t\t\"idProduto\": 4\r\n\t}\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/frutopia/itens_pedidos/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"frutopia",
-								"itens_pedidos",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "ItemPedido Delete",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/frutopia/itens_pedidos/100",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"frutopia",
-								"itens_pedidos",
-								"100"
-							]
-						}
-					},
-					"response": []
-				}
-			],
-			"auth": {
-				"type": "bearer",
-				"bearer": [
-					{
-						"key": "token",
-						"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJCcmVubyIsImlhdCI6MTY4NTQxNzg2OSwiZXhwIjoxNjg1NTA0MjY5fQ.wtUXtj0v7LwVVpQ7o9T7Gwytczz2zV_xnP05SoIRM-arN47ckgOL9fGgdKqNWy4o",
-						"type": "string"
-					}
-				]
-			},
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							""
-						]
-					}
-				},
-				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							""
-						]
-					}
-				}
-			]
-		},
-		{
-			"name": "Pedido",
-			"item": [
-				{
-					"name": "Pedido GetAll",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/frutopia/pedidos",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"frutopia",
-								"pedidos"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Pedido GetById",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/frutopia/pedidos/2",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"frutopia",
-								"pedidos",
-								"2"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Pedido Save",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n\t\"dataPedido\": \"2023-05-26T16:51:12.830-03:00\",\r\n\t\"dataEntrega\": \"2023-05-26T16:51:12.830-03:00\",\r\n\t\"dataEnvio\": \"2023-05-26T16:51:12.830-03:00\",\r\n\t\"status\": \"Confirmado\",\r\n\t\"valorTotal\": 200,\r\n\t\"cliente\": {\r\n\t\t\"idCliente\": 2\r\n\t}\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/frutopia/pedidos",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"frutopia",
-								"pedidos"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Pedido Update",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n\t\"dataPedido\": \"2023-05-26T16:51:12.830-03:00\",\r\n\t\"dataEntrega\": \"2023-05-26T16:51:12.830-03:00\",\r\n\t\"dataEnvio\": \"2023-05-26T16:51:12.830-03:00\",\r\n\t\"status\": \"Confirmado\",\r\n\t\"valorTotal\": 200,\r\n\t\"cliente\": {\r\n\t\t\"idCliente\": 2\r\n\t}\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/frutopia/pedidos/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"frutopia",
-								"pedidos",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Pedido Delete",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/frutopia/pedidos/100",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"frutopia",
-								"pedidos",
-								"100"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Cliente",
-			"item": [
-				{
-					"name": "Cliente GetAll",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/frutopia/clientes",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"frutopia",
-								"clientes"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Cliente GetById",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/frutopia/clientes/2",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"frutopia",
-								"clientes",
-								"2"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Cliente Save",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"cpf\" : \"12345678901\",\r\n    \"dataNascimento\" : \"1970-04-22T00:35:00.000-03:00\",\r\n    \"email\" : \"abc@gmail.com\",\r\n    \"nomeCompleto\" : \"Filipe\",\r\n    \"telefone\" : \"12345678\",\r\n    \"senha\" : \"12345\",\r\n    \"endereco\" : {\r\n            \"idEndereco\" : 1\r\n    }\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/frutopia/clientes",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"frutopia",
-								"clientes"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Cliente Update",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"cpf\" : \"12345678901\",\r\n    \"dataNascimento\" : \"1970-04-22T00:35:00.000-03:00\",\r\n    \"email\" : \"abc@gmail.com\",\r\n    \"nomeCompleto\" : \"Filipe\",\r\n    \"telefone\" : \"12345678\",\r\n    \"senha\" : \"12345\",\r\n    \"endereco\" : {\r\n            \"idEndereco\" : 1\r\n    }\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/frutopia/clientes/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"frutopia",
-								"clientes",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Cliente Delete",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/frutopia/clientes/100",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"frutopia",
-								"clientes",
-								"100"
+								"4"
 							]
 						}
 					},
@@ -868,24 +589,15 @@
 			]
 		},
 		{
-			"name": "Security Roles",
+			"name": "Cliente",
 			"item": [
 				{
-					"name": "Role_User Save",
+					"name": "Cliente GetAll",
 					"request": {
-						"method": "POST",
+						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n\t\"name\": \"ROLE_USER\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "http://localhost:8080/frutopia/roles",
+							"raw": "http://localhost:8080/frutopia/clientes",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -893,28 +605,19 @@
 							"port": "8080",
 							"path": [
 								"frutopia",
-								"roles"
+								"clientes"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Role_Admin Save",
+					"name": "Cliente GetById",
 					"request": {
-						"method": "POST",
+						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n\t\"name\": \"ROLE_ADMIN\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "http://localhost:8080/frutopia/roles",
+							"raw": "http://localhost:8080/frutopia/clientes/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -922,20 +625,21 @@
 							"port": "8080",
 							"path": [
 								"frutopia",
-								"roles"
+								"clientes",
+								"2"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Signup Admin",
+					"name": "Cliente Save",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"username\" : \"Breno\",\r\n\t\"email\": \"admin@mail.com\",\r\n\t\"password\": \"12345678\",\r\n\t\"role\": [\"admin\"]\r\n}",
+							"raw": "{\r\n    \"cpf\" : \"12345678901\",\r\n    \"dataNascimento\" : \"1970-04-22T00:35:00.000-03:00\",\r\n    \"email\" : \"abc@gmail.com\",\r\n    \"nomeCompleto\" : \"Filipe\",\r\n    \"telefone\" : \"12345678\",\r\n    \"senha\" : \"12345\",\r\n    \"endereco\" : {\r\n            \"idEndereco\" : 1\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -943,7 +647,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/frutopia/auth/signup",
+							"raw": "http://localhost:8080/frutopia/clientes",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -951,21 +655,20 @@
 							"port": "8080",
 							"path": [
 								"frutopia",
-								"auth",
-								"signup"
+								"clientes"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Signup User",
+					"name": "Cliente Update",
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"username\" : \"NomeUser\",\r\n\t\"email\": \"user@mail.com\",\r\n\t\"password\": \"12345678\",\r\n\t\"role\": [\"user\"]\r\n}",
+							"raw": "{\r\n    \"cpf\" : \"12345678901\",\r\n    \"dataNascimento\" : \"1970-04-22T00:35:00.000-03:00\",\r\n    \"email\" : \"abc@gmail.com\",\r\n    \"nomeCompleto\" : \"Filipe\",\r\n    \"telefone\" : \"12345678\",\r\n    \"senha\" : \"12345\",\r\n    \"endereco\" : {\r\n            \"idEndereco\" : 1\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -973,7 +676,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/frutopia/auth/signup",
+							"raw": "http://localhost:8080/frutopia/clientes/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -981,21 +684,21 @@
 							"port": "8080",
 							"path": [
 								"frutopia",
-								"auth",
-								"signup"
+								"clientes",
+								"1"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Signin Admin",
+					"name": "Cliente Delete",
 					"request": {
-						"method": "POST",
+						"method": "DELETE",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"username\" : \"Breno\",\r\n\t\"password\": \"12345678\"\r\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1003,7 +706,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/frutopia/auth/signin",
+							"raw": "http://localhost:8080/frutopia/clientes/100",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1011,29 +714,45 @@
 							"port": "8080",
 							"path": [
 								"frutopia",
-								"auth",
-								"signin"
+								"clientes",
+								"100"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Produto",
+			"item": [
+				{
+					"name": "Produto GetAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/frutopia/produtos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"frutopia",
+								"produtos"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Signin User",
+					"name": "Produto GetById",
 					"request": {
-						"method": "POST",
+						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n\t\"username\" : \"NomeUser\",\r\n\t\"password\": \"12345678\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "http://localhost:8080/frutopia/auth/signin",
+							"raw": "http://localhost:8080/frutopia/produtos/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1041,12 +760,482 @@
 							"port": "8080",
 							"path": [
 								"frutopia",
-								"auth",
-								"signin"
+								"produtos",
+								"2"
 							]
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Produto Save",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJCcmVubyIsImlhdCI6MTY4NTQ4NDU1NywiZXhwIjoxNjg1NTcwOTU3fQ.UORPksqTr3P0Z9yD6DHQcbuhpNO8vDlysb3i-h_gujqva_EiDgA6FhK9GCVbtVj4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nome",
+									"value": "Rambutao",
+									"type": "text"
+								},
+								{
+									"key": "descricao",
+									"value": "Fruta rambutão",
+									"type": "text"
+								},
+								{
+									"key": "qtdEstoque",
+									"value": "25",
+									"type": "text"
+								},
+								{
+									"key": "dataCadastro",
+									"value": "2023-03-10",
+									"type": "text"
+								},
+								{
+									"key": "valorUnitario",
+									"value": "13.0",
+									"type": "text"
+								},
+								{
+									"key": "imagem",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "categoria",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/frutopia/produtos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"frutopia",
+								"produtos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Produto Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\t\r\n\t\"nome\": \"Carro\",\r\n\t\"descricao\": \"20 Km\",\r\n\t\"qtdEstoque\": 30,\r\n  \"dataCadastro\": \"1970-04-22T00:35:00.000-03:00\",\r\n\t\"valorUnitario\": 200,\r\n\t\"imagem\": \"Imagem\",\r\n\t\"categoria\": {\r\n\t\t\"idCategoria\": 2\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/frutopia/produtos/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"frutopia",
+								"produtos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Produto Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJCcmVubyIsImlhdCI6MTY4NTQ4MTYyNCwiZXhwIjoxNjg1NTY4MDI0fQ.nH1yj6gqUMl-2gkbls8JprYOgVCHVwGAxeSTX0L6Ymbv8k5Yoj-0l1Tv-vUGhlzH",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/frutopia/produtos/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"frutopia",
+								"produtos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pedido",
+			"item": [
+				{
+					"name": "Pedido GetAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/frutopia/pedidos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"frutopia",
+								"pedidos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pedido GetById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/frutopia/pedidos/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"frutopia",
+								"pedidos",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pedido Save",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"dataPedido\": \"2023-05-26T16:51:12.830-03:00\",\r\n\t\"dataEntrega\": \"2023-05-26T16:51:12.830-03:00\",\r\n\t\"dataEnvio\": \"2023-05-26T16:51:12.830-03:00\",\r\n\t\"status\": \"Confirmado\",\r\n\t\"valorTotal\": 200,\r\n\t\"cliente\": {\r\n\t\t\"idCliente\": 2\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/frutopia/pedidos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"frutopia",
+								"pedidos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pedido Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"dataPedido\": \"2023-05-26T16:51:12.830-03:00\",\r\n\t\"dataEntrega\": \"2023-05-26T16:51:12.830-03:00\",\r\n\t\"dataEnvio\": \"2023-05-26T16:51:12.830-03:00\",\r\n\t\"status\": \"Confirmado\",\r\n\t\"valorTotal\": 200,\r\n\t\"cliente\": {\r\n\t\t\"idCliente\": 2\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/frutopia/pedidos/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"frutopia",
+								"pedidos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pedido Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJCcmVubyIsImlhdCI6MTY4NTQ4MTYyNCwiZXhwIjoxNjg1NTY4MDI0fQ.nH1yj6gqUMl-2gkbls8JprYOgVCHVwGAxeSTX0L6Ymbv8k5Yoj-0l1Tv-vUGhlzH",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/frutopia/pedidos/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"frutopia",
+								"pedidos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Item_Pedido",
+			"item": [
+				{
+					"name": "ItemPedido GetAll",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJCcmVubyIsImlhdCI6MTY4NTQxNzg2OSwiZXhwIjoxNjg1NTA0MjY5fQ.wtUXtj0v7LwVVpQ7o9T7Gwytczz2zV_xnP05SoIRM-arN47ckgOL9fGgdKqNWy4o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/frutopia/itens_pedidos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"frutopia",
+								"itens_pedidos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ItemPedido GetById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/frutopia/itens_pedidos/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"frutopia",
+								"itens_pedidos",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ItemPedido Save",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\t\r\n\t\"quantidade\": 10,\r\n\t\"precoVenda\": 200,\r\n\t\"percentualDesconto\": 10,\r\n\t\"valorBruto\": 250,\r\n\t\"valorLiquido\": 300,\r\n\t\"pedido\":{\r\n\t\t\"idPedido\": 2\r\n\t},\r\n\t\"produto\":{\r\n\t\t\"idProduto\": 4\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/frutopia/itens_pedidos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"frutopia",
+								"itens_pedidos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ItemPedido Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\t\r\n\t\"quantidade\": 10,\r\n\t\"precoVenda\": 200,\r\n\t\"percentualDesconto\": 10,\r\n\t\"valorBruto\": 250,\r\n\t\"valorLiquido\": 300,\r\n\t\"pedido\":{\r\n\t\t\"idPedido\": 2\r\n\t},\r\n\t\"produto\":{\r\n\t\t\"idProduto\": 4\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/frutopia/itens_pedidos/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"frutopia",
+								"itens_pedidos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ItemPedido Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJCcmVubyIsImlhdCI6MTY4NTQ4MTYyNCwiZXhwIjoxNjg1NTY4MDI0fQ.nH1yj6gqUMl-2gkbls8JprYOgVCHVwGAxeSTX0L6Ymbv8k5Yoj-0l1Tv-vUGhlzH",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/frutopia/itens_pedidos/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"frutopia",
+								"itens_pedidos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJCcmVubyIsImlhdCI6MTY4NTQxNzg2OSwiZXhwIjoxNjg1NTA0MjY5fQ.wtUXtj0v7LwVVpQ7o9T7Gwytczz2zV_xnP05SoIRM-arN47ckgOL9fGgdKqNWy4o",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
 				}
 			]
 		}

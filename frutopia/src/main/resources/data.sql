@@ -87,5 +87,6 @@ id_pedido_fk, id_produto_fk) VALUES (10.00, 43.00, 3, 129.0, 116.1, 1, 9);
 INSERT INTO item_pedido (percentual_desconto, preco_venda, quantidade, valor_bruto, valor_liquido,
 id_pedido_fk, id_produto_fk) VALUES (5.00, 28.00, 4, 112.0, 106.4, 1, 10);
 
-INSERT INTO roles (name) VALUES ('ROLE_ADMIN');
 INSERT INTO roles (name) VALUES ('ROLE_USER');
+INSERT INTO roles (name) VALUES ('ROLE_ADMIN');
+INSERT INTO roles (name) VALUES ('ROLE_CLIENTE');

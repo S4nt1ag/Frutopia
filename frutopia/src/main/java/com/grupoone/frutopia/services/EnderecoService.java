@@ -1,23 +1,22 @@
 package com.grupoone.frutopia.services;
 
+import java.util.HashMap;
 import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.Map;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
+import com.grupoone.frutopia.dto.CepDTO;
 import com.grupoone.frutopia.dto.ClienteDTO;
 import com.grupoone.frutopia.dto.EnderecoDTO;
-import com.grupoone.frutopia.entities.Categoria;
 import com.grupoone.frutopia.entities.Endereco;
-import com.grupoone.frutopia.entities.Pedido;
 import com.grupoone.frutopia.exceptions.IdNotFoundException;
 import com.grupoone.frutopia.repositories.EnderecoRepository;
-
-import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class EnderecoService {
@@ -64,7 +63,15 @@ public class EnderecoService {
 	public Endereco saveEndereco(Endereco endereco) {
 
 		try {
+			CepDTO cep = consultaApiCep(endereco.getCep());
+
+			endereco.setRua(cep.getLogradouro());
+			endereco.setCidade(cep.getLocalidade());
+			endereco.setUf(cep.getUf());
+			endereco.setBairro(cep.getBairro());
+
 			Endereco novoEndereco = enderecoRepository.save(endereco);
+
 			return novoEndereco;
 		}
 
@@ -89,14 +96,16 @@ public class EnderecoService {
 	}
 
 	private void updateData(Endereco updateEndereco, Endereco endereco) {
-
+		
+		CepDTO cep = consultaApiCep(endereco.getCep());
+		
 		updateEndereco.setCep(endereco.getCep());
-		updateEndereco.setRua(endereco.getRua());
-		updateEndereco.setBairro(endereco.getBairro());
-		updateEndereco.setCidade(endereco.getCidade());
+		updateEndereco.setRua(cep.getLogradouro());
+		updateEndereco.setBairro(cep.getBairro());
+		updateEndereco.setCidade(cep.getLocalidade());
 		updateEndereco.setNumero(endereco.getNumero());
 		updateEndereco.setComplemento(endereco.getComplemento());
-		updateEndereco.setUf(endereco.getUf());
+		updateEndereco.setUf(cep.getUf());
 	}
 
 	public Boolean deleteEndereco(Integer id) {
@@ -113,5 +122,16 @@ public class EnderecoService {
 		} else {
 			return false;
 		}
+	}
+
+	private CepDTO consultaApiCep(String cep) {
+		RestTemplate restTemplate = new RestTemplate();
+		String uri = "https://viacep.com.br/ws/{cep}/json";
+
+		Map<String, String> params = new HashMap<>();
+		params.put("cep", cep); // "cep" nome dentro {} do uri
+
+		CepDTO cepDto = restTemplate.getForObject(uri, CepDTO.class, params);
+		return cepDto;
 	}
 }

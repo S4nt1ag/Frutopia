@@ -1,5 +1,7 @@
 package com.grupoone.frutopia.services;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -17,8 +19,11 @@ import com.grupoone.frutopia.dto.RelatorioPedidoDTO;
 import com.grupoone.frutopia.dto.RelatorioPedidoItemDTO;
 import com.grupoone.frutopia.entities.ItemPedido;
 import com.grupoone.frutopia.entities.Pedido;
+import com.grupoone.frutopia.entities.Produto;
 import com.grupoone.frutopia.exceptions.IdNotFoundException;
+import com.grupoone.frutopia.repositories.ItemPedidoRepository;
 import com.grupoone.frutopia.repositories.PedidoRepository;
+import com.grupoone.frutopia.repositories.ProdutoRepository;
 
 @Service
 public class PedidoService {
@@ -26,6 +31,14 @@ public class PedidoService {
 	@Autowired
 	PedidoRepository pedidoRepository;
 	
+	@Autowired
+	ItemPedidoRepository itemPedidoRepository;
+	
+	@Autowired
+	ProdutoRepository produtoRepository;
+	
+	@Autowired
+	EmailService emailService;
 	
 	@Autowired
 	private ModelMapper modelMapper;
@@ -155,6 +168,8 @@ public class PedidoService {
 			itemRelatorio.setPercentualDesconto(item.getPercentualDesconto());
 			itemRelatorio.setValorLiquido(valorLiquido);
 			
+			atualizaItemPedido(item, valorBruto, valorLiquido);
+			
 			itensRelatorio.add(itemRelatorio);
 			
 			valorTotal += valorLiquido;
@@ -163,6 +178,34 @@ public class PedidoService {
 		relatorio.setValorTotal(valorTotal);
 		relatorio.setListaItemPedido(itensRelatorio);
 		
+		LocalDateTime agora = LocalDateTime.now();
+		DateTimeFormatter format = DateTimeFormatter.ofPattern("HH");
+		Integer hora = Integer.parseInt(agora.format(format));
+		String mensagem = "";
+	
+		if(hora >= 6 && hora < 13) mensagem = "Bom dia";
+		else if(hora >= 13 && hora < 19) mensagem = "Boa tarde";
+		else mensagem = "Boa noite";
+		
+		emailService.enviarEmail("frutopia.projeto.api@gmail.com", mensagem, relatorio.toString());
+		
 		return relatorio;
+	}
+	
+	private void atualizaItemPedido(ItemPedido item, Double valorBruto, Double valorLiquido) {
+		ItemPedido itemPedido = itemPedidoRepository.findById(item.getIdItemPedido()).orElse(null);
+				
+		if(itemPedido != null) {
+			itemPedido.setValorBruto(valorBruto);
+			itemPedido.setValorLiquido(valorLiquido);
+			itemPedidoRepository.save(itemPedido);
+		}
+		
+		Produto produto = produtoRepository.findById(item.getProduto().getIdProduto()).orElse(null);
+		
+		if(produto != null) {
+			produto.setQtdEstoque(produto.getQtdEstoque() - item.getQuantidade());
+			produtoRepository.save(produto);
+		}
 	}
 }
