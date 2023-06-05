@@ -68,16 +68,13 @@ public class Cliente {
 	@JoinColumn(name = "id_endereco_FK", referencedColumnName = "id_endereco")
 	private Endereco endereco;
 	
-	@OneToOne
-   @JoinColumn(name = "user_id")
-    private User user;
 
 	public Cliente() {
 		super();
 	}
 
 	public Cliente(Integer idCliente, String email, String nomeCompleto, String cpf,
-			String telefone, @NotBlank LocalDate dataNascimento, String senha, Endereco endereco, User user) {
+			String telefone, @NotBlank LocalDate dataNascimento, String senha, Endereco endereco) {
 		super();
 		this.idCliente = idCliente;
 		this.email = email;
@@ -87,7 +84,6 @@ public class Cliente {
 		this.dataNascimento = dataNascimento;
 		this.senha = senha;
 		this.endereco = endereco;
-		this.user = user;
 	}
 
 	public Integer getIdCliente() {
@@ -160,16 +156,6 @@ public class Cliente {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
-	}
-	
-	
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
 	}
 
 	@Override

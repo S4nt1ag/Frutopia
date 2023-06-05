@@ -11,7 +11,7 @@ public class PedidoResumidoDTO {
 	private Instant dataPedido;
 	private LocalDateTime dataEntrega;
 	private LocalDateTime dataEnvio;
-	private Integer status;
+	private StatusPedido status;
 	private Double valorTotal;
 	
 	public PedidoResumidoDTO() {
@@ -25,7 +25,7 @@ public class PedidoResumidoDTO {
 		this.dataPedido = dataPedido;
 		this.dataEntrega = dataEntrega;
 		this.dataEnvio = dataEnvio;
-		setStatus(status);
+		this.status = status;
 		this.valorTotal = valorTotal;
 	}
 
@@ -52,20 +52,18 @@ public class PedidoResumidoDTO {
 	public void setDataEnvio(LocalDateTime dataEnvio) {
 		this.dataEnvio = dataEnvio;
 	}
-
+	
 	public StatusPedido getStatus() {
-		return StatusPedido.valueOf(status);
+		return status;
 	}
 
 	public void setStatus(StatusPedido status) {
-		if(status != null) {
-			this.status = status.getCode();
-		}
+		this.status = status;
 	}
 
 	public Double getValorTotal() {
 		return valorTotal;
-	}
+	}	
 
 	public void setValorTotal(Double valorTotal) {
 		this.valorTotal = valorTotal;

@@ -25,6 +25,7 @@ import com.grupoone.frutopia.dto.SignupRequestDTO;
 import com.grupoone.frutopia.entities.Role;
 import com.grupoone.frutopia.entities.User;
 import com.grupoone.frutopia.entities.enums.RoleEnum;
+import com.grupoone.frutopia.repositories.ClienteRepository;
 import com.grupoone.frutopia.repositories.RoleRepository;
 import com.grupoone.frutopia.repositories.UserRepository;
 import com.grupoone.frutopia.security.jwt.JwtUtils;
@@ -47,6 +48,9 @@ public class AuthController {
 
 	@Autowired
 	PasswordEncoder encoder;
+	
+	@Autowired
+	ClienteRepository clienteRepository;
 	
 	@Autowired
 	JwtUtils jwtUtils;
@@ -77,6 +81,10 @@ public class AuthController {
 		if (userRepository.existsByEmail(signUpRequest.getEmail())) {
 			return ResponseEntity.badRequest().body(new MessageResponseDTO("Erro: Email já utilizado!"));
 		}
+		
+		if (clienteRepository.existsByEmail(signUpRequest.getEmail())) {
+		    return ResponseEntity.badRequest().body(new MessageResponseDTO("Erro: O email já está sendo usado por outro cliente!"));
+		}
 
 		// Cria a nova conta de usuario
 		User user = new User(signUpRequest.getUsername(), signUpRequest.getEmail(),
@@ -103,7 +111,7 @@ public class AuthController {
 					    if (clienteRoles.isEmpty()) {
 					        throw new RuntimeException("Erro: Role não encontrada.");
 					    }
-					    Role clienteRole = clienteRoles.get(0);
+					    Role clienteRole = clienteRoles.get(0);					    
 					    roles.add(clienteRole);
 					    break;
 				default:
@@ -115,6 +123,10 @@ public class AuthController {
 		}
 
 		user.setRoles(roles);
+		
+		// coloca email do cliente como o email de usuário
+		user.setEmail(signUpRequest.getEmail());		
+		
 		userRepository.save(user);
 		
 		return ResponseEntity.ok(new MessageResponseDTO("Usuário registrado com sucesso!"));

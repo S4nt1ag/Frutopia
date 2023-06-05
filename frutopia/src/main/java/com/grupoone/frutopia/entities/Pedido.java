@@ -12,6 +12,8 @@ import com.grupoone.frutopia.entities.enums.StatusPedido;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -43,8 +45,9 @@ public class Pedido {
 	private LocalDateTime dataEnvio;
 
 	@NotNull
-	@Column(name = "status")
-	private Integer status;  // passa o Enum como Integer, para especificar que está gravando no banco de dados o número inteiro
+	@Enumerated(EnumType.STRING)
+	@Column(name = "status", length = 20)
+	private StatusPedido status;
 
 	@Column(name = "valor_total")
 	private Double valorTotal;
@@ -68,7 +71,7 @@ public class Pedido {
 		this.dataPedido = dataPedido;
 		this.dataEntrega = dataEntrega;
 		this.dataEnvio = dataEnvio;
-		setStatus(status);
+		this.status = status;
 		this.valorTotal = valorTotal;
 		this.cliente = cliente;
 	}
@@ -111,14 +114,12 @@ public class Pedido {
 		this.dataEnvio = dataEnvio;
 	}
 
-	public StatusPedido getStatus() { // pega o valor numérico no banco e converte para Enum
-		return StatusPedido.valueOf(status);
+	public StatusPedido getStatus() {
+		return status;
 	}
 
 	public void setStatus(StatusPedido status) {
-		if(status != null) {
-			this.status = status.getCode(); // pega o código para setar o status
-		}
+		this.status = status;
 	}
 
 	public Double getValorTotal() {

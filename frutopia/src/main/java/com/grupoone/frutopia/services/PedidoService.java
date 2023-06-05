@@ -91,10 +91,8 @@ public class PedidoService {
 	public Pedido savePedido(Pedido pedido) {
 		try {
 			//calculo de valores brutos e liquidos
-			Pedido pedidoResponse =  pedidoRepository.save(pedido);
-			
-//			geraRelatorioPedido(pedido);
-			return pedido;
+//			geraRelatorioPedido(pedido);				
+			return pedidoRepository.save(pedido);
 		} catch(DataAccessException e) {
 			throw new IdNotFoundException("");
 		}
@@ -126,21 +124,12 @@ public class PedidoService {
 		updatePedido.setListaItemPedido(pedido.getListaItemPedido());
 	}
 	
-	public Boolean deletePedido(Integer id) {
-		Pedido pedidoDeleted = pedidoRepository.findById(id).orElse(null);
-		
-		if(pedidoDeleted != null) { 
-			pedidoRepository.delete(pedidoDeleted);
-			pedidoDeleted = pedidoRepository.findById(id).orElse(null);
-			if(pedidoDeleted != null) {
-				return false;
-			} else {
-				return true;
-			}
-		} else {
-			return false;
-		}
+	public void deletePedido(Integer id) {		
+		Pedido pedidoDeleted = pedidoRepository.findById(id)
+				.orElseThrow(() -> new IdNotFoundException("Entidade não foi encontrada"));
+		pedidoRepository.delete(pedidoDeleted);
 	}
+		
 	
 	public RelatorioPedidoDTO geraRelatorioPedido(Integer id) {
 		Pedido pedido = pedidoRepository.findById(id).get();
@@ -193,7 +182,8 @@ public class PedidoService {
 	}
 	
 	private void atualizaItemPedido(ItemPedido item, Double valorBruto, Double valorLiquido) {
-		ItemPedido itemPedido = itemPedidoRepository.findById(item.getIdItemPedido()).orElse(null);
+		ItemPedido itemPedido = itemPedidoRepository.findById(item.getIdItemPedido())
+				.orElseThrow(() -> new IdNotFoundException("Entidade não foi encontrada"));
 				
 		if(itemPedido != null) {
 			itemPedido.setValorBruto(valorBruto);
@@ -201,7 +191,8 @@ public class PedidoService {
 			itemPedidoRepository.save(itemPedido);
 		}
 		
-		Produto produto = produtoRepository.findById(item.getProduto().getIdProduto()).orElse(null);
+		Produto produto = produtoRepository.findById(item.getProduto().getIdProduto())
+				.orElseThrow(() -> new IdNotFoundException("Entidade não foi encontrada"));;
 		
 		if(produto != null) {
 			produto.setQtdEstoque(produto.getQtdEstoque() - item.getQuantidade());

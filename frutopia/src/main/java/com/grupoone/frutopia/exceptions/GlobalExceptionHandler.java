@@ -40,7 +40,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		return problemDetail;
 	}
 	
-	// verifica se id não existe no database
+	// verifica problema upload de arquivos
 		@ExceptionHandler(UploadArquivoException.class)
 		ProblemDetail handleIdNotFoundException(UploadArquivoException e) {
 			ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, e.getMessage());

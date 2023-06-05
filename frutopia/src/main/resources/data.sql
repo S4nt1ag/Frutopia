@@ -46,25 +46,25 @@ INSERT INTO cliente (cpf, data_nascimento, email, nome_completo, senha, telefone
 VALUES ('77722211100', '1982-12-30', 'pedro@example.com', 'Pedro Oliveira', '7890', '1187654321', 5);
 
 INSERT INTO pedido (id_cliente_fk, status, valor_total, data_entrega, data_envio, data_pedido)
-VALUES (1, 4, 111.4, '2023-11-28T16:51:12', '2023-06-06T16:51:12', '2023-04-20T19:53:07Z');
+VALUES (1, 'ENTREGUE', 111.4, '2023-11-28T16:51:12', '2023-06-06T16:51:12', '2023-04-20T19:53:07Z');
 INSERT INTO pedido (id_cliente_fk, status, valor_total, data_entrega, data_envio, data_pedido)
-VALUES (2, 1, 120.3, '2023-11-28T16:51:12', '2023-06-06T16:51:12', '2023-05-20T19:53:07Z');
+VALUES (2, 'AGUARDANDO_PAGAMENTO', 120.3, '2023-11-28T16:51:12', '2023-06-06T16:51:12', '2023-05-20T19:53:07Z');
 INSERT INTO pedido (id_cliente_fk, status, valor_total, data_entrega, data_envio, data_pedido)
-VALUES (3, 2, 137.3, '2023-11-28T16:51:12', '2023-06-06T16:51:12', '2023-06-20T19:53:07Z');
+VALUES (3, 'PAGO', 137.3, '2023-11-28T16:51:12', '2023-06-06T16:51:12', '2023-06-20T19:53:07Z');
 INSERT INTO pedido (id_cliente_fk, status, valor_total, data_entrega, data_envio, data_pedido)
-VALUES (4, 5, 90.7, '2023-11-28T16:51:12', '2023-06-06T16:51:12', '2023-07-20T19:53:07Z');
+VALUES (4, 'ENTREGUE', 90.7, '2023-11-28T16:51:12', '2023-06-06T16:51:12', '2023-07-20T19:53:07Z');
 INSERT INTO pedido (id_cliente_fk, status, valor_total, data_entrega, data_envio, data_pedido)
-VALUES (5, 2, 58.3, '2023-11-28T16:51:12', '2023-06-06T16:51:12', '2023-08-20T19:53:07Z');
+VALUES (5, 'PAGO', 58.3, '2023-11-28T16:51:12', '2023-06-06T16:51:12', '2023-08-20T19:53:07Z');
 INSERT INTO pedido (id_cliente_fk, status, valor_total, data_entrega, data_envio, data_pedido)
-VALUES (1, 4, 131.4, '2023-11-28T16:51:12', '2023-06-06T16:51:12', '2023-09-20T19:53:07Z');
+VALUES (1, 'ENTREGUE', 131.4, '2023-11-28T16:51:12', '2023-06-06T16:51:12', '2023-09-20T19:53:07Z');
 INSERT INTO pedido (id_cliente_fk, status, valor_total, data_entrega, data_envio, data_pedido)
-VALUES (2, 1, 170.3, '2023-11-28T16:51:12', '2023-06-06T16:51:12', '2023-10-20T19:53:07Z');
+VALUES (2, 'ENVIADO', 170.3, '2023-11-28T16:51:12', '2023-06-06T16:51:12', '2023-10-20T19:53:07Z');
 INSERT INTO pedido (id_cliente_fk, status, valor_total, data_entrega, data_envio, data_pedido)
-VALUES (3, 2, 35.3, '2023-11-28T16:51:12', '2023-06-06T16:51:12', '2023-11-20T19:53:07Z');
+VALUES (3, 'PAGO', 35.3, '2023-11-28T16:51:12', '2023-06-06T16:51:12', '2023-11-20T19:53:07Z');
 INSERT INTO pedido (id_cliente_fk, status, valor_total, data_entrega, data_envio, data_pedido)
-VALUES (4, 5, 190.7, '2023-11-28T16:51:12', '2023-06-06T16:51:12', '2023-12-20T19:53:07Z');
+VALUES (4, 'ENTREGUE', 190.7, '2023-11-28T16:51:12', '2023-06-06T16:51:12', '2023-12-20T19:53:07Z');
 INSERT INTO pedido (id_cliente_fk, status, valor_total, data_entrega, data_envio, data_pedido)
-VALUES (5, 2, 98.3, '2023-11-28T16:51:12', '2023-06-06T16:51:12', '2023-01-20T19:53:07Z');
+VALUES (5, 'PAGO', 98.3, '2023-11-28T16:51:12', '2023-06-06T16:51:12', '2023-01-20T19:53:07Z');
 
 INSERT INTO item_pedido (percentual_desconto, preco_venda, quantidade, valor_bruto, valor_liquido,
 id_pedido_fk, id_produto_fk) VALUES (10.00, 23.00, 3, 69.0, 62.1, 1, 1);

@@ -55,12 +55,8 @@ public class PedidoController {
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Boolean> deletePedido(@Valid @PathVariable Integer id) {
-		Boolean resp = pedidoService.deletePedido(id);
-		if (resp)
-			return new ResponseEntity<>(resp, HttpStatus.OK);
-		else
-			return new ResponseEntity<>(resp, HttpStatus.NOT_MODIFIED);
-	}
-	
+	public ResponseEntity<String> deletePedido(@Valid @PathVariable Integer id) {
+		pedidoService.deletePedido(id);
+		return ResponseEntity.ok("Entidade deleteda");
+	}	
 }

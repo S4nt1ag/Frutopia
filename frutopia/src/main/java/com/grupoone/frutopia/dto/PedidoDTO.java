@@ -13,7 +13,7 @@ public class PedidoDTO {
 	private Instant dataPedido;
 	private LocalDateTime dataEntrega;
 	private LocalDateTime dataEnvio;
-	private Integer status;
+	private StatusPedido status;
 	private Double valorTotal;
 	private ClienteResumidoDTO cliente;
 	private List<ItemPedidoResumidoDTO> listaItemPedido = new ArrayList<>();
@@ -29,7 +29,7 @@ public class PedidoDTO {
 		this.dataPedido = dataPedido;
 		this.dataEntrega = dataEntrega;
 		this.dataEnvio = dataEnvio;
-		setStatus(status);
+		this.status = status;
 		this.valorTotal = valorTotal;
 		this.cliente = cliente;
 	}
@@ -67,13 +67,11 @@ public class PedidoDTO {
 	}
 
 	public StatusPedido getStatus() {
-		return StatusPedido.valueOf(status);
+		return status;
 	}
 
 	public void setStatus(StatusPedido status) {
-		if(status != null) {
-			this.status = status.getCode();
-		}
+		this.status = status;
 	}
 
 	public Double getValorTotal() {
